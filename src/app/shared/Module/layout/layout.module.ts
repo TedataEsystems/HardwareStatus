@@ -15,6 +15,7 @@ import { EditComponent } from 'src/app/component/edit/edit.component';
 import { HardwareStatusComponent } from 'src/app/component/hardware-status/hardware-status.component';
 import { SettingsComponent } from 'src/app/component/settings/settings.component';
 import { HistoryComponent } from 'src/app/component/history/history.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -38,6 +39,7 @@ import { HistoryComponent } from 'src/app/component/history/history.component';
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
