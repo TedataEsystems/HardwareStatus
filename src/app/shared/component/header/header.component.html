@@ -2,7 +2,7 @@
     <div>
         
         <a routerLink="#">
-            <img src="../../../../assets/image/slogan.gif" height="40" width="250"/>
+            <img src="../../../../assets/image/we.png" height="38" width="80"/>
           
         </a>
     </div>
@@ -13,15 +13,26 @@
         
             <li>
             
-                <button mat-icon-button>
+                <button mat-icon-button >
                    
                     <mat-icon>account_circle</mat-icon> 
                  </button>
-                 <span> UserName </span>
+                 <span> {{UserName}} </span>
+        
                  
             </li>
             <li>
-                <button mat-icon-button  (click)="logOut()">
+                <button mat-icon-button   matTooltip="الاعدادات" routerLink="/settings"  routerLinkActive="active" >
+                    <mat-icon>settings</mat-icon> 
+                 </button>
+            </li>
+            <li>
+                <button mat-icon-button   matTooltip="السجلات" routerLink="/history" routerLinkActive="active" >
+                    <mat-icon>history</mat-icon> 
+                 </button>
+            </li>
+            <li>
+                <button mat-icon-button  (click)="logOut()"   matTooltip="تسجيل الخروج">
                     <mat-icon>logout</mat-icon> 
                  </button>
             </li>

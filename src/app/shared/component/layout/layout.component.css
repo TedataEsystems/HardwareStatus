@@ -5,7 +5,7 @@ main{
       margin-top: 40px;
   }
 mat-toolbar{
-    height: 140px;
+    height: 110px;
     background: #ffffff;
     color: var(--main-color);
     border-bottom: 1px solid #dddddd;
@@ -39,7 +39,7 @@ mat-toolbar{
   .mat-button{
     margin-top: 42.4px;
     height: 95.2px;
-    width: 130px;
+    min-width: 130px;
     padding-top: 29px;
     font-family: 'Unica One', cursive;
     font-size: 17px;

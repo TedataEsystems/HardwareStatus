@@ -14,7 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --third-color:#d7d7d7;
   --body-color:#f7f7f7;
   --forth-color:#ffad00;
-  --fifth-color:#f1cb10;
+  --fifth-color:#377cae;
   --font-color:#585858;
 }
 button,[mat-icon-button]{
@@ -57,6 +57,7 @@ mat-footer-row mat-footer-cell{
 }
 .mat-paginator-container{
   min-height: 40px  !important;
+  justify-content: flex-start !important;
 }
   .search-div{
     flex-direction: row ;
@@ -107,6 +108,7 @@ mat-footer-row mat-footer-cell{
 }
 .search-form-field div.mat-form-field-infix{
     border-top: 0px;
+    text-align: start;
 }
 .search-form-field div.mat-form-field-wrapper{
    padding-bottom: 0px;
@@ -492,7 +494,7 @@ snack-bar-container.success {
 }
 .mat-card-title{
   line-height: 2;
-  text-align: left !important;
+  text-align: right!important;
 }
 .mat-card-header,.mat-card-header-text, .mat-card-title{
   width: 100%;
@@ -760,6 +762,7 @@ a,span,input,h2,.mat-raised-button,.mat-menu-panel,.mat-list-item,.mat-menu-item
 mat-sidenav-content{
   transition: .2s margin-left ease-in-out;
   padding: 30px 50px;
+  direction: rtl;
 }
 
 mat-sidenav-container ,mat-sidenav-content , mat-sidenav{

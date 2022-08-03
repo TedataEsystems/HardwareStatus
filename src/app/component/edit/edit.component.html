@@ -1,63 +1,106 @@
-<mat-toolbar>
-    <span class="fill-remaining-space">Edit</span>
+<mat-toolbar dir="rtl">
+    <span class="fill-remaining-space">{{dialogTitle}}</span>
     <button fxFlex fxLayout fxLayoutAlign="end" class="btn-dialog-close" mat-button  tabIndex="-1" (click)="onClose()"><mat-icon>clear</mat-icon></button>
   </mat-toolbar>
-  <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
-    <mat-grid-list cols="2" rowHeight="300px">
+  <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()" dir="rtl">
+    <mat-grid-list cols="2" rowHeight="400px">
       <mat-grid-tile>
         <div class="controles-container">
-          <input type="hidden" formControlName="$key">
+          <input type="hidden" formControlName="id">
           <mat-form-field>
-            <input formControlName="fullName" matInput placeholder="Full Name*">
-            <mat-error>This field is mandatory.</mat-error> 
+            <input formControlName="clientName" matInput placeholder="اسم العميل*">
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="email" matInput placeholder="Email">
-            <mat-error>Invalid email address.</mat-error>
+            <input formControlName="central" matInput placeholder="السنترال*">
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="mobile" matInput placeholder="Mobile*">
-            <mat-error *ngIf="service.form.controls['mobile'].errors?.required">This field is mandatory.</mat-error>
-            <mat-error *ngIf="service.form.controls['mobile'].errors?.minlength">Minimum 11 charactors needed.</mat-error>
+            <input formControlName="orderNum" matInput placeholder="رقم الاوردر*">
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="city" matInput placeholder="City">
+            <input formControlName="technicianName" matInput placeholder="اسم الفني *">
+            <mat-error>مطلوب</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="circuitNum" matInput placeholder=" رقم الدائرة*">
+            <mat-error>مطلوب</mat-error> 
+          </mat-form-field>
+         
+          <mat-form-field>
+            <input formControlName="number" matInput placeholder="العدد*">
+            <mat-error>مطلوب</mat-error> 
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="hardwareType" matInput placeholder="نوع الجهاز*">
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
         <div class="controles-container">
-          <div class="add-bottom-padding">
-            <label id="radio-group-label">Gender : </label>
-            <mat-radio-group formControlName="gender">
-              <mat-radio-button value="1">Male</mat-radio-button>
-              <mat-radio-button value="2">Female</mat-radio-button>
-            </mat-radio-group>
-          </div>
           <mat-form-field>
-            <mat-select formControlName="department" placeholder="Department">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let department of departments">
-                <mat-option value="{{department.id}}">{{department.value}}</mat-option>
-              </ng-container>
-            </mat-select>
+            <input formControlName="serialNum" matInput placeholder="السيريال نامبر *">
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Hire Date">
+            <input formControlName="comments" matInput placeholder="ملاحظات*">
+            <mat-error>مطلوب</mat-error> 
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="exitDate" matInput [matDatepicker]="picker" placeholder="تاريخ الخروج *">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error>مطلوب</mat-error> 
           </mat-form-field>
-          <div class="add-bottom-padding">
-            <mat-checkbox formControlName="isPermanent">Permanent Employee</mat-checkbox>
-          </div>
+          <mat-form-field>
+            <mat-select formControlName="receiptState" placeholder="موقف ايصال الاستلام *">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let receiptState of receiptStateList">
+                <mat-option value="{{receiptState.id}}">{{receiptState.value}}</mat-option>
+              </ng-container> 
+            </mat-select>
+            <mat-error>مطلوب</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="orderState" placeholder=" موقف الاوردر *">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let orderState of orderStateList">
+                <mat-option value="{{orderState.id}}">{{orderState.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>مطلوب</mat-error> 
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="company" placeholder="اسم الشركة*">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let companyName of companyNameList">
+                <mat-option value="{{companyName.id}}">{{companyName.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>مطلوب</mat-error> 
+          </mat-form-field>
+       
+       
+         
          
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="2" id="act-btn" >
-        <div class="button-row w-100 text-right">
-          <button mat-raised-button class="btn-success" type="submit" >Submit</button>
-          <button mat-raised-button  class='clr' (click)="onClear()">Clear</button>
-        </div>
-        </mat-grid-tile>
+        
     </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="50px">
+      <mat-grid-tile>
+      <div class="button-row w-100 text-center">
+        <button mat-raised-button class="btn-success w-50" type="submit" >ارسال</button>
+       
+      </div>
+      </mat-grid-tile>
+      </mat-grid-list>
   </form>
+
+
+
+  <div *ngIf="appear">
+    <app-loading-page></app-loading-page>
+  </div>

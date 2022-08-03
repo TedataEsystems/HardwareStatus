@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Login } from 'src/app/Model/login.model';
+import { ConfigureService } from '../../service/configure.service';
+import { LoginserService } from '../../service/loginser.service';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +20,21 @@ export class LoginComponent implements OnInit {
     
   });
   warning=false;
+  loginmodel: Login = {
+    userName: "",
+    password: ""
+  }
   
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private config: ConfigureService,
+    private login : LoginserService
     )
     { 
-      
-      this.titleService.setTitle("PSC | Login");
+      this.titleService.setTitle("HWStatus | Login");
+      this.config.Logout();
 
     }
 
@@ -35,16 +44,36 @@ export class LoginComponent implements OnInit {
   }
     
   onSubmit() {
-      if (this.form.invalid) {
-          return;
-      }
-    
-      
-    
-        // window.location.href="/"
-     
-   
-   this.router.navigate(['/'], { relativeTo: this.route });
+    if (this.form.invalid) {
+      return;
     }
+
+    this.loginmodel.userName = this.form.value.username.trim();
+    this.loginmodel.password = this.form.value.password;
+    this.login.getLogin(this.loginmodel).subscribe(res => {
+
+      if (res.status == true) {
+        localStorage.setItem("tokNum", res.token);
+        localStorage.setItem("usernam", res.userData.userName);
+        localStorage.setItem("userGroup", res.userData.userGroup);
+
+       window.location.href = "/"
+
+
+         //this.router.navigate(['/'], { relativeTo: this.route });
+      }
+      else {
+        
+        this.warning=true;
+
+      }
+
+      // Retrieve
+    }, err => {
+      
+      this.warning=true;
+
+    });
+  }
 
 }

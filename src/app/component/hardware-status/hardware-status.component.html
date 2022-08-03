@@ -1,0 +1,150 @@
+
+<div class="search-div" fxLayout="row">
+    <mat-list-item class="header-tag mr-0 home"  routerLink="/" > <mat-icon>home</mat-icon></mat-list-item>
+    <mat-list-item class="header-tag mr-0"  routerLink="/"> الصفحة الرئيسية </mat-list-item>/
+    
+    <mat-list-item class="header-tag active" routerLink="#" > حالة الاجهزة</mat-list-item>
+
+</div>
+
+
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>
+       تفاصيل حالة الاجهزة
+        </mat-card-title>
+        <button mat-button (click)="onCreate()">
+            <mat-icon class="add-new" >add</mat-icon>
+         اضافة جديد
+        </button>
+        <button mat-button (click)="exportExcel()">
+            <mat-icon>file_download</mat-icon>
+          استخراج تقرير
+        </button>
+       
+    </mat-card-header>
+    <mat-divider></mat-divider>
+<div class="search-div" fxLayout="row">
+    
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter()"> 
+       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button> 
+    </mat-form-field>
+</div>
+
+<div *ngIf="dataSource==null;else table">
+    <app-loading-page></app-loading-page>
+  </div>
+  
+<ng-template #table>
+    <div class="example-container mat-elevation-z8">
+
+<mat-table [dataSource]="dataSource" multiTemplateDataRows  matSort >
+ 
+    
+   
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> رقم</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="رقم"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="clientName">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم العميل  </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم العميل"> {{element.clientName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="central">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> السنترال </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="السنترال"> {{element.central}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNum">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>رقم الاوردر</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="رقم الاوردر"> {{element.orderNum}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="technicianName">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الفني </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم الفني"> {{element.technicianName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="circuitNum">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> رقم الدائرة </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="رقم الدائرة"> {{element.circuitNum}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="number">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> العدد </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="العدد"> {{element.number}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="hardwareType">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> نوع الجهاز </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="نوع الجهاز"> {{element.hardwareType}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="serialNum">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>السيريال نامبر </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="السيريال نامبر"> {{element.serialNum}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comments">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> ملاحظات </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="ملاحظات"> {{element.comments}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="exitDate">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الخروج </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="تاريخ الخروج"> {{element.exitDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="receiptState">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف ايصال الاستلام</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element.receiptState}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="orderState">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف الاوردر </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element.orderState}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الشركة</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.company}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> الاجراء</mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="الاجراء">
+            
+            
+            <button mat-button   class="btn-success mx-1"  matTooltip="Edit" (click)="onEdit()">
+                <mat-icon>edit</mat-icon>
+            </button>
+           
+            <button mat-button   class="btn-danger"   matTooltip="Delete" (click)="onDelete()">
+                <mat-icon>delete_forever</mat-icon>
+            </button>
+        </mat-cell>
+
+    </ng-container>
+   
+      
+    <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="14">
+          .... لا يوجد بيانات 
+        </mat-footer-cell>
+
+    </ng-container>
+  
+  
+    
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource.data.length==0 && dataSource !=null)}"></mat-footer-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="student-element-row"
+    [class.student-expanded-row]="row.isExpanded"></mat-row>
+    
+
+</mat-table>
+<!-- end test -->
+</div>
+
+</ng-template>
+
+<mat-paginator [pageSizeOptions]="[5,25, 50, 100]"   [pageSize]="5"   showFirstLastButtons></mat-paginator>
+
+</mat-card>
+

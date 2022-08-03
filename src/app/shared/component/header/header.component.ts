@@ -7,12 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  UserName = localStorage.getItem("usernam");
+  isNotAdmin=false;
  
   @Output() public sidenavToggle = new EventEmitter();
-  constructor(private router :Router) { }
-// constructor( private router :Router,private accountService : AccountService,private notificationService:NotificationMsgService) { }
-UserName:any="";
+  constructor(private router :Router) {
+    var teamval= localStorage.getItem("userGroup");
+    
+    if(teamval?.toLocaleLowerCase() != 'admin'){
+   this.isNotAdmin=true;  
+    
+ }
+   }
+
 ngOnInit(): void {
 // this.UserName=this.conser.UserName();
 }
