@@ -10,6 +10,7 @@ import { ConfigureService } from './configure.service';
 export class HwStatusDataService {
 
   private apiURL:string;
+
   private headers = new HttpHeaders();
    constructor(private httpClient: HttpClient,
     private config:ConfigureService) {
@@ -25,9 +26,24 @@ export class HwStatusDataService {
     {responseType: 'blob',headers: this.headers}); 
   }
 
-  AddHardwareStatus(model:HardwareStatus)
+
+  AddHardwareStatus(model:any):Observable<any>
   {
-    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/AddHardwareStatus, ${model}`,
-   {responseType: 'blob',headers: this.headers}); 
+    return this.httpClient.post<any>(`${this.apiURL}/AddHardwareStatus`, model); 
+  }
+
+
+
+  
+  UpdateHardwareStatus(model:HardwareStatus):Observable<any>
+  {
+    
+    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/UpdateHardwareStatus`,model
+  ); 
+  }
+  GettingLists():Observable<any>
+  {
+    return this.httpClient.get<any>(`${this.apiURL}/getSettingsList`
+   ); 
   }
 }
