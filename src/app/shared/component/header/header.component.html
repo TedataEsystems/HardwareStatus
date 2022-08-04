@@ -22,14 +22,34 @@
                  
             </li>
             <li>
-                <button mat-icon-button   matTooltip="الاعدادات" routerLink="/settings"  routerLinkActive="active" >
-                    <mat-icon>settings</mat-icon> 
-                 </button>
+               
+                <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="الاعدادات"  aria-label="Example icon-button with a menu">
+                    <mat-icon>settings</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <a mat-menu-item routerLink="/company">
+                      
+                      <span>اسم الشركة</span>
+                
+                    </a>
+                    <a mat-menu-item routerLink="/order">
+                      
+                        <span>موقف الاوردر</span>
+                  
+                      </a>
+                      <a mat-menu-item routerLink="/receipt">
+                      
+                        <span>موقف ايصال الاستلام</span>
+                  
+                      </a>
+                    
+                  </mat-menu>
+                  
             </li>
             <li>
-                <button mat-icon-button   matTooltip="السجلات" routerLink="/history" routerLinkActive="active" >
+                <a mat-icon-button   matTooltip="السجلات" routerLink="/history" routerLinkActive="active" >
                     <mat-icon>history</mat-icon> 
-                 </button>
+                </a>
             </li>
             <li>
                 <button mat-icon-button  (click)="logOut()"   matTooltip="تسجيل الخروج">

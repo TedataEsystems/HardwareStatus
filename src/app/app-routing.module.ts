@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HardwareStatusComponent } from './component/hardware-status/hardware-status.component';
 import { HistoryComponent } from './component/history/history.component';
-import { SettingsComponent } from './component/settings/settings.component';
+import { CompanyNameComponent } from './component/settings/company-name/company-name.component';
+import { OrderStateComponent } from './component/settings/order-state/order-state.component';
+import { ReceiptStateComponent } from './component/settings/receipt-state/receipt-state.component';
 import { ErrorPageComponent } from './shared/component/error-page/error-page.component';
 import { LayoutComponent } from './shared/component/layout/layout.component';
 import { LoginComponent } from './shared/component/login/login.component';
@@ -30,10 +32,21 @@ const routes: Routes = [
 
     },
     {
-      path:'settings',
-      component: SettingsComponent,
+      path:'company',
+      component: CompanyNameComponent,
 
     },
+    {
+      path:'order',
+      component: OrderStateComponent,
+
+    },
+    {
+      path:'receipt',
+      component: ReceiptStateComponent,
+
+    },
+   
     {
       path:'history',
       component: HistoryComponent,

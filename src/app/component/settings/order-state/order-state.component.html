@@ -1,0 +1,75 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>
+       موقف الاوردر
+        </mat-card-title>
+        <button mat-button (click)=toggleDisplay()>
+            <mat-icon class="add-new">add</mat-icon>
+         اضافة جديد
+        </button>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <div class="search-div" fxLayout="row">
+        <form  *ngIf="isShowDiv" [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>موقف الاوردر</mat-label>
+              <input type="text"  id="picvalid" matInput formControlName="value" [value]="valdata" >
+              <input type="hidden" id="picid" formControlName="id"  [value]="valuid"  placeholder="">
+             
+             
+            </mat-form-field><span style="margin-left: 10px;"> </span>
+            
+    
+           
+            <button type="submit" mat-raised-button    class="search text-white">اضافة</button>
+          </form>
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter($event)"> 
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+             <mat-icon>close</mat-icon>
+         </button> 
+        
+     </mat-form-field>
+    </div>
+    
+      <div class="example-container mat-elevation-z8" #TABLE>
+
+      <mat-table [dataSource]="dataSource" matSort #table>
+  
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> الرقم </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef mat-sort-header4> موقف الاوردر </mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="value"> {{element.value}} </mat-cell>
+    </ng-container>
+  
+   
+   <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef > الاجراء </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="action">
+        <button mat-button (click)="onEdit(row)">
+            <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-button color="warn" (click)="onDelete(row)">
+          <mat-icon>delete_outline</mat-icon>
+      </button>
+       
+    </mat-cell>
+    </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;">
+        </mat-row>
+      </mat-table>
+            <mat-paginator  [pageSizeOptions]="[20, 50, 100]"   [pageSize]="20" ></mat-paginator>
+  
+    </div>
+
+
+
+</mat-card>

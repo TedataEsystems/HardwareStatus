@@ -5,6 +5,10 @@ a{
 a:hover ,a:active{
     color: lightgray;
 }
+a.mat-menu-item{
+    color: var(--main-color);
+}
+
 li{
     list-style: none;
 }

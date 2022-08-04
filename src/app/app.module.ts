@@ -17,18 +17,9 @@ import { MaterialModule } from './shared/Module/material/material.module';
 import { LoginModule } from './shared/Module/login/login.module';
 import { HttpClientModule } from '@angular/common/http';
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
-   
-   
-   
-   
   
   ],
   imports: [

@@ -13,11 +13,11 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditComponent } from 'src/app/component/edit/edit.component';
 import { HardwareStatusComponent } from 'src/app/component/hardware-status/hardware-status.component';
-import { SettingsComponent } from 'src/app/component/settings/settings.component';
 import { HistoryComponent } from 'src/app/component/history/history.component';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { OrderStateComponent } from 'src/app/component/settings/order-state/order-state.component';
+import { CompanyNameComponent } from 'src/app/component/settings/company-name/company-name.component';
+import { ReceiptStateComponent } from 'src/app/component/settings/receipt-state/receipt-state.component';
 
 
 
@@ -32,8 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     EditComponent,
     HardwareStatusComponent,
-    SettingsComponent,
-    HistoryComponent
+    HistoryComponent,
+    OrderStateComponent,
+    CompanyNameComponent,
+    ReceiptStateComponent
 
   ],
   imports: [
