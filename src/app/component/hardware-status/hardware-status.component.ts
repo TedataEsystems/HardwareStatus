@@ -84,7 +84,7 @@ export class HardwareStatusComponent implements OnInit {
       this.deleteService.openConfirmDialog();
 }
 
-//test
+//testtt
 
 exportExcel(){
   let searchData=this.searchKey.trim().toLowerCase();
