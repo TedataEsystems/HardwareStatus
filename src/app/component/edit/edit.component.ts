@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyNameList } from 'src/app/Model/company-name-list.model';
 import { OrderStateList } from 'src/app/Model/order-state-list.model';
 import { ReceiptStateList } from 'src/app/Model/receipt-state-list.model';
 import { EditFormService } from 'src/app/shared/service/edit-form.service';
+import { HwStatusDataService } from 'src/app/shared/service/hw-status-data.service';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 
 @Component({
@@ -17,7 +19,13 @@ export class EditComponent implements OnInit {
   public companyNameList :CompanyNameList[]=[];
   public orderStateList :OrderStateList[]=[];
   public receiptStateList :ReceiptStateList[]=[];
-  constructor(public service :EditFormService, public dialogRef: MatDialogRef<EditComponent>,public notificationService: NotificationService,@Inject(MAT_DIALOG_DATA) public data: any ) { }
+  
+  // form:FormGroup=new FormGroup({
+  //   username: new FormControl('',Validators.required),
+  //   password: new FormControl('',Validators.required)
+    
+  // });
+  constructor(public hwStatus:HwStatusDataService,public service :EditFormService, public dialogRef: MatDialogRef<EditComponent>,public notificationService: NotificationService,@Inject(MAT_DIALOG_DATA) public data: any ) { }
 
  
   ngOnInit(){
@@ -32,12 +40,9 @@ export class EditComponent implements OnInit {
     this.appear=true;
     if(this.service.form.invalid){
       this.appear=false;
-  
     return;
-
     }
-
-
+   // this.hwStatus.AddHardwareStatus()
 
 
     /*
@@ -128,7 +133,7 @@ export class EditComponent implements OnInit {
 
 
 
-  }
+  }//submit
   onClose(){
     this.service.form.reset();
     this.service.initializeFormGroup();

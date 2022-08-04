@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfigureService } from '../../service/configure.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   isNotAdmin=false;
  
   @Output() public sidenavToggle = new EventEmitter();
-  constructor(private router :Router) {
+  constructor(private router :Router ,private config:ConfigureService) {
     var teamval= localStorage.getItem("userGroup");
     
     if(teamval?.toLocaleLowerCase() != 'admin'){
@@ -25,9 +26,7 @@ ngOnInit(): void {
 }
 
 logOut(){
-  // localStorage.clear();
-  // this.accountService.logout().subscribe(res=>{
-    // this.conser.Logout();
+    this.config.Logout();
     this.router.navigateByUrl('/login');
     
   // } 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 import { ConfigureService } from './configure.service';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class HwStatusDataService {
   private headers = new HttpHeaders();
    constructor(private httpClient: HttpClient,
     private config:ConfigureService) {
-     this.apiURL= this.config.ApiUrl() + "HwStatusData";
+     this.apiURL= this.config.ApiUrl() + "HardwareStatus";
      this.headers =this.headers.set('Authorization',"Bearer "+ this.config.UserToken()); 
      }
 
@@ -22,5 +23,11 @@ export class HwStatusDataService {
   {
     return this.httpClient.get(`${this.apiURL}/ExpotExcel?search=${search}&reqId=${rId}&poolId=${pool}`,
     {responseType: 'blob',headers: this.headers}); 
+  }
+
+  AddHardwareStatus(model:HardwareStatus)
+  {
+    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/AddHardwareStatus, ${model}`,
+   {responseType: 'blob',headers: this.headers}); 
   }
 }

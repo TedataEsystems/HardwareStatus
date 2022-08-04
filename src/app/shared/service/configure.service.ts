@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class ConfigureService {
 
-  Apiurl:string = "http://172.29.29.80:6061/api/";
+  Apiurl:string = "https://localhost:44329/api/";
 
 public pIn:number=0;
   constructor(  private router: Router)
@@ -23,6 +23,10 @@ public pIn:number=0;
        return localStorage.getItem("usernam");
    }
 
+   UserGroup()
+   {
+       return localStorage.getItem("userGroup");
+   }
    UserToken()
    {
        return localStorage.getItem("tokNum");
@@ -39,7 +43,8 @@ public pIn:number=0;
    Logout()
    {
   
-    localStorage.removeItem("teamName");
+   // localStorage.removeItem("teamName");
+    localStorage.removeItem("userGroup");
     localStorage.removeItem("tokNum");
     localStorage.removeItem("usernam");
    }

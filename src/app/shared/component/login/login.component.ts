@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     
   });
   warning=false;
+  //object
   loginmodel: Login = {
     userName: "",
     password: ""
@@ -53,13 +54,11 @@ export class LoginComponent implements OnInit {
     this.login.getLogin(this.loginmodel).subscribe(res => {
 
       if (res.status == true) {
-        localStorage.setItem("tokNum", res.token);
-        localStorage.setItem("usernam", res.userData.userName);
-        localStorage.setItem("userGroup", res.userData.userGroup);
-
+       localStorage.setItem("tokNum", res.token);
+        localStorage.setItem("usernam", res.userName);
+        localStorage.setItem("userGroup", res.userGroup);
+ 
        window.location.href = "/"
-
-
          //this.router.navigate(['/'], { relativeTo: this.route });
       }
       else {
