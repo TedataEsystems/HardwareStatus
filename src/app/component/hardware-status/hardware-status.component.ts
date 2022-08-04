@@ -10,7 +10,7 @@ import { DeleteService } from 'src/app/shared/service/delete.service';
 import { HwStatusDataService } from 'src/app/shared/service/hw-status-data.service';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 import { EditComponent } from '../edit/edit.component';
-import { saveAs } from 'file-saver';
+import{saveAs} from 'file-saver';
 import { ConfigureService } from 'src/app/shared/service/configure.service';
 
 
@@ -84,7 +84,7 @@ export class HardwareStatusComponent implements OnInit {
       this.deleteService.openConfirmDialog();
 }
 
-
+//test
 
 exportExcel(){
   let searchData=this.searchKey.trim().toLowerCase();
@@ -93,7 +93,7 @@ exportExcel(){
     
     const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
     const file = new File([blob],  'hwStatusData' + new Date().toLocaleString()+ '.xlsx', { type: 'application/vnd.ms.excel' });
-  saveAs(file,'hwStatusData.txt');
+    saveAs(file,'hwStatusData.txt');
     
   },err=>{
     if(err.status==401)
