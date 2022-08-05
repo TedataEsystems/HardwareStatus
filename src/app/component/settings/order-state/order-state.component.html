@@ -14,7 +14,7 @@
         <form  *ngIf="isShowDiv" [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form">
             <mat-form-field class="example-full-width">
               <mat-label>موقف الاوردر</mat-label>
-              <input type="text"  id="picvalid" matInput formControlName="value" [value]="valdata" >
+              <input type="text"  id="picvalid" matInput formControlName="name" [value]="valdata" >
               <input type="hidden" id="picid" formControlName="id"  [value]="valuid"  placeholder="">
              
              

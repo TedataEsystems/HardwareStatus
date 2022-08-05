@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStateList } from 'src/app/Model/order-state-list.model';
+import { HwStatusDataService } from 'src/app/shared/service/hw-status-data.service';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 
 @Component({
@@ -18,11 +19,16 @@ export class OrderStateComponent implements OnInit {
    isShowDiv=false;
   form: FormGroup = new FormGroup({
     id: new FormControl(0),
-    value: new FormControl('',[Validators.required]),
-   
-        
+    name: new FormControl('',[Validators.required]),    
   });
-  displayedColumns: string[] = ['id', 'value','action'];
+  //object
+  order= {
+    id:0,
+    name: "",
+    createdBy:""
+  }
+  
+  displayedColumns: string[] = ['id', 'name','action'];
     columnsToDisplay: string[] = this.displayedColumns.slice();
 OrderStateList?:OrderStateList[]=[];
 OrderStateListTab?:OrderStateList[]=[];
@@ -36,7 +42,7 @@ dataSource = new MatTableDataSource<any>();
   @ViewChild(MatSort) sort?: MatSort;
 settingtype=''
   constructor(private titleService:Title
-    ,private notser:NotificationService,private router: Router,private route: ActivatedRoute,
+    ,private notser:NotificationService,private router: Router,private route: ActivatedRoute, private hwServices:HwStatusDataService
     ) {
       this.titleService.setTitle('order state');
    
@@ -106,13 +112,33 @@ settingtype=''
          this.isDisable=false;
           return;
       } 
+
+      else
+      {
+        this.order.name=this.form.value.name;
+        this.order.createdBy=localStorage.getItem('usernam')||'';
+       
+        this.hwServices.AddOrderStatus(this.order).subscribe(res=>
+          {
+            if(res.status==true)
+            {
+              this.notser.success(":: add successfully");
+              this.form.reset();
+            }
+            else{
+              this.notser.warn(":: failed");
+            }
+          })
+          //here will call getall method
+      }
       
    
   }
   setReactValue(id:number,val:any){
     this.form.patchValue({
       id: id,
-      value:val
+      // value:val
+      name:val
      
     });
   
