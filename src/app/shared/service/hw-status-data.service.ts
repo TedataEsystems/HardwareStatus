@@ -11,11 +11,12 @@ export class HwStatusDataService {
 
   private apiURL:string;
   private apiUrl2:string;
+
   private headers = new HttpHeaders();
    constructor(private httpClient: HttpClient,
     private config:ConfigureService) {
      this.apiURL= this.config.ApiUrl() + "HardwareStatus";
-     this.apiUrl2="https://localhost:44329/api/Setting"
+     this.apiUrl2="https://localhost:44329/api/Setting";
      this.headers =this.headers.set('Authorization',"Bearer "+ this.config.UserToken()); 
      }
 
@@ -27,10 +28,25 @@ export class HwStatusDataService {
     {responseType: 'blob',headers: this.headers}); 
   }
 
-  AddHardwareStatus(model:HardwareStatus)
+
+  AddHardwareStatus(model:any):Observable<any>
   {
-    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/AddHardwareStatus, ${model}`,
-   {responseType: 'blob',headers: this.headers}); 
+    return this.httpClient.post<any>(`${this.apiURL}/AddHardwareStatus`, model); 
+  }
+
+
+
+  
+  UpdateHardwareStatus(model:HardwareStatus):Observable<any>
+  {
+    
+    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/UpdateHardwareStatus`,model
+  ); 
+  }
+  GettingLists():Observable<any>
+  {
+    return this.httpClient.get<any>(`${this.apiURL}/getSettingsList`
+   ); 
   }
 
   AddCompanyName(model:any):Observable<any>

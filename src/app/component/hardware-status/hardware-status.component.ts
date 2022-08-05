@@ -12,6 +12,7 @@ import { NotificationService } from 'src/app/shared/service/notification.service
 import { EditComponent } from '../edit/edit.component';
 import{saveAs} from 'file-saver';
 import { ConfigureService } from 'src/app/shared/service/configure.service';
+import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { ConfigureService } from 'src/app/shared/service/configure.service';
   templateUrl: './hardware-status.component.html',
   styleUrls: ['./hardware-status.component.css']
 })
+
 export class HardwareStatusComponent implements OnInit {
   searchKey:string ='' ;
   isNotAdmin= false ;
@@ -36,6 +38,7 @@ export class HardwareStatusComponent implements OnInit {
   }
  
   
+ 
   @ViewChild(MatSort) sort?:MatSort ;
   @ViewChild(MatPaginator) paginator?:MatPaginator ;
   displayedColumns: string[] = ['id', 'clientName', 'central', 'orderNum','technicianName','circuitNum','number','hardwareType','serialNum','comments','exitDate','receiptState','orderState','company','action'];
@@ -69,22 +72,26 @@ export class HardwareStatusComponent implements OnInit {
       this.dialog.open(EditComponent,dialogGonfig);
     }
 
-    onEdit(){
+    onEdit(row:any){
       //this.service.initializeFormGroup();
-      const dialogGonfig = new MatDialogConfig();
-      dialogGonfig.data= {dialogTitle: " تعديل"};
-      dialogGonfig.disableClose=true;
-      dialogGonfig.autoFocus= true;
-      dialogGonfig.width="50%";
-      dialogGonfig.panelClass='modals-dialog';
-      this.dialog.open(EditComponent,dialogGonfig);
+       const dialogGonfig = new MatDialogConfig();
+      // dialogGonfig.data= {dialogTitle: " تعديل",xx:row};
+      // dialogGonfig.disableClose=true;
+      // dialogGonfig.autoFocus= true;
+      // dialogGonfig.width="50%";
+      // dialogGonfig.panelClass='modals-dialog';
+       this.dialog.open(EditComponent,{
+        width:"50%",data:row
+      });
+
+      
 
     }
     onDelete(){
       this.deleteService.openConfirmDialog();
 }
 
-//testtt
+
 
 exportExcel(){
   let searchData=this.searchKey.trim().toLowerCase();
