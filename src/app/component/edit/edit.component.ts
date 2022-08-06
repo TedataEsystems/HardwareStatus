@@ -55,7 +55,8 @@ export class EditComponent implements OnInit {
     this.companyNameList=res.companyName;
     this.orderStateList=res.orderStatus;
     this.receiptStateList=res.receiptStatus
-    }else{this.notificationService.warn(':: error')}
+    }
+    else{this.notificationService.warn(':: error')}
     console.log(res)
    });
 
