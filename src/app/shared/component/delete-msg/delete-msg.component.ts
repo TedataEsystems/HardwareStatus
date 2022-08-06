@@ -15,18 +15,29 @@ export class DeleteMsgComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onClose(){
+  // onClose(){
   
-    this.dialogRef.close();
+  //   this.dialogRef.close();
+
+  // }
+  // onDelete(){
+  //   //if(confirm('Are you sure to delete this record ?')){
+  
+  //       this.onClose();
+
+  //       this.notificationService.success(' Deleted successfully');
+  //   //}
+  // }
+  onClose(){
+    this.dialogRef.close(false);
+    // this.dialogRef.close();
 
   }
   onDelete(){
-    //if(confirm('Are you sure to delete this record ?')){
-  
-        this.onClose();
+    this.dialogRef.close(true);
+        // this.onClose();
 
-        this.notificationService.success(' Deleted successfully');
-    //}
   }
+
 
 }
