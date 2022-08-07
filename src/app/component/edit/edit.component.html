@@ -16,7 +16,7 @@
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="orderNum" matInput placeholder="رقم الاوردر*">
+            <input formControlName="orderNumber" type="number" matInput placeholder="رقم الاوردر*">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
@@ -24,16 +24,13 @@
             <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="circuitNum" matInput placeholder=" رقم الدائرة*">
+            <input formControlName="zoneNumber" type="number" matInput placeholder=" رقم الدائرة*">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
          
+         
           <mat-form-field>
-            <input formControlName="number" matInput placeholder="العدد*">
-            <mat-error>مطلوب</mat-error> 
-          </mat-form-field>
-          <mat-form-field>
-            <input formControlName="hardwareType" matInput placeholder="نوع الجهاز*">
+            <input formControlName="deviceType" matInput placeholder="نوع الجهاز*">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
         </div>
@@ -41,11 +38,11 @@
       <mat-grid-tile>
         <div class="controles-container">
           <mat-form-field>
-            <input formControlName="serialNum" matInput placeholder="السيريال نامبر *">
+            <input formControlName="serialNumber" type="number" matInput placeholder="السيريال نامبر *">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="comments" matInput placeholder="ملاحظات*">
+            <input formControlName="notes" matInput placeholder="ملاحظات*">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
@@ -55,30 +52,55 @@
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <mat-select formControlName="receiptState" placeholder="موقف ايصال الاستلام *">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let receiptState of receiptStateList">
-                <mat-option value="{{receiptState.id}}">{{receiptState.value}}</mat-option>
-              </ng-container> 
+
+            <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *"  >
+              <mat-option  *ngFor="let receiptStatus of receiptStateList"   [value]="receiptStatus.id">
+                {{receiptStatus.name}}
+              </mat-option>
             </mat-select>
+
+
+            <!-- <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let receiptStatus of receiptStateList">
+                <mat-option value={{receiptStatus.id}}>{{receiptStatus.name}}</mat-option>
+              </ng-container> 
+            </mat-select> -->
             <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-select formControlName="orderState" placeholder=" موقف الاوردر *">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let orderState of orderStateList">
-                <mat-option value="{{orderState.id}}">{{orderState.value}}</mat-option>
-              </ng-container>
+
+            <mat-select formControlName="orderStatusId" placeholder="وقف الاوردر "  >
+              <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
+                {{orderStatus.name}}
+              </mat-option>
             </mat-select>
+
+
+            <!-- <mat-select formControlName="orderStatusId" placeholder=" موقف الاوردر *">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let orderStatus of orderStateList">
+                <mat-option value={{orderStatus.id}}>{{orderStatus.name}</mat-option>
+              </ng-container>
+            </mat-select> -->
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <mat-select formControlName="company" placeholder="اسم الشركة*">
+
+
+            <mat-select formControlName="companyNameId" placeholder="اسم الشركة*"  >
+              <mat-option  *ngFor="let companyName of companyNameList"   [value]="companyName.id">
+                {{companyName.name}}
+              </mat-option>
+            </mat-select>
+
+
+            <!-- <mat-select formControlName="companyNameId" placeholder="اسم الشركة*">
               <mat-option>None</mat-option>
               <ng-container *ngFor="let companyName of companyNameList">
-                <mat-option value="{{companyName.id}}">{{companyName.value}}</mat-option>
+                <mat-option value={{companyName.id}}>{{companyName.name}}</mat-option>
               </ng-container>
-            </mat-select>
+            </mat-select> -->
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
        

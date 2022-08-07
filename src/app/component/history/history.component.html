@@ -1,99 +1,101 @@
-
-<div class="search-div" fxLayout="row">
-    <mat-list-item class="header-tag mr-0 home"  routerLink="/" > <mat-icon>home</mat-icon></mat-list-item>
-    <mat-list-item class="header-tag mr-0"  routerLink="/"> الصفحة الرئيسية </mat-list-item>/
-    
-    <mat-list-item class="header-tag active" routerLink="#" > السجلات</mat-list-item>
-
-</div>
-
-
-
 <mat-card class="example-card">
     <mat-card-header>
         <mat-card-title>
-         تفاصيل السجلات
+            السجل
         </mat-card-title>
        
     </mat-card-header>
     <mat-divider></mat-divider>
-<div class="search-div" fxLayout="row">
+
+    <div class="search-div" fxLayout="row">
+        
     
-    <mat-form-field class="search-form-field" floatLabel="never">
+     
+       
+      <mat-form-field class="search-form-field" floatLabel="never">
         <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter()"> 
-       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
-            <mat-icon>close</mat-icon>
-        </button> 
-    </mat-form-field>
-</div>
-
-<div *ngIf="dataSource==null;else table">
-    <app-loading-page></app-loading-page>
-  </div>
-  
-<ng-template #table>
-    <div class="example-container mat-elevation-z8">
-
-<mat-table [dataSource]="dataSource" multiTemplateDataRows  matSort >
- 
-    
-   
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> رقم</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="رقم"> {{element.id}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="HW_Id">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> رقم الجهاز  </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="رقم الجهاز"> {{element.HW_Id}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="desciption">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> التفاصيل</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="التفاصيل"> {{element.desciption}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="tableName">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>اسم الجدول </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم الجدول"> {{element.tableName}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="actionType">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> نوع الاجراء</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="نوع الاجراء"> {{element.actionType}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="userName">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم المستخدم">{{element.userName}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="creationDate">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الانشاء
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="تاريخ الانشاء"> {{element.creationDate}} </mat-cell>
-    </ng-container>
-    
-  
-
-    
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+             <mat-icon>close</mat-icon>
+         </button> 
+        
+     </mat-form-field>
+    </div>
+     
+    <div class="spinner" *ngIf="dataSource==null || loader ;else table">
+      <span>Loading Data ...</span>
+      <mat-progress-bar class="example-margin"  mode="buffer" value="50">
+    </mat-progress-bar>
       
-    <ng-container matColumnDef="noData">
-        <mat-footer-cell *matFooterCellDef colspan="6">
-          .... لا يوجد بيانات 
-        </mat-footer-cell>
+    </div>
 
-    </ng-container>
-  
-  
+    <ng-template #table>
+      <div class="example-container mat-elevation-z8" >
+ 
+      <mat-table [dataSource]="dataSource"  #table  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear >
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> رقم</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="رقم"> {{element.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="elementId">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> رقم الجهاز  </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="رقم الجهاز"> {{element.elementId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="descirption">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> التفاصيل</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="التفاصيل"> {{element.descirption}} </mat-cell>
+        </ng-container>
     
-    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource.data.length==0 && dataSource !=null)}"></mat-footer-row>
-    <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+        <ng-container matColumnDef="parentType">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>اسم الجدول </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="اسم الجدول"> {{element.parentType}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actionType">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> نوع الاجراء</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="نوع الاجراء"> {{element.actionType}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="اسم المستخدم">{{element.userName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الانشاء
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="تاريخ الانشاء"> {{element.creationDate|date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="updateDate">
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ التعديلء
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="تاريخ التعديل"> {{element.updateDate|date}} </mat-cell>
+        </ng-container>
+        
+      
+    
   
+   
+   
+  <ng-container matColumnDef="noData">
+    <mat-footer-cell *matFooterCellDef colspan="6">
+        .... لا يوجد بيانات 
+    </mat-footer-cell>
+
+</ng-container>
+
+     
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource.data.length==0 && dataSource !=null)}"></mat-footer-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
    
 
 </mat-table>
 <!-- end test -->
 </div>
-
 </ng-template>
 
-<mat-paginator [pageSizeOptions]="[5,25, 50, 100]"   [pageSize]="5"   showFirstLastButtons></mat-paginator>
-
+<mat-paginator [pageSizeOptions]="[50, 25, 100]" [pageSize]="25" (page)="pageChanged($event)" showFirstLastButtons>
+</mat-paginator>
 </mat-card>
+
+
 

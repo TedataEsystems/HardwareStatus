@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyNameList } from 'src/app/Model/company-name-list.model';
+import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 import { OrderStateList } from 'src/app/Model/order-state-list.model';
 import { ReceiptStateList } from 'src/app/Model/receipt-state-list.model';
 import { EditFormService } from 'src/app/shared/service/edit-form.service';
@@ -20,29 +21,148 @@ export class EditComponent implements OnInit {
   public orderStateList :OrderStateList[]=[];
   public receiptStateList :ReceiptStateList[]=[];
   
-  // form:FormGroup=new FormGroup({
-  //   username: new FormControl('',Validators.required),
-  //   password: new FormControl('',Validators.required)
-    
-  // });
+ 
   constructor(public hwStatus:HwStatusDataService,public service :EditFormService, public dialogRef: MatDialogRef<EditComponent>,public notificationService: NotificationService,@Inject(MAT_DIALOG_DATA) public data: any ) { }
 
+//   //object
+//   HwStatus: HardwareStatus = {
+//   central:this.service.form.value.central ;
+//   clientName:this.service.form.value.clientName;
+//   orderNumber:this.service.form.value.orderNumber,
+//   technicianName :this.service.form.value.technicianName,
+//   zoneNumber :this.service.form.value.zoneNumber,
+//   deviceType :this.service.form.value.deviceType,
+//   serialNumber:this.service.form.value.serialNumber,
+//   notes :this.service.form.value.notes,
+//   orderStatusId :this.service.form.value.orderStatusId,
+//   orderStatus :this.service.form.value.orderStatus,
+//   receiptStatusId :this.service.form.value.receiptStatusId,
+//   receiptStatus :this.service.form.value.receiptStatus,
+//   companyNameId :this.service.form.value.companyNameId,
+//   companyName :this.service.form.value.companyName,
+//   exitDate :this.service.form.value.exitDate,
+//   creationDate :this.service.form.value.creationDate,
+//   updateDate :this.service.form.value.updateDate,
+//   createdBy:this.service.form.value.createdBy,
+//   updatedBy :this.service.form.value.updatedBy
+// }
  
   ngOnInit(){
     this.dialogTitle = this.data.dialogTitle;
+   this.hwStatus.GettingLists().subscribe(res=>{
+    if(res.status==true)
+    {
+    this.companyNameList=res.companyName;
+    this.orderStateList=res.orderStatus;
+    this.receiptStateList=res.receiptStatus
+    }
+    else{this.notificationService.warn(':: error')}
+    console.log(res)
+   });
+
+// if(this.data)
+// {
+//       this.service.form.controls['clientName'].setValue(this.data.clientName);
+//       this.service.form.controls['central'].setValue(this.data.central);
+//       this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
+//       this.service.form.controls['technicianName'].setValue(this.data.technicianName);
+//       this.service.form.controls['zoneNumber'].setValue(this.data.zoneNumber);
+//       this.service.form.controls['deviceType'].setValue(this.data.deviceType);
+//       this.service.form.controls['serialNumber'].setValue(this.data.serialNumber);
+//       this.service.form.controls['notes'].setValue(this.data.notes);
+//       this.service.form.controls['exitDate'].setValue(this.data.exitDate);
+//       this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
+//       this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
+//       this.service.form.controls['orderStateId'].setValue(this.data.orderStateId);
+// }
+
+
+
   }
   onClear(){
     this.service.form.reset();
     this.service.initializeFormGroup();
     //this.notificationService.success(':: Submitted successfully');
   }
+
+
+
   onSubmit(){
     this.appear=true;
     if(this.service.form.invalid){
       this.appear=false;
     return;
     }
-   // this.hwStatus.AddHardwareStatus()
+
+
+let HwStatus=  {
+  central:this.service.form.value.central ,
+  clientName:this.service.form.value.clientName,
+  orderNumber:this.service.form.value.orderNumber,
+  technicianName :this.service.form.value.technicianName,
+  zoneNumber :this.service.form.value.zoneNumber,
+  deviceType :this.service.form.value.deviceType,
+  serialNumber:this.service.form.value.serialNumber,
+  notes :this.service.form.value.notes,
+  orderStatusId :this.service.form.value.orderStatusId,
+  orderStatus :this.service.form.value.orderStatus,
+  receiptStatusId :this.service.form.value.receiptStatusId,
+  receiptStatus :this.service.form.value.receiptStatus,
+  companyNameId :this.service.form.value.companyNameId,
+  companyName :this.service.form.value.companyName,
+  exitDate :this.service.form.value.exitDate,
+  creationDate :this.service.form.value.creationDate,
+  updateDate :this.service.form.value.updateDate,
+  createdBy:this.service.form.value.createdBy,
+  updatedBy :this.service.form.value.updatedBy
+};
+// if(!this.data)
+// {
+  console.log("add",this.service.form.value);
+  console.log("HwStatus",HwStatus);
+  //Add
+    this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
+      res=>{
+        console.log("model",this.service.form.value)
+        console.log("Status response",res)
+        if(res.status=true)
+        {
+      this.notificationService.success(':: Submitted successfully');
+      this.service.form.reset();
+      this.dialogRef.close('save');
+        }
+        else{
+          this.notificationService.warn(':: Failed');
+    
+        }
+      
+    },
+   
+  )
+  // }else
+  // {
+  //   //update
+  //   console.log("update");
+
+  //   this.hwStatus.UpdateHardwareStatus(this.service.form.value).subscribe(
+  //     res=>{
+  //       console.log("model",this.service.form.value)
+  //       console.log("Status response",res)
+  //       if(res.status=true)
+  //       {
+  //       this.notificationService.success(':: Updated successfully');
+  //       this.service.form.reset();
+  //       this.dialogRef.close('save');
+  //       }
+  //       else{
+  //         this.notificationService.warn(':: Failed');
+    
+  //       }
+      
+  //   },
+   
+  // )
+  // } 
 
 
     /*
