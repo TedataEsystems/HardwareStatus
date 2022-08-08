@@ -38,7 +38,7 @@ export class CompanyNameComponent implements OnInit {
   searchKey: string = '';
   listName: string = '';
   loading: boolean = true;
-
+  isNameUpdatedRepeated:boolean=false;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['id', 'name', 'action'];
@@ -46,7 +46,8 @@ export class CompanyNameComponent implements OnInit {
   dataSource = new MatTableDataSource(this.companyList);
   settingtype = ''
 
-
+  editUsr :any;
+  editdisabled: boolean = false;
 
 
   constructor(private titleService: Title
@@ -91,6 +92,7 @@ export class CompanyNameComponent implements OnInit {
   //////////
 
   ngOnInit(): void {
+    this.editUsr = 0;
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
 
@@ -174,7 +176,48 @@ export class CompanyNameComponent implements OnInit {
   addNew() {
     this.show = true;
   }
-
+  editROw(r: any) {
+    this.editUsr = r.id;
+    this.editdisabled = true;
+  //  this.getRequestdata(1,25,'',this.sortColumnDef,this.SortDirDef);
+  }
+  cancelEdit() {
+    this.editdisabled = false;
+    this.isNameUpdatedRepeated=false;
+    this.getRequestdata(1,25,'',this.sortColumnDef,this.SortDirDef);
+  }
+  updateEdit(row : any) {
+    this.loader=true;
+    let companyEdit:CompanyNameList=
+    {
+      id:row.id,
+      name:row.name
+    }
+    this.settingServices.UpdateCompanyName(companyEdit).subscribe(res=>
+      {
+        if(res.status==true)
+        {
+          setTimeout(() => {
+            this.loader = false;
+          }, 1500)
+          this.notser.success(":: update successfully");
+          this.LoadCompanyName();
+          this.form['controls']['name'].setValue('');
+          this.form['controls']['id'].setValue(0);
+          //   this.form.reset();
+this.cancelEdit();
+          this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        }//if
+        else
+        {
+          setTimeout(() => {
+            this.loader = false;
+          }, 0)
+          this.notser.warn(":: failed");
+        }
+        
+      })
+  }
   
 
   //this section for pagination 
@@ -238,8 +281,6 @@ export class CompanyNameComponent implements OnInit {
   onChecknameIsalreadysign() {
     this.company.name = this.form.value.name;
     this.company.id = this.form.value.id;
-    console.log(this.company.name, "yhyhyhhjkl");
-    console.log(this.company.id);
     this.settingServices.CompanyNameIsalreadysign(this.company.name, this.company.id).subscribe(
       res => {
         if (res.status == true) {
@@ -253,6 +294,24 @@ export class CompanyNameComponent implements OnInit {
 
         }
       });
+  }
+
+  onChecknameIsalreadysignWhenUpdate(row : any)
+  {
+   let compName = row.name;
+   let compNameId = row.id;
+    this.settingServices.CompanyNameIsalreadysign(compName  , compNameId).subscribe(
+      res =>{
+    if(res.status == true )
+    {
+      this.isDisabled = false;
+      this.isNameUpdatedRepeated=false;
+    }else
+    {
+      this.isDisabled  = true;
+      this.isNameUpdatedRepeated=true;
+    }
+    });
   }
 
 
