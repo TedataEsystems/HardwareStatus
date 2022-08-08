@@ -50,13 +50,26 @@
 
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> الرقم</mat-header-cell>
-      <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+      <mat-cell *matCellDef="let element" data-label="id">
+         {{element.id}} 
+        </mat-cell>
     </ng-container>
   
    
     <ng-container matColumnDef="name">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الشركة </mat-header-cell>
-      <mat-cell *matCellDef="let element" data-label="اسم الشركة">{{element.name}} </mat-cell>
+      <mat-cell *matCellDef="let element" data-label="اسم الشركة">
+        <!-- {{element.name}} -->
+        <ng-container *ngIf="!editdisabled || element.id!=editUsr">
+          {{element.name}} 
+         </ng-container>
+         <ng-container *ngIf="editdisabled  && element.id==editUsr">
+           <mat-form-field hideRequiredMarker="false" appearance="legacy">
+             <input matInput placeholder="Name"  name="name" [(ngModel)]="element.name" (keyup)="onChecknameIsalreadysignWhenUpdate(element)">
+             <span class="mat-error" *ngIf="isNameUpdatedRepeated && element.id == editUsr">name already exist</span>
+           </mat-form-field>
+         </ng-container>
+       </mat-cell>
   </ng-container>
   
    
@@ -66,9 +79,38 @@
         <!-- <button mat-button (click)="onEdit(row)">
             <mat-icon>launch</mat-icon>
         </button> -->
-        <button mat-button color="warn" (click)="onDelete(row)">
+        <!-- <button mat-button color="warn" (click)="onDelete(row)">
           <mat-icon>delete_outline</mat-icon>
-      </button>
+      </button> -->
+      <ng-container *ngIf="!editdisabled">
+               
+        <button mat-button class="text-success font-weight-bolder"  (click)="editROw(row)">
+          Edit
+        </button>
+       <span class="mx-2">|</span>
+        <button mat-button class="font-weight-bolder" color="warn"  (click)="onDelete(row)">
+           Delete
+          
+        </button>
+      </ng-container>
+      <ng-container *ngIf="editdisabled">
+        <button  class="btn-success btn-sm mr-1" [disabled]="isDisabled"  (click)="updateEdit(row)">
+           Update
+        </button>
+       
+        <button  class="btn-danger btn-sm"  (click)="cancelEdit()">
+          Cancel
+        </button>
+      </ng-container>
+    
+
+
+
+
+
+
+
+
        
     </mat-cell>
     </ng-container>
