@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 import { ConfigureService } from './configure.service';
 
@@ -31,7 +32,31 @@ export class HwStatusDataService {
   AddHardwareStatus(model: any): Observable<any> {
     return this.httpClient.post<any>(`${this.apiURL}/AddHardwareStatus`, model);
   }
+    
+  DeleteHwStatus(id:any):Observable<any>
+  {
+    
+    return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`+id) ;
+  }
 
+  getHwStatus(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
+    let params = new HttpParams();
+    if(PageNumber !== null && PageSize !== null){
+      params = params.append('pageNumber' , PageNumber.toString());
+      params = params.append('pageSize' , PageSize.toString());
+      params = params.append('searchValue' , searchValue.toString());
+      params = params.append('sortcolumn' , sortcolumn.toString());
+      params = params.append('sortcolumndir' , sortcolumndir.toString());
+    }
+    return this.httpClient.get<any>(`${this.apiURL}/GetHardwareStatus`  , {observe:'response' , params}).pipe(
+      map(response => {
+        console.log("fromservice",response)
+         return response.body ;
+      })
+    )
+  }
+
+  
 
 
 

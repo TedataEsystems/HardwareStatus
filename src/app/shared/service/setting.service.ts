@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -45,6 +46,10 @@ export class SettingService {
   CompanyNameIsalreadysign(name:string,id:number ):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/CompanyNameIsAlreadySigned/`+name+`/`+id);  
+  }
+  UpdateCompanyName(model:any):Observable<any>
+  {
+return this.httpClient.post<any>(`${this.apiUrl2}/UpdateCompanyName`,model);
   }
 
 ////logs
@@ -93,6 +98,10 @@ AddOrderStatus(model:any):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/OrderStatusIsAlreadySigned/`+name+`/`+id);  
   }
+  UpdateOrderStatus(model:any):Observable<any>
+  {
+   return this.httpClient.post<any>(`${this.apiUrl2}/UpdateOrderStatus`,model);
+  }
 ////ReceiptStatus
 
 AddReceiptStatus(model:any):Observable<any>
@@ -123,6 +132,9 @@ ReceiptStatusIsalreadysign(name:string,id:number ):Observable<any>
 {
  return this.httpClient.get<any>(`${this.apiUrl2}/ReceiptStatusIsAlreadySigned/`+name+`/`+id);  
 }
-
+UpdateReceiptStatus(model:any):Observable<any>
+  {
+   return this.httpClient.post<any>(`${this.apiUrl2}/UpdateReceiptStatus`,model);
+  }
 
 }

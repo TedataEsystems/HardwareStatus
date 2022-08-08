@@ -49,6 +49,8 @@ export class EditComponent implements OnInit {
  
   ngOnInit(){
     this.dialogTitle = this.data.dialogTitle;
+    console.log("rowOnInt",this.data);
+    //this.service.form=this.data.xx;
    this.hwStatus.GettingLists().subscribe(res=>{
     if(res.status==true)
     {
@@ -58,23 +60,33 @@ export class EditComponent implements OnInit {
     }
     else{this.notificationService.warn(':: error')}
     console.log(res)
+
+
+
    });
 
-// if(this.data)
-// {
-//       this.service.form.controls['clientName'].setValue(this.data.clientName);
-//       this.service.form.controls['central'].setValue(this.data.central);
-//       this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
-//       this.service.form.controls['technicianName'].setValue(this.data.technicianName);
-//       this.service.form.controls['zoneNumber'].setValue(this.data.zoneNumber);
-//       this.service.form.controls['deviceType'].setValue(this.data.deviceType);
-//       this.service.form.controls['serialNumber'].setValue(this.data.serialNumber);
-//       this.service.form.controls['notes'].setValue(this.data.notes);
-//       this.service.form.controls['exitDate'].setValue(this.data.exitDate);
-//       this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
-//       this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
-//       this.service.form.controls['orderStateId'].setValue(this.data.orderStateId);
-// }
+   if(this.data)
+   {
+    console.log("condition entered")
+    this.service.form.controls['id'].setValue(this.data.id);
+    this.service.form.controls['central'].setValue(this.data.central);
+    this.service.form.controls['clientName'].setValue(this.data.clientName);
+    this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
+    this.service.form.controls['technicianName'].setValue(this.data.technicianName);
+    this.service.form.controls['zoneNumber'].setValue(this.data.zoneNumber);
+    this.service.form.controls['serialNumber'].setValue(this.data.serialNumber);
+    this.service.form.controls['notes'].setValue(this.data.notes);
+    this.service.form.controls['exitDate'].setValue(this.data.exitDate);
+    this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
+    this.service.form.controls['deviceType'].setValue(this.data.deviceType);
+    this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
+    this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
+    this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
+   
+
+   }
+
+
 
 
 
@@ -116,8 +128,8 @@ let HwStatus=  {
   createdBy:this.service.form.value.createdBy,
   updatedBy :this.service.form.value.updatedBy
 };
-// if(!this.data)
-// {
+if(!this.data)
+{
   console.log("add",this.service.form.value);
   console.log("HwStatus",HwStatus);
   //Add
@@ -139,30 +151,31 @@ let HwStatus=  {
     },
    
   )
-  // }else
-  // {
-  //   //update
-  //   console.log("update");
+  }else
+  {
+    //update
+    console.log("update");
 
-  //   this.hwStatus.UpdateHardwareStatus(this.service.form.value).subscribe(
-  //     res=>{
-  //       console.log("model",this.service.form.value)
-  //       console.log("Status response",res)
-  //       if(res.status=true)
-  //       {
-  //       this.notificationService.success(':: Updated successfully');
-  //       this.service.form.reset();
-  //       this.dialogRef.close('save');
-  //       }
-  //       else{
-  //         this.notificationService.warn(':: Failed');
+    this.hwStatus.UpdateHardwareStatus(this.service.form.value).subscribe(
+      res=>{
+        console.log("model",this.service.form.value)
+        console.log("Status response",res)
+        if(res.status=true)
+        {
+        this.notificationService.success(':: Updated successfully');
+        this.service.form.reset();
+        this.dialogRef.close('save');
     
-  //       }
+        }
+        else{
+          this.notificationService.warn(':: Failed');
+    
+        }
       
-  //   },
+    },
    
-  // )
-  // } 
+  )
+  } 
 
 
     /*
