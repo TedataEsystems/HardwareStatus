@@ -70,6 +70,10 @@ export class HwStatusDataService {
     );
   }
 
+  DownloadAllDisplayDataOfExcel():Observable<Blob>{
+    return this.httpClient.get(`${this.apiURL}/ExportExcel`,{responseType: 'blob',headers: this.headers}); 
+  }
+
 
 
 

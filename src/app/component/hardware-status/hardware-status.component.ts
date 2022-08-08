@@ -209,24 +209,38 @@ sortData(sort: any) {
   var c = this.pageIn;
   this.getRequestdata(1, 25, '', sort.active, this.lastdir);
 }
+exportExcel() {
+  this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
+    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+    const file = new File([blob], 'hwStatusData' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
 
-exportExcel(){
-  let searchData=this.searchKey.trim().toLowerCase();
+    saveAs(file, 'hwStatusData' + Date.now() + '.xlsx')
 
-  this.hwstatus.getAllHwStatusDataEXel(searchData).subscribe(res=>{
-    
-    const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
-    const file = new File([blob],  'hwStatusData' + new Date().toLocaleString()+ '.xlsx', { type: 'application/vnd.ms.excel' });
-    saveAs(file,'hwStatusData.txt');
-    
-  },err=>{
-    if(err.status==401)
-    this.router.navigate(['/login'], { relativeTo: this.route });
-    else 
-    this.note.warn("!! Fail")
-   
+  }, err => {
+
+    this.note.warn("! Fail")
+
   });
+
 }
+
+// exportExcel(){
+//   let searchData=this.searchKey.trim().toLowerCase();
+
+//   this.hwstatus.getAllHwStatusDataEXel(searchData).subscribe(res=>{
+    
+//     const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
+//     const file = new File([blob],  'hwStatusData' + new Date().toLocaleString()+ '.xlsx', { type: 'application/vnd.ms.excel' });
+//     saveAs(file,'hwStatusData.txt');
+    
+//   },err=>{
+//     if(err.status==401)
+//     this.router.navigate(['/login'], { relativeTo: this.route });
+//     else 
+//     this.note.warn("!! Fail")
+   
+//   });
+// }
 
 }
