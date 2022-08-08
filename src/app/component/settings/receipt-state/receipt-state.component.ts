@@ -20,6 +20,7 @@ export class ReceiptStateComponent implements OnInit {
 
   isShowDiv = false;  
   isNameRepeated : boolean =false;
+  isNameUpdatedRepeated: boolean = false;
   form: FormGroup = new FormGroup({
     id: new FormControl(0),
     name: new FormControl('',[Validators.required]),      
@@ -38,7 +39,8 @@ valdata="";valuid=0;
   searchKey:string ='';
   listName:string ='';
   loading: boolean = true;
- 
+  editUsr: any;
+  editdisabled: boolean = false;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['id', 'name','action'];
@@ -66,7 +68,7 @@ settingtype=''
   SortDirDef: string = 'asc';
   public colname: string = 'Id';
   public coldir: string = 'asc';
-  LoadTechName() {
+  LoadReceoptStatus() {
     this.settingServices.getReceiptSttatus(this.pageNumber, this.pageSize, '', this.colname, this.coldir).subscribe(response => {
       this.receiptList.push(...response?.data);
       this.receiptList.length = response?.pagination.totalCount;
@@ -91,6 +93,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
 //////////
 
 ngOnInit(): void {
+  this.editUsr=0;
   this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
 }
 
@@ -120,6 +123,9 @@ applyFilter() {
   onCreateUpdate() {
     
    this.isDisable=true;
+   this.receipt.name=this.form.value.name;
+   this.receipt.id=this.form.value.id;
+   this.receipt.createdBy = localStorage.getItem('usernam') || '';
       if (this.form.invalid||this.form.value.name==' ') {
         if (this.form.value.name==' ')
          this.setReactValue(Number(0),"");  
@@ -128,8 +134,9 @@ applyFilter() {
       } 
       else
       {
+        if(this.form.value.id==0){
         this.isDisable=true;
-        this.receipt.name=this.form.value.name;
+      
         this.receipt.createdBy=localStorage.getItem('usernam')||'';
         this.settingServices.AddReceiptStatus(this.receipt).subscribe(res=>
           {
@@ -137,10 +144,9 @@ applyFilter() {
                 this.loader=false;
               },1500)
               this.notser.success(":: add successfully");
-              this.LoadTechName();
-             this.form.value.name='';
-             this.form.value.id=0;
-           //   this.form.reset();
+              this.LoadReceoptStatus();
+              this.form['controls']['name'].setValue('');
+              this.form['controls']['id'].setValue(0);
              
               this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
           } ,
@@ -150,14 +156,92 @@ applyFilter() {
             },0)
             this.notser.warn(":: failed");}
         );
-      }
-      
-   
-  }//end of submit
+      }//if
+      else {
+        //not used
+        this.settingServices.UpdateReceiptStatus(this.receipt).subscribe(res => {
+          setTimeout(() => {
+            this.loader = false;
+          }, 1500)
+          this.notser.success(":: update successfully");
+          this.LoadReceoptStatus();
+          this.form['controls']['name'].setValue('');
+          this.form['controls']['id'].setValue(0);
+          this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        },
+          error => {
+            setTimeout(() => {
+              this.loader = false;
+            }, 0)
+            this.notser.warn(":: failed");
+          }
+        )
+      }//else
+    }
+    this.show = false;
+    } 
+  //end of submit
+
+
 
   addNew(){
     this.show=true;
   }
+  editROw(r: any) {
+    this.editUsr = r.id;
+    this.editdisabled = true;
+
+  }
+  cancelEdit() {
+    this.editdisabled = false;
+    this.isNameUpdatedRepeated = false;
+    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  }
+  updateEdit(row: any) {
+    this.loader = true;
+    let ReceiptEdit:ReceiptStateList=
+    {
+      id: row.id,
+      name: row.name
+    }
+    console.log(ReceiptEdit);
+    this.settingServices.UpdateReceiptStatus(ReceiptEdit).subscribe(res => {
+      if (res.status == true) {
+         console.log(ReceiptEdit);
+        setTimeout(() => {
+          this.loader = false;
+        }, 1500)
+        this.notser.success(":: update successfully");
+        this.LoadReceoptStatus();
+        this.form['controls']['name'].setValue('');
+        this.form['controls']['id'].setValue(0);
+        this.cancelEdit();
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      }//if
+      else {
+        setTimeout(() => {
+          this.loader = false;
+        }, 0)
+        this.notser.warn(":: failed");
+      }
+
+    })
+  }
+
+  onChecknameIsalreadysignWhenUpdate(row: any) {
+    let ReceiptName = row.name;
+    let ReceiptNameId = row.id;
+    this.settingServices.ReceiptStatusIsalreadysign(ReceiptName, ReceiptNameId).subscribe(
+      res => {
+        if (res.status == true) {
+          this.isDisabled = false;
+          this.isNameUpdatedRepeated = false;
+        } else {
+          this.isDisabled = true;
+          this.isNameUpdatedRepeated = true;
+        }
+      });
+    }
   //this section for pagination 
   pageIn = 0;
   previousSizedef = 25;
@@ -196,6 +280,7 @@ applyFilter() {
     
 
   }
+  
 ///////
 
 lastcol: string = 'Id';

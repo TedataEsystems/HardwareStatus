@@ -12,8 +12,7 @@ import { LayoutComponent } from './shared/component/layout/layout.component';
 import { LoginComponent } from './shared/component/login/login.component';
 
 const routes: Routes = [
- //  {path: '', component: LoginComponent},
-
+ 
   {
     path:'login',component:LoginComponent,
  },
