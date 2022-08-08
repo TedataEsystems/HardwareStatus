@@ -138,9 +138,18 @@ applyFilter() {
               },1500)
               this.notser.success(":: add successfully");
               this.LoadTechName();
-              this.form.value.name='';
-              this.form.value.id=0;
-           //   this.form.reset();
+              this.form['controls']['name'].setValue('');
+              this.form['controls']['id'].setValue(0);
+              // this.form.controls['name'].valueChanges.subscribe(value => {
+              //   value='';
+              // });
+              // this.form.controls['id'].valueChanges.subscribe(value => {
+              //   value=0;
+              // });
+              
+             
+              // this.toggleDisplay();
+          
              
               this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
           } ,
@@ -218,6 +227,7 @@ sortData(sort: any) {
 
 onChecknameIsalreadysign()
   {
+    
     this.company.name=this.form.value.name;
     this.company.id=this.form.value.id;
     console.log(this.company.name,"yhyhyhhjkl");
@@ -278,6 +288,7 @@ onDelete(r: any) {
 
 toggleDisplay() {  
   this.isShowDiv = !this.isShowDiv;  
- 
+  this.form['controls']['name'].setValue('');
+  this.form['controls']['id'].setValue(0);
 } 
 }

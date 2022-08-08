@@ -8,5 +8,8 @@ import { ConfigureService } from './shared/service/configure.service';
 })
 export class AppComponent {
   title = '';
+
  
 }
+
+

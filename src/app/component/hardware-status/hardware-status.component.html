@@ -59,51 +59,48 @@
         <mat-cell *matCellDef="let element" data-label="السنترال"> {{element.central}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="orderNum">
+    <ng-container matColumnDef="orderNumber">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>رقم الاوردر</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="رقم الاوردر"> {{element.orderNum}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="رقم الاوردر"> {{element.orderNumber}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="technicianName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الفني </mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="اسم الفني"> {{element.technicianName}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="circuitNum">
+    <ng-container matColumnDef="zoneNumber">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> رقم الدائرة </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="رقم الدائرة"> {{element.circuitNum}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="رقم الدائرة"> {{element.zoneNumber}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="number">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> العدد </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="العدد"> {{element.number}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="hardwareType">
+ 
+    <ng-container matColumnDef="deviceType">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> نوع الجهاز </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="نوع الجهاز"> {{element.hardwareType}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="نوع الجهاز"> {{element.deviceType}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="serialNum">
+    <ng-container matColumnDef="serialNumber">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>السيريال نامبر </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="السيريال نامبر"> {{element.serialNum}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="السيريال نامبر"> {{element.serialNumber}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="comments">
+    <ng-container matColumnDef="notes">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> ملاحظات </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="ملاحظات"> {{element.comments}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="ملاحظات"> {{element.notes}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="exitDate">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الخروج </mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="تاريخ الخروج"> {{element.exitDate}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="receiptState">
+    <ng-container matColumnDef="receiptStatusId">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف ايصال الاستلام</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element.receiptState}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element.receiptStatusId}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="orderState">
+    <ng-container matColumnDef="orderStatusId">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف الاوردر </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element.orderState}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element.orderStatusId}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="company">
+    <ng-container matColumnDef="companyName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الشركة</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.company}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.companyName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
@@ -115,7 +112,7 @@
                 <mat-icon>edit</mat-icon>
             </button>
            
-            <button mat-button   class="btn-danger"   matTooltip="Delete" (click)="onDelete()">
+            <button mat-button   class="btn-danger" *ngIf="!isNotAdmin" matTooltip="Delete" (click)="onDelete(row)">
                 <mat-icon>delete_forever</mat-icon>
             </button>
         </mat-cell>
