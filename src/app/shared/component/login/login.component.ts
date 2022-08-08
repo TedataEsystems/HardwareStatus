@@ -12,7 +12,7 @@ import { LoginserService } from '../../service/loginser.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
  
   form:FormGroup=new FormGroup({
     username: new FormControl('',Validators.required),
@@ -20,12 +20,15 @@ export class LoginComponent implements OnInit {
     
   });
   warning=false;
+  returnUrl?: string;
   //object
   loginmodel: Login = {
     userName: "",
     password: ""
   }
   
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,15 +43,21 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
-   
- 
+    
+this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+  
   }
     
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
-
+    setInterval(()=>{     
+      console.log("timer")                     
+      this.config.Logout();
+      console.log(localStorage);
+  }, 3600000);
     this.loginmodel.userName = this.form.value.username.trim();
     this.loginmodel.password = this.form.value.password;
     this.login.getLogin(this.loginmodel).subscribe(res => {
@@ -58,7 +67,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("usernam", res.userName);
         localStorage.setItem("userGroup", res.userGroup);
  
-       window.location.href = "/"
+      // window.location.href = "/"
+      this.router.navigate([this.returnUrl]);
          //this.router.navigate(['/'], { relativeTo: this.route });
       }
       else {

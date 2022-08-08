@@ -132,8 +132,8 @@ export class CompanyNameComponent implements OnInit {
           }, 1500)
           this.notser.success(":: add successfully");
           this.LoadCompanyName();
-          this.form.value.name = '';
-          this.form.value.id = 0;
+          this.form['controls']['name'].setValue('');
+          this.form['controls']['id'].setValue(0);
           //   this.form.reset();
 
           this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
@@ -153,8 +153,8 @@ export class CompanyNameComponent implements OnInit {
           }, 1500)
           this.notser.success(":: update successfully");
           this.LoadCompanyName();
-          this.form.value.name = '';
-          this.form.value.id = 0;
+          this.form['controls']['name'].setValue('');
+          this.form['controls']['id'].setValue(0);
           //   this.form.reset();
 
           this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
@@ -176,7 +176,6 @@ export class CompanyNameComponent implements OnInit {
   }
 
   
-
 
   //this section for pagination 
   pageIn = 0;
@@ -292,8 +291,9 @@ export class CompanyNameComponent implements OnInit {
 
 
 
-  toggleDisplay() {
-    this.isShowDiv = !this.isShowDiv;
-
-  }
+toggleDisplay() {  
+  this.isShowDiv = !this.isShowDiv;  
+  this.form['controls']['name'].setValue('');
+  this.form['controls']['id'].setValue(0);
+} 
 }

@@ -47,6 +47,8 @@ public pIn:number=0;
     localStorage.removeItem("userGroup");
     localStorage.removeItem("tokNum");
     localStorage.removeItem("usernam");
+    this.router.navigateByUrl('/login');
+    
    }
 
 }
