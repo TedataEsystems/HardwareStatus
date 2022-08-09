@@ -42,7 +42,7 @@
 <ng-template #table>
     <div class="example-container mat-elevation-z8">
 
-<mat-table [dataSource]="dataSource" multiTemplateDataRows  matSort >
+<mat-table [dataSource]="dataSource" multiTemplateDataRows   matSort (matSortChange)="sortData($event)" matSortActive="name"matSortDirection="asc" matSortDisableClear >
  
     
    
@@ -98,9 +98,9 @@
         <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element.orderStatusId}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="companyName">
+    <ng-container matColumnDef="companyNameId">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الشركة</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.companyName}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.companyNameId}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
