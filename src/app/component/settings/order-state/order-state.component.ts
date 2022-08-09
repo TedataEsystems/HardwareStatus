@@ -17,8 +17,10 @@ import { SettingService } from 'src/app/shared/service/setting.service';
   styleUrls: ['./order-state.component.css']
 })
 export class OrderStateComponent implements OnInit {
-
+ 
   isShowDiv = false;  
+  isNameUpdatedRepeated  : boolean =false;
+  editdisabled: boolean = false;
   isNameRepeated : boolean =false;
   form: FormGroup = new FormGroup({
     id: new FormControl(0),
@@ -31,7 +33,7 @@ export class OrderStateComponent implements OnInit {
     createdBy:""
   }
 
- 
+  editUsr: any;
 orderList:OrderStateList[]=[];
 orderistTab?:OrderStateList[]=[];
 valdata="";valuid=0;
@@ -66,7 +68,7 @@ settingtype=''
   SortDirDef: string = 'asc';
   public colname: string = 'Id';
   public coldir: string = 'asc';
-  LoadTechName() {
+  LoadOrderStatus() {
     this.settingServices.getOrderStatus(this.pageNumber, this.pageSize, '', this.colname, this.coldir).subscribe(response => {
       this.orderList.push(...response?.data);
       this.orderList.length = response?.pagination.totalCount;
@@ -91,6 +93,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
 //////////
 
 ngOnInit(): void {
+  this.editUsr=0;
   this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
 }
 
@@ -107,19 +110,13 @@ applyFilter() {
   this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
 }
 
-
-
-
-
-
-
-
-  
   isDisable=false;
 
   onCreateUpdate() {
     
    this.isDisable=true;
+   this.order.name=this.form.value.name;
+   this.order.id=this.form.value.id;
       if (this.form.invalid||this.form.value.name==' ') {
         if (this.form.value.name==' ')
          this.setReactValue(Number(0),"");  
@@ -128,8 +125,8 @@ applyFilter() {
       } 
       else
       {
+        if (this.form.value.id == 0) {
         this.isDisable=true;
-        this.order.name=this.form.value.name;
         this.order.createdBy=localStorage.getItem('usernam')||'';
         this.settingServices.AddOrderStatus(this.order).subscribe(res=>
           {
@@ -137,9 +134,9 @@ applyFilter() {
                 this.loader=false;
               },1500)
               this.notser.success(":: add successfully");
-              this.LoadTechName();
-              this.form.value.name='';
-              this.form.value.id=0;
+              this.LoadOrderStatus();
+              this.form['controls']['name'].setValue('');
+          this.form['controls']['id'].setValue(0);
           //    this.form.reset();
              
               this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
@@ -151,13 +148,94 @@ applyFilter() {
             this.notser.warn(":: failed");}
         );
       }
-      
-   
+    ///if
+    else {
+      //not used
+      this.settingServices.UpdateOrderStatus(this.order).subscribe(res => {
+        setTimeout(() => {
+          this.loader = false;
+        }, 1500)
+        this.notser.success(":: update successfully");
+        this.LoadOrderStatus();
+        this.form['controls']['name'].setValue('');
+        this.form['controls']['id'].setValue(0);
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      },
+        error => {
+          setTimeout(() => {
+            this.loader = false;
+          }, 0)
+          this.notser.warn(":: failed");
+        }
+      )
+    }//else
+  }
+  this.show=false;
   }//end of submit
 
   addNew(){
     this.show=true;
   }
+  editROw(r: any) {
+    this.editUsr = r.id;
+    this.editdisabled = true;
+
+  }
+  cancelEdit() {
+    this.editdisabled = false;
+    this.isNameUpdatedRepeated = false;
+    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  }
+
+  updateEdit(row: any) {
+    this.loader = true;
+    let orderEdit: OrderStateList =
+    {
+      id: row.id,
+      name: row.name
+    }
+    this.settingServices.UpdateOrderStatus(orderEdit).subscribe(res => {
+      if (res.status == true) {
+        setTimeout(() => {
+          this.loader = false;
+        }, 1500)
+        this.notser.success(":: update successfully");
+        this.LoadOrderStatus();
+        this.form['controls']['name'].setValue('');
+        this.form['controls']['id'].setValue(0);
+        //   this.form.reset();
+        this.cancelEdit();
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      }//if
+      else {
+        setTimeout(() => {
+          this.loader = false;
+        }, 0)
+        this.notser.warn(":: failed");
+      }
+
+    })
+  }
+
+
+  onChecknameIsalreadysignWhenUpdate(row: any) {
+    let compName = row.name;
+    let compNameId = row.id;
+    this.settingServices.OrderStatusIsalreadysign(compName, compNameId).subscribe(
+      res => {
+        if (res.status == true) {
+          this.isDisabled = false;
+          this.isNameUpdatedRepeated = false;
+        } else {
+          this.isDisabled = true;
+          this.isNameUpdatedRepeated = true;
+        }
+      });
+  }
+
+
+
+
   //this section for pagination 
   pageIn = 0;
   previousSizedef = 25;
@@ -225,13 +303,13 @@ onChecknameIsalreadysign()
     if(res.status == true )
     {
       this.isDisabled = false;
-      this.isNameRepeated=false;
+      this.isNameRepeated  =false;
       
       
     }else
     {
       this.isDisabled  = true;
-      this.isNameRepeated=true;
+      this.isNameRepeated  =true;
      
     }
     });
