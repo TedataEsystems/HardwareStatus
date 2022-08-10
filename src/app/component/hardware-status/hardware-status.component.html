@@ -89,18 +89,18 @@
         <mat-cell *matCellDef="let element" data-label="تاريخ الخروج"> {{element.exitDate}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="receiptStatusId">
+    <ng-container matColumnDef="_ReceiptStatusName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف ايصال الاستلام</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element.receiptStatusId}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element._ReceiptStatusName}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="orderStatusId">
+    <ng-container matColumnDef="_OrderStatusName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف الاوردر </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element.orderStatusId}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="موقف الاوردر"> {{element._OrderStatusName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="companyNameId">
+    <ng-container matColumnDef="_CompanyName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم الشركة</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element.companyNameId}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element._CompanyName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">

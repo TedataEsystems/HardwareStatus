@@ -19,7 +19,7 @@
               <mat-label>اسم الشركة</mat-label>
               <input type="text"  id="picvalid" matInput formControlName="name" [value]="valdata" (keyup)="onChecknameIsalreadysign()" >
               <input type="hidden" id="picid" formControlName="id"  [value]="valuid"  placeholder="">
-              <span class="mat-error" *ngIf="isNameRepeated">name already exist</span>
+              <span class="mat-error" *ngIf="isNameRepeated">الاسم مسجل مسبقاً</span>
             </mat-form-field><span style="margin-left: 10px;"> </span>
             
             
@@ -66,7 +66,7 @@
          <ng-container *ngIf="editdisabled  && element.id==editUsr">
            <mat-form-field hideRequiredMarker="false" appearance="legacy">
              <input matInput placeholder="Name"  name="name" [(ngModel)]="element.name" (keyup)="onChecknameIsalreadysignWhenUpdate(element)">
-             <span class="mat-error" *ngIf="isNameUpdatedRepeated && element.id == editUsr">name already exist</span>
+             <span class="mat-error" *ngIf="isNameUpdatedRepeated && element.id == editUsr">الاسم مسجل مسبقاً</span>
            </mat-form-field>
          </ng-container>
        </mat-cell>
@@ -85,21 +85,21 @@
       <ng-container *ngIf="!editdisabled">
                
         <button mat-button class="text-success font-weight-bolder"  (click)="editROw(row)">
-          Edit
+          تعديل
         </button>
        <span class="mx-2">|</span>
         <button mat-button class="font-weight-bolder" color="warn"  (click)="onDelete(row)">
-           Delete
+           مسح
           
         </button>
       </ng-container>
       <ng-container *ngIf="editdisabled">
         <button  class="btn-success btn-sm mr-1" [disabled]="isDisabled"  (click)="updateEdit(row)">
-           Update
+           تعديل
         </button>
        
         <button  class="btn-danger btn-sm"  (click)="cancelEdit()">
-          Cancel
+          إلغاء
         </button>
       </ng-container>
     
