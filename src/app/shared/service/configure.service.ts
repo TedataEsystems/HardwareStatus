@@ -20,16 +20,16 @@ public pIn:number=0;
      
    UserName()
    {
-       return localStorage.getItem("usernam");
+       return  sessionStorage.getItem("usernam");
    }
 
    UserGroup()
    {
-       return localStorage.getItem("userGroup");
+       return  sessionStorage.getItem("userGroup");
    }
    UserToken()
    {
-       return localStorage.getItem("tokNum");
+       return  sessionStorage.getItem("tokNum");
    }
 
    IsAuthentecated()
@@ -43,10 +43,10 @@ public pIn:number=0;
    Logout()
    {
   
-   // localStorage.removeItem("teamName");
-    localStorage.removeItem("userGroup");
-    localStorage.removeItem("tokNum");
-    localStorage.removeItem("usernam");
+   
+   sessionStorage.removeItem("userGroup");
+   sessionStorage.removeItem("tokNum");
+   sessionStorage.removeItem("usernam");
     this.router.navigateByUrl('/login');
     
    }

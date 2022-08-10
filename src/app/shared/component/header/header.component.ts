@@ -8,12 +8,12 @@ import { ConfigureService } from '../../service/configure.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  UserName = localStorage.getItem("usernam");
+  UserName =  sessionStorage.getItem("usernam");
   isNotAdmin=false;
  
   @Output() public sidenavToggle = new EventEmitter();
   constructor(private router :Router ,private config:ConfigureService) {
-    var teamval= localStorage.getItem("userGroup");
+    var teamval=  sessionStorage.getItem("userGroup");
     
     if(teamval?.toLocaleLowerCase() != 'admin'){
    this.isNotAdmin=true;  

@@ -56,16 +56,16 @@ this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     setInterval(()=>{     
       console.log("timer")                     
       this.config.Logout();
-      console.log(localStorage);
+    //  console.log( sessionStorage);
   }, 3600000);
     this.loginmodel.userName = this.form.value.username.trim();
     this.loginmodel.password = this.form.value.password;
     this.login.getLogin(this.loginmodel).subscribe(res => {
 
       if (res.status == true) {
-       localStorage.setItem("tokNum", res.token);
-        localStorage.setItem("usernam", res.userName);
-        localStorage.setItem("userGroup", res.userGroup);
+        sessionStorage.setItem("tokNum", res.token);
+        sessionStorage.setItem("usernam", res.userName);
+        sessionStorage.setItem("userGroup", res.userGroup);
  
       // window.location.href = "/"
       this.router.navigate([this.returnUrl]);

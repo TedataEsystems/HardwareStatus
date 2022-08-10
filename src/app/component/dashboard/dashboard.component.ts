@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 import {ChartType} from 'chart.js';
 import {Color,MultiDataSet,Label} from 'ng2-charts';
+import { DashboardService } from 'src/app/shared/service/dashboard.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,12 +18,12 @@ export class DashboardComponent implements OnInit {
  
   //chartData=<IChart>{};
   count:number=0;
-  userRole=localStorage.getItem('userGroup');
+  userRole= sessionStorage.getItem('userGroup');
   constructor(
     //private hardwareService:HardwareService,
     public notificationService: NotificationService,
    // public service:EmpService ,
-    private titleService:Title ){
+    private titleService:Title,private dashboard:DashboardService,private router:Router ){
 
     this.titleService.setTitle("Home"); 
     
@@ -29,14 +31,14 @@ export class DashboardComponent implements OnInit {
  
   
 
-  doughnutChartLabelsp: Label[] =['Pending customer','Pending TE','Pending ESP','Pending ETSI'];
+  doughnutChartLabelsp: Label[] =[];
   doughnutChartDatap: MultiDataSet = [
-    [20,30,10,50]
+    []
   ];
  
-  doughnutChartLabels: Label[] = ['Pending customer','Pending TE','Pending ESP','Pending ETSI','Pending EPM','Delivered'];
+  doughnutChartLabels: Label[] = [];
   doughnutChartData: MultiDataSet = [
-    [30,10,43,23,12,22]
+    []
   ];
 
   doughnutChartType: ChartType = 'doughnut';
@@ -44,6 +46,8 @@ export class DashboardComponent implements OnInit {
     {
       backgroundColor: [
        
+        '#8cb8d6','#3c85b6','#3377a5','#226a9b','#1a6699','green',
+        '#8cb8d6','#3c85b6','#3377a5','#226a9b','#1a6699','green',
         '#8cb8d6','#3c85b6','#3377a5','#226a9b','#1a6699','green'
       ]
     }
@@ -100,9 +104,28 @@ export class DashboardComponent implements OnInit {
 
 // }
    ngOnInit(){
+      console.log("side ");
+this.dashboard.getOrderStatusChart().subscribe(res=>
+  {
+   console.log(res.key,"Firstkey");
+   console.log(res.val,"Firstval");
+this.doughnutChartLabelsp=res.key;
+this. doughnutChartDatap=res.val;
+  }
+ 
+)///
+this.dashboard.getReceiptStatusChart().subscribe(res=>
+  {
+    //alert("recipt");
+    console.log(res.key,"key");
+     console.log(res.val,"val");
+    this.doughnutChartLabels=res.key;
+    this. doughnutChartData=res.val;
+  })
 
-  // this.getChartData();
-   }
+
+
+   }//oninit
 
  
 
