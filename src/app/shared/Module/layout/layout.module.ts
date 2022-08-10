@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrderStateComponent } from 'src/app/component/settings/order-state/order-state.component';
 import { CompanyNameComponent } from 'src/app/component/settings/company-name/company-name.component';
 import { ReceiptStateComponent } from 'src/app/component/settings/receipt-state/receipt-state.component';
-import { ChartsModule } from 'ng2-charts';
+ import { ChartsModule } from 'ng2-charts';
 
 
 

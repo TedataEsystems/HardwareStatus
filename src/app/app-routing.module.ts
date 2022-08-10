@@ -18,7 +18,8 @@ const routes: Routes = [
  },
   {
     path:'',
-    component: LayoutComponent,canActivate: [AuthGuard] ,
+    component: LayoutComponent,
+    canActivate: [AuthGuard] ,
 
 
     children: [

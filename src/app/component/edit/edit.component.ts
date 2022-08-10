@@ -8,6 +8,7 @@ import { ReceiptStateList } from 'src/app/Model/receipt-state-list.model';
 import { EditFormService } from 'src/app/shared/service/edit-form.service';
 import { HwStatusDataService } from 'src/app/shared/service/hw-status-data.service';
 import { NotificationService } from 'src/app/shared/service/notification.service';
+import { HardwareStatusComponent } from '../hardware-status/hardware-status.component';
 
 @Component({
   selector: 'app-edit',
@@ -128,11 +129,15 @@ let HwStatus=  {
   createdBy:this.service.form.value.createdBy,
   updatedBy :this.service.form.value.updatedBy
 };
-if(!this.data)
+console.log("data checking",this.data);
+
+if(this.data.dialogTitle=="اضافة جديد")
 {
   console.log("add",this.service.form.value);
   console.log("HwStatus",HwStatus);
   //Add
+  console.log("ADD");
+
     this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
       res=>{
         console.log("model",this.service.form.value)
@@ -165,6 +170,8 @@ if(!this.data)
         this.notificationService.success(':: Updated successfully');
         this.service.form.reset();
         this.dialogRef.close('save');
+
+
     
         }
         else{

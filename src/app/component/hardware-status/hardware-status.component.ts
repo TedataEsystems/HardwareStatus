@@ -24,6 +24,7 @@ import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 export class HardwareStatusComponent implements OnInit {
   hwList:HardwareStatus[]=[];
   isNotAdmin= false ;
+  loader: boolean = false;
   valdata="";valuid=0;
   searchKey:string ='';
   listName:string ='';
@@ -54,7 +55,7 @@ export class HardwareStatusComponent implements OnInit {
   public coldir: string = 'asc';
 
 getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-  //this.loader = true;
+  this.loader = true;
   this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
     this.hwList = response?.data;
     this.hwList.length = response?.pagination.totalCount;
@@ -64,7 +65,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     this.dataSource._updateChangeSubscription();
     this.dataSource.paginator = this.paginator as MatPaginator;
   })
-  //setTimeout(()=> this.loader = false,2000) ;
+  setTimeout(()=> this.loader = false,2000) ;
 }
 
  
@@ -103,7 +104,11 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       dialogGonfig.autoFocus= true;
       dialogGonfig.width="50%";
       dialogGonfig.panelClass='modals-dialog';
-      this.dialog.open(EditComponent,dialogGonfig);
+      this.dialog.open(EditComponent,dialogGonfig).afterClosed().subscribe(result => {
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      });
+      
+    
     }
 
     onEdit(row:any){
@@ -115,9 +120,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       dialogGonfig.autoFocus= true;
       dialogGonfig.width="50%";
       dialogGonfig.panelClass='modals-dialog';
-       this.dialog.open(EditComponent,{
-        width:"50%",data:row
-      });
+       this.dialog.open(EditComponent,{ width:"50%",data:row }).afterClosed().subscribe(result => {
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef)});
 
       
 
