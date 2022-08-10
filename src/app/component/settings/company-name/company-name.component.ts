@@ -115,7 +115,7 @@ export class CompanyNameComponent implements OnInit {
     this.isDisable = true;
     this.company.name = this.form.value.name;
     this.company.id = this.form.value.id;
-    this.company.createdBy = localStorage.getItem('usernam') || '';
+    this.company.createdBy =  sessionStorage.getItem('usernam') || '';
     if (this.form.invalid || this.form.value.name == ' ') {
       if (this.form.value.name == ' ')
         this.setReactValue(Number(0), "");

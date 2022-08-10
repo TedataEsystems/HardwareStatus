@@ -125,7 +125,7 @@ applyFilter() {
    this.isDisable=true;
    this.receipt.name=this.form.value.name;
    this.receipt.id=this.form.value.id;
-   this.receipt.createdBy = localStorage.getItem('usernam') || '';
+   this.receipt.createdBy =  sessionStorage.getItem('usernam') || '';
       if (this.form.invalid||this.form.value.name==' ') {
         if (this.form.value.name==' ')
          this.setReactValue(Number(0),"");  
@@ -137,7 +137,7 @@ applyFilter() {
         if(this.form.value.id==0){
         this.isDisable=true;
       
-        this.receipt.createdBy=localStorage.getItem('usernam')||'';
+        this.receipt.createdBy= sessionStorage.getItem('usernam')||'';
         this.settingServices.AddReceiptStatus(this.receipt).subscribe(res=>
           {
               setTimeout(()=>{
