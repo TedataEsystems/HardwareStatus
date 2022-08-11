@@ -216,18 +216,19 @@ li:last-of-type{
   box-shadow: 3px 3px 5px grey;
 }
 mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
-  padding-right: 24px;
+  /* padding-right: 24px; */
+  padding-left: 0;
 }
-mat-cell:nth-child(4), mat-header-cell:nth-child(4)
-at-cell:nth-child(12), mat-header-cell:nth-child(12){
+mat-cell:nth-child(11), mat-header-cell:nth-child(11),
+mat-cell:nth-child(10), mat-header-cell:nth-child(10){
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 10% ;
-  width: 10% ;
+  flex: 0 0 12%  !important;
+  width: 12%  !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
-padding-right: 5px;
+/* padding-right: 5px; */
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;

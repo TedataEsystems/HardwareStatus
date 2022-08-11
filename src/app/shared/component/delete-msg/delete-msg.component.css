@@ -8,6 +8,9 @@
     color: #fff;
   }
   */
+  .content-container:first-of-type{
+    background-color: #bfbfbf;
+  }
 
   .pointer {
     display: inline-block;

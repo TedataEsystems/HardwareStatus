@@ -1,3 +1,19 @@
 mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
     padding-right: 24px;
 }
+
+mat-cell:nth-child(3), mat-header-cell:nth-child(3){
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 18%  !important;
+  width: 18%  !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+/* padding-right: 5px; */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  
+ }
