@@ -9,7 +9,10 @@
   }
   */
   .content-container:first-of-type{
-    background-color: #bfbfbf;
+    background-color: var(--main-color);
+    color: white;
+    font-size: 19px;
+    font-weight: 900;
   }
 
   .pointer {

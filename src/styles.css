@@ -238,7 +238,7 @@ snack-bar-container.success {
           float: right;
         border: 0;
     width: 50%; 
-    background-color: var(--main-color);
+    background-color: red;
     color: #fff !important;
     border-radius: 0px;
     line-height: 1;
