@@ -13,7 +13,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --seconed-color:#71716f;
   --third-color:#d7d7d7;
   --body-color:#f7f7f7;
-  --forth-color:#ffad00;
+  --forth-color:   #82919b ;/*#ffad00*/
   --fifth-color:#377cae;
   --font-color:#585858;
 }
@@ -353,6 +353,7 @@ snack-bar-container.success {
            /* table responsive */
            
            @media screen and (max-width: 960px) {
+            
             .mat-table {
               border: 0;
               /* vertical-align: middle */
@@ -366,7 +367,9 @@ snack-bar-container.success {
             mat-sidenav-content{
               padding:30px 10px !important;
             }
-          
+            .mat-cell, .mat-header-cell, .mat-footer-cell {
+              font-size: 12px !important;
+          }
             .mat-table caption {
               font-size: 1em;
             }
@@ -451,7 +454,7 @@ snack-bar-container.success {
              color: #fff !important;
            }
            .mat-header-cell{
-             background-color:var(--body-color);
+             background-color:rgb(198 201 204 / 26%);
            color:var(--main-color)
            }
            .mat-list-base .mat-list-item {
@@ -563,25 +566,26 @@ border: none;
 }
 /* width */
 ::-webkit-scrollbar {
-width: 5px;
-height: 5px;
+width:7px;
+height: 7px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-box-shadow: inset 0 0 5px transparent; 
-border-radius: 15px;
+box-shadow: inset 0 0 5px var(--main-color); 
+border-radius: 0px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: #cad1d3; 
-border-radius: 15px;
+background:var(--forth-color); 
+border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: #cad1d3; 
+  cursor: pointer;
+background: var(--forth-color); 
 }
 .botttom-dialog-container{
 position: absolute !important;
@@ -1159,5 +1163,9 @@ mat-cell:last-of-type, mat-header-cell:last-of-type, mat-footer-cell:last-of-typ
   padding-right: 0px !important;
 }
 mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
-   padding-left: 0px; 
+   padding-left: 0px !important; 
+}
+
+.mat-paginator-range-label{
+  direction: ltr;
 }
