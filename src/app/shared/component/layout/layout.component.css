@@ -9,6 +9,10 @@ mat-toolbar{
     background: #ffffff;
     color: var(--main-color);
     border-bottom: 1px solid #dddddd;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 19; /* Ensure that your app's content doesn't overlap the toolbar */
    
    
 }

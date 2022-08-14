@@ -44,10 +44,11 @@ export class DashboardComponent implements OnInit {
   doughnutChartType: ChartType = 'doughnut';
   colors: Color[] = [
     {
+     
       backgroundColor: [
        
         'red','orange','blue','yellow','purple','gray','green','lime','maroon'
-        ,'navy','teal','aqua','coral','#1a6699','peach'
+        ,'navy','teal','aqua','coral','#1a6699','peach',
       ]
     }
   ];
