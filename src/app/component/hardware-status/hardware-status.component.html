@@ -110,8 +110,8 @@
         <mat-cell *matCellDef="let element" data-label="تاريخ العديل"> {{element.updateDate|date : 'yyyy-MM-dd'}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="updateBy">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="اسم المستخدم"> {{element.updateBy}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>  التعديل بواسطة</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label=" المستخدم"> {{element.updateBy}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell mat-header-cell *matHeaderCellDef> الاجراء</mat-header-cell>
@@ -131,7 +131,7 @@
    
       
     <ng-container matColumnDef="noData">
-        <mat-footer-cell *matFooterCellDef colspan="14">
+        <mat-footer-cell *matFooterCellDef colspan="19">
           .... لا يوجد بيانات 
         </mat-footer-cell>
 

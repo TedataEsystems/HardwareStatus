@@ -28,7 +28,7 @@ valdata="";valuid=0;
  
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id' ,'elementId','descirption', 'parentType', 'actionType', 'userName','creationDate','updateDate'];
+  displayedColumns: string[] = ['id' ,'elementId','descirption', 'parentType', 'actionType', 'userName','creationDate'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource = new MatTableDataSource(this.logsList);
 settingtype=''
