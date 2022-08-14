@@ -9,7 +9,7 @@ export class DashboardService {
 
   private Url:string;
   constructor(private httpClient:HttpClient) { 
-    this.Url='https://localhost:44329/api/Dashboard';
+    this.Url='http://172.29.29.9:2122/api/Dashboard';
   }
   getOrderStatusChart():Observable<any>
   {
