@@ -75,6 +75,7 @@ export class EditComponent implements OnInit {
     this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
     this.service.form.controls['technicianName'].setValue(this.data.technicianName);
     this.service.form.controls['zoneNumber'].setValue(this.data.zoneNumber);
+    this.service.form.controls['number'].setValue(this.data.number);
     this.service.form.controls['serialNumber'].setValue(this.data.serialNumber);
     this.service.form.controls['notes'].setValue(this.data.notes);
     this.service.form.controls['exitDate'].setValue(this.data.exitDate);
@@ -116,6 +117,7 @@ let HwStatus=  {
   zoneNumber :this.service.form.value.zoneNumber,
   deviceType :this.service.form.value.deviceType,
   serialNumber:this.service.form.value.serialNumber,
+ number:this.service.form.value.number,
   notes :this.service.form.value.notes,
   orderStatusId :this.service.form.value.orderStatusId,
   orderStatus :this.service.form.value.orderStatus,
