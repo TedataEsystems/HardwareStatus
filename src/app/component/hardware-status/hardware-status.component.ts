@@ -120,7 +120,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       dialogGonfig.autoFocus= true;
       dialogGonfig.width="50%";
       dialogGonfig.panelClass='modals-dialog';
-       this.dialog.open(EditComponent,{ width:"50%",data:row }).afterClosed().subscribe(result => {
+       this.dialog.open(EditComponent,{disableClose:true,autoFocus:true, width:"50%",data:row}).afterClosed().subscribe(result => {
         this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef)});
 
       

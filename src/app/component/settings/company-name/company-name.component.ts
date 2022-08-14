@@ -333,7 +333,7 @@ export class CompanyNameComponent implements OnInit {
         );
       }
       else {
-        this.notser.warn(':: An Error Occured')
+       // this.notser.warn(':: An Error Occured')
       }
     });
   }

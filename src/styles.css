@@ -353,6 +353,7 @@ snack-bar-container.success {
            /* table responsive */
            
            @media screen and (max-width: 960px) {
+            
             .mat-table {
               border: 0;
               /* vertical-align: middle */
@@ -1159,5 +1160,5 @@ mat-cell:last-of-type, mat-header-cell:last-of-type, mat-footer-cell:last-of-typ
   padding-right: 0px !important;
 }
 mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
-   padding-left: 0px; 
+   padding-left: 0px !important; 
 }
