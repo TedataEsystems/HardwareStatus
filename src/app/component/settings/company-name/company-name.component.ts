@@ -41,7 +41,7 @@ export class CompanyNameComponent implements OnInit {
   isNameUpdatedRepeated: boolean = false;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  displayedColumns: string[] = ['id', 'name','creationDate','createdBy','updateDate','updateBy', 'action'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource = new MatTableDataSource(this.companyList);
   settingtype = ''
@@ -188,7 +188,10 @@ export class CompanyNameComponent implements OnInit {
     let companyEdit: CompanyNameList =
     {
       id: row.id,
-      name: row.name
+      name: row.name,
+      createdBy:row.createdBy,
+      creationDate:row.creationDate,
+      updatedBy: sessionStorage.getItem('usernam') || ''
     }
     this.settingServices.UpdateCompanyName(companyEdit).subscribe(res => {
       if (res.status == true) {
