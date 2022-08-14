@@ -21,7 +21,7 @@ export class EditFormService {
     orderNumber: new FormControl(0,[Validators.required]),
     technicianName: new FormControl('',[Validators.required]),
     zoneNumber: new FormControl(0,[Validators.required]),
-    number: new FormControl(0,[Validators.required]),
+    number: new FormControl(0,[Validators.required,Validators.min(1)]),
     deviceType: new FormControl('',[Validators.required]),
     serialNumber: new FormControl('',[Validators.required]),
     notes: new FormControl('',[Validators.required]),
