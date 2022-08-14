@@ -70,13 +70,17 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>السيريال نامبر </mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="السيريال نامبر"> {{element.serialNumber}} </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="number">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>العدد</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label=" العدد"> {{element.number}} </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="notes">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> ملاحظات </mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="ملاحظات"> {{element.notes}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="exitDate">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الخروج </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="تاريخ الخروج"> {{element.exitDate}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label="تاريخ الخروج"> {{element.exitDate|date : 'yyyy-MM-dd'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="_ReceiptStatusName">
@@ -93,6 +97,22 @@
         <mat-cell *matCellDef="let element" data-label="اسم الشركة"> {{element._CompanyName}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="creationDate">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الانشاء </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label=" تاريخ الانشاء"> {{element.creationDate|date : 'yyyy-MM-dd'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="createdBy">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم المستخدم"> {{element.createdBy}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="updateDate">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ التعديل</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="تاريخ العديل"> {{element.updateDate|date : 'yyyy-MM-dd'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="updateBy">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="اسم المستخدم"> {{element.updateBy}} </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell mat-header-cell *matHeaderCellDef> الاجراء</mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="الاجراء">

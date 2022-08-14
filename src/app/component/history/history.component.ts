@@ -50,9 +50,9 @@ settingtype=''
   pageNumber = 1;
   pageSize =25;
   sortColumnDef: string = "Id";
-  SortDirDef: string = 'asc';
+  SortDirDef: string = 'desc';
   public colname: string = 'Id';
-  public coldir: string = 'asc';
+  public coldir: string = 'desc';
   LoadTechName() {
     this.settingServices.getLogs(this.pageNumber, this.pageSize, '', this.colname, this.coldir).subscribe(response => {
       this.logsList.push(...response?.data);
@@ -91,7 +91,7 @@ onSearchClear() {
 }
 applyFilter() {
   let searchData = this.searchKey.trim().toLowerCase();
-  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "desc");
 }
 
 
