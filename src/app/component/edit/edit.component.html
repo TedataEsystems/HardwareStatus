@@ -3,7 +3,7 @@
     <button fxFlex fxLayout fxLayoutAlign="end" class="btn-dialog-close" mat-button  tabIndex="-1" (click)="onClose()"><mat-icon>clear</mat-icon></button>
   </mat-toolbar>
   <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()" dir="rtl">
-    <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-list cols="2" rowHeight="450px">
       <mat-grid-tile>
         <div class="controles-container">
           <input type="hidden" formControlName="id">
@@ -56,41 +56,29 @@
           <mat-form-field>
 
             <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *"  >
+              <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let receiptStatus of receiptStateList"   [value]="receiptStatus.id">
                 {{receiptStatus.name}}
               </mat-option>
             </mat-select>
-
-
-            <!-- <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let receiptStatus of receiptStateList">
-                <mat-option value={{receiptStatus.id}}>{{receiptStatus.name}}</mat-option>
-              </ng-container> 
-            </mat-select> -->
             <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
 
             <mat-select formControlName="orderStatusId" placeholder="موقف الاوردر "  >
+              <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
                 {{orderStatus.name}}
               </mat-option>
-            </mat-select>
-
-
-            <!-- <mat-select formControlName="orderStatusId" placeholder=" موقف الاوردر *">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let orderStatus of orderStateList">
-                <mat-option value={{orderStatus.id}}>{{orderStatus.name}</mat-option>
-              </ng-container>
-            </mat-select> -->
+            
+            </mat-select> 
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
 
 
             <mat-select formControlName="companyNameId" placeholder="اسم الشركة*"  >
+              <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let companyName of companyNameList"   [value]="companyName.id">
                 {{companyName.name}}
               </mat-option>

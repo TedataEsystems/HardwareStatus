@@ -59,16 +59,16 @@
             <mat-cell *matCellDef="let element" data-label="اسم المستخدم">{{element.userName}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="creationDate">
-            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ الانشاء
+            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> التاريخ 
             </mat-header-cell>
             <mat-cell *matCellDef="let element" data-label="تاريخ الانشاء"> {{element.creationDate|date : 'yyyy-MM-dd'}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="updateDate">
+        <!-- <ng-container matColumnDef="updateDate">
             <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ التعديل
             </mat-header-cell>
             <mat-cell *matCellDef="let element" data-label="تاريخ التعديل"> {{element.updateDate|date}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
         
       
     
@@ -93,7 +93,7 @@
 </div>
 </ng-template>
 
-<mat-paginator [pageSizeOptions]="[50, 25, 100]" [pageSize]="25" (page)="pageChanged($event)" showFirstLastButtons>
+<mat-paginator [pageSizeOptions]="[10, 25,50, 100]" [pageSize]="10" (page)="pageChanged($event)" showFirstLastButtons>
 </mat-paginator>
 </mat-card>
 

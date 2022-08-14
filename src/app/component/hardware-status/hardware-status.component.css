@@ -219,8 +219,22 @@ mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-
   /* padding-right: 24px; */
   padding-left: 0;
 }
-mat-cell:nth-child(11), mat-header-cell:nth-child(11),
-mat-cell:nth-child(10), mat-header-cell:nth-child(10){
+mat-cell, mat-header-cell,mat-header-cell{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 7%  !important;
+  width: 7%  !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  
+ }
+
+mat-cell:nth-child(12), mat-header-cell:nth-child(12){
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 12%  !important;
@@ -228,7 +242,7 @@ mat-cell:nth-child(10), mat-header-cell:nth-child(10){
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
-/* padding-right: 5px; */
+
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
