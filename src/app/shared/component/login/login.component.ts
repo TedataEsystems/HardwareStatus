@@ -70,9 +70,10 @@ this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       this.router.navigate([this.returnUrl]);
       window.addEventListener("beforeunload", () =>
       { localStorage.removeItem('usernam');
-      console.log("cleared");
+      localStorage.removeItem("userGroup");
+    localStorage.removeItem("tokNum");
+     // console.log("cleared");
     });
-      
          //this.router.navigate(['/'], { relativeTo: this.route });
       }
       else {
