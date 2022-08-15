@@ -20,6 +20,7 @@ export class SettingService {
 
 //CompanyName
   getCompanyNames(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
+    
     let params = new HttpParams();
     if(PageNumber !== null && PageSize !== null){
       params = params.append('pageNumber' , PageNumber.toString());

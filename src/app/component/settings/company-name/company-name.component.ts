@@ -68,6 +68,11 @@ export class CompanyNameComponent implements OnInit {
   public colname: string = 'Id';
   public coldir: string = 'asc';
   LoadCompanyName() {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.settingServices.getCompanyNames(this.pageNumber, this.pageSize, '', this.colname, this.coldir).subscribe(response => {
       this.companyList.push(...response?.data);
       this.companyList.length = response?.pagination.totalCount;
@@ -76,8 +81,14 @@ export class CompanyNameComponent implements OnInit {
 
     })
   }
+  }
   ///////////////
   getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.loader = true;
     this.settingServices.getCompanyNames(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
       this.companyList = response?.data;
@@ -88,7 +99,7 @@ export class CompanyNameComponent implements OnInit {
     })
     setTimeout(() => this.loader = false, 2000);
   }
-
+  }
   //////////
 
   ngOnInit(): void {
@@ -106,12 +117,22 @@ export class CompanyNameComponent implements OnInit {
     this.dataSource.paginator = this.paginator as MatPaginator;
   }
   onSearchClear() {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.searchKey = '';
-    this.applyFilter();
+    this.applyFilter();}
   }
   applyFilter() {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     let searchData = this.searchKey.trim().toLowerCase();
-    this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+    this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");}
   }
   isDisable = false;
 
@@ -241,6 +262,11 @@ export class CompanyNameComponent implements OnInit {
   pagesizedef: number = 25;
   public pIn: number = 0;
   pageChanged(event: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.loader = true;
     this.pIn = event.pageIndex;
     this.pageIn = event.pageIndex;
@@ -249,10 +275,14 @@ export class CompanyNameComponent implements OnInit {
     let pageSize = event.pageSize;
     let previousSize = pageSize * pageIndex;
     this.previousSizedef = previousSize;
-    this.getRequestdataNext(previousSize, pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
+    this.getRequestdataNext(previousSize, pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);}
   }
   getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.settingServices.getCompanyNames(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
       if (res.status == true) {
 
@@ -271,7 +301,7 @@ export class CompanyNameComponent implements OnInit {
 
     })
 
-
+  }
   }
   ///////
 
@@ -279,6 +309,11 @@ export class CompanyNameComponent implements OnInit {
   lastdir: string = 'asc';
 
   sortData(sort: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     if (this.pIn != 0)
       window.location.reload();
     if (this.lastcol == sort.active && this.lastdir == sort.direction) {
@@ -290,6 +325,7 @@ export class CompanyNameComponent implements OnInit {
     this.lastcol = sort.active; this.lastdir = sort.direction;
     var c = this.pageIn;
     this.getRequestdata(1, 25, '', sort.active, this.lastdir);
+  }
   }
 
 

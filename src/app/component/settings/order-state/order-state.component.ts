@@ -69,6 +69,11 @@ settingtype=''
   public colname: string = 'Id';
   public coldir: string = 'asc';
   LoadOrderStatus() {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.settingServices.getOrderStatus(this.pageNumber, this.pageSize, '', this.colname, this.coldir).subscribe(response => {
       this.orderList.push(...response?.data);
       this.orderList.length = response?.pagination.totalCount;
@@ -77,8 +82,14 @@ settingtype=''
 
     })
 }
+  }
 ///////////////
 getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.loader = true;
   this.settingServices.getOrderStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
     this.orderList= response?.data;
@@ -89,12 +100,17 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   })
   setTimeout(()=> this.loader = false,2000) ;
 }
-
+}
 //////////
 
 ngOnInit(): void {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.editUsr=0;
-  this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);}
 }
 
 ngAfterViewInit() {
@@ -102,18 +118,28 @@ ngAfterViewInit() {
   this.dataSource.paginator = this.paginator as MatPaginator;
 }
 onSearchClear() {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.searchKey = '';
-  this.applyFilter();
+  this.applyFilter();}
 }
 applyFilter() {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   let searchData = this.searchKey.trim().toLowerCase();
-  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");}
 }
 
   isDisable=false;
 
   onCreateUpdate() {
-    
+  
    this.isDisable=true;
    this.order.name=this.form.value.name;
    this.order.id=this.form.value.id;
@@ -171,15 +197,26 @@ applyFilter() {
       )
     }//else
   }
+
   this.show=false;
   }//end of submit
 
   addNew(){
-    this.show=true;
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
+    this.show=true;}
   }
   editROw(r: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.editUsr = r.id;
-    this.editdisabled = true;
+    this.editdisabled = true;}
 
   }
   cancelEdit() {
@@ -246,6 +283,11 @@ applyFilter() {
   pagesizedef: number = 25;
   public pIn: number = 0;
   pageChanged(event: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.loader = true;
     this.pIn = event.pageIndex;
     this.pageIn = event.pageIndex;
@@ -254,10 +296,14 @@ applyFilter() {
     let pageSize = event.pageSize;
     let previousSize = pageSize * pageIndex;
     this.previousSizedef = previousSize;
-    this.getRequestdataNext(previousSize,  pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
+    this.getRequestdataNext(previousSize,  pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);}
   }
   getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-  
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
       this.settingServices.getOrderStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
         if (res.status == true) {
          
@@ -276,7 +322,7 @@ applyFilter() {
 
       })
     
-
+    }
   }
 ///////
 
@@ -284,6 +330,11 @@ lastcol: string = 'Id';
 lastdir: string = 'asc';
 
 sortData(sort: any) {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   if (this.pIn != 0)
     window.location.reload();
   if (this.lastcol == sort.active && this.lastdir == sort.direction) {
@@ -294,7 +345,7 @@ sortData(sort: any) {
   }
   this.lastcol = sort.active; this.lastdir = sort.direction;
   var c = this.pageIn;
-  this.getRequestdata(1, 25, '', sort.active, this.lastdir);
+  this.getRequestdata(1, 25, '', sort.active, this.lastdir);}
 }
 
 
@@ -335,6 +386,11 @@ onChecknameIsalreadysign()
 
 
 onDelete(r: any) {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
     if (res) {
       this.settingServices.DeleteOrderStatus(r.id).subscribe(
@@ -352,7 +408,7 @@ onDelete(r: any) {
     }
   });
 }
-
+}
 
 
 
