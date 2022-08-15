@@ -31,7 +31,7 @@
     <ng-template #table>
       <div class="example-container mat-elevation-z8" >
  
-      <mat-table [dataSource]="dataSource"  #table  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear >
+      <mat-table [dataSource]="dataSource"  #table multiTemplateDataRows  matSort (matSortChange)="sortData($event)" matSortActive="name" matSortDirection="asc" matSortDisableClear >
 
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> رقم</mat-header-cell>
@@ -42,10 +42,33 @@
             <mat-cell *matCellDef="let element" data-label="رقم الجهاز"> {{element.elementId}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="descirption">
-            <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> التفاصيل</mat-header-cell>
-            <mat-cell *matCellDef="let element" data-label="التفاصيل"> {{element.descirption}} </mat-cell>
+            <mat-header-cell mat-header-cell *matHeaderCellDef> التفاصيل</mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="descirption">
+        <button mat-button class="text-success"    matTooltip="View Details" (click)="row.isExpanded = !row.isExpanded">
+            <mat-icon>content_paste_search</mat-icon>
+        </button>
+        </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+            <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      
+              <div class="row student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+                <mat-list>
+                 
+                  <mat-list-item >
+                    {{element.descirption}}
+                  
+                  </mat-list-item>
+                </mat-list>
+            </div>
+      
+            </mat-cell>
+          </ng-container>
+
+
     
+
+
         <ng-container matColumnDef="parentType">
             <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>اسم الجدول </mat-header-cell>
             <mat-cell *matCellDef="let element" data-label="اسم الجدول"> {{element.parentType}} </mat-cell>
@@ -85,8 +108,11 @@
      
     <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource.data.length==0 && dataSource !=null)}"></mat-footer-row>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-   
+    <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="student-element-row"
+    [class.student-expanded-row]="row.isExpanded"></mat-row>
+     <!-- Extra row to show detail content column -->
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="student-detail-row"></mat-row>
 
 </mat-table>
 <!-- end test -->

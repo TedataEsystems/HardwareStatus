@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
     
   }
  
-  
 
   doughnutChartLabelsp: Label[] =[];
   doughnutChartDatap: MultiDataSet = [
@@ -40,19 +39,30 @@ export class DashboardComponent implements OnInit {
   doughnutChartData: MultiDataSet = [
     []
   ];
-
+ 
   doughnutChartType: ChartType = 'doughnut';
   colors: Color[] = [
     {
      
       backgroundColor: [
        
-        'red','orange','blue','yellow','purple','gray','green','lime','maroon'
-        ,'navy','teal','aqua','coral','#1a6699','peach',
+       '#0B6099','#0D77BD','#008C83','#00A69B','#00B3A7','#00BFB2','#00CCBE','#00DBCD','#00E3D4','#00F0E0','#585858','#71716f','#82919b','#d7d7d7',
       ]
     }
   ];
 
+  doughnutChartPlugins = [{
+    afterLayout: function (chart:any) {
+      chart.legend.legendItems.forEach(
+        (label:any) => {
+          let value = chart.data.datasets[0].data[label.index];
+
+          label.text += ' ' + value;
+          return label;
+        }
+      )
+    }
+  }];
 
 // getChartData():void{
 //   if(this.userRole=="esp")
