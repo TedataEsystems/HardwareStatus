@@ -139,7 +139,7 @@ if(this.data.dialogTitle=="اضافة جديد")
   console.log("HwStatus",HwStatus);
   //Add
   console.log("ADD");
-
+HwStatus.createdBy=sessionStorage.getItem('usernam') || '';
     this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
       res=>{
         console.log("model",this.service.form.value)
@@ -161,8 +161,7 @@ if(this.data.dialogTitle=="اضافة جديد")
   }else
   {
     //update
-    console.log("update");
-
+    console.log("update",this.service.form.value);
     this.hwStatus.UpdateHardwareStatus(this.service.form.value).subscribe(
       res=>{
         console.log("model",this.service.form.value)
