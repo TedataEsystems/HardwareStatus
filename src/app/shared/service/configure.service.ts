@@ -21,16 +21,16 @@ public pIn:number=0;
      
    UserName()
    {
-       return  sessionStorage.getItem("usernam");
+       return  localStorage.getItem("usernam");
    }
 
    UserGroup()
    {
-       return  sessionStorage.getItem("userGroup");
+       return  localStorage.getItem("userGroup");
    }
    UserToken()
    {
-       return  sessionStorage.getItem("tokNum");
+       return localStorage.getItem("tokNum");
    }
 
    IsAuthentecated()
@@ -45,9 +45,9 @@ public pIn:number=0;
    {
   
    
-   sessionStorage.removeItem("userGroup");
-   sessionStorage.removeItem("tokNum");
-   sessionStorage.removeItem("usernam");
+    localStorage.removeItem("userGroup");
+    localStorage.removeItem("tokNum");
+    localStorage.removeItem("usernam");
     this.router.navigateByUrl('/login');
     
    }

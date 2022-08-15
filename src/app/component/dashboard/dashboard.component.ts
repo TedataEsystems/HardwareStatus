@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
  
   //chartData=<IChart>{};
   count:number=0;
-  userRole= sessionStorage.getItem('userGroup');
+  userRole= localStorage.getItem('userGroup');
   constructor(
     //private hardwareService:HardwareService,
     public notificationService: NotificationService,

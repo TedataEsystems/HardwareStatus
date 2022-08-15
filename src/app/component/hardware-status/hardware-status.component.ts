@@ -41,7 +41,7 @@ export class HardwareStatusComponent implements OnInit {
   {
     this.titleService.setTitle("Hardware Status"); 
     //this.config.IsAuthentecated();
-    var teamval=  sessionStorage.getItem("userGroup");
+    var teamval=  localStorage.getItem("userGroup");
     
     if(teamval?.toLocaleLowerCase() != 'admin'){
       this.isNotAdmin=true;  }
@@ -78,8 +78,13 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
  
 
   ngOnInit(){
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
   this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
-   
+    }
   }
 
   ngAfterViewInit() { 
@@ -92,12 +97,22 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       this.applyFilter();
     }
     applyFilter(){
-     // this.dataSource.filter=this.searchKey.trim().toLowerCase();
+      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+      {
+        this.router.navigateByUrl('/login');
+      }
+      else{
      let searchData = this.searchKey.trim().toLowerCase();
      this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+      }
     }
     onCreate(){
      // this.service.initializeFormGroup();
+     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+     {
+       this.router.navigateByUrl('/login');
+     }
+     else{
       const dialogGonfig = new MatDialogConfig();
       dialogGonfig.data= {dialogTitle: "اضافة جديد"};
       dialogGonfig.disableClose=true;
@@ -107,13 +122,17 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       this.dialog.open(EditComponent,dialogGonfig).afterClosed().subscribe(result => {
         this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
       });
-      
+    }
     
     }
 
     onEdit(row:any){
       //this.service.initializeFormGroup();
-      console.log("row",row);
+      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+      {
+        this.router.navigateByUrl('/login');
+      }
+      else{
        const dialogGonfig = new MatDialogConfig();
       dialogGonfig.data= {dialogTitle: " تعديل"};
       dialogGonfig.disableClose=true;
@@ -124,11 +143,16 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef)});
 
       
-
+       }
     }
 
 
     onDelete(row: any) {
+      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+      {
+        this.router.navigateByUrl('/login');
+      }
+      else{
       this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
         if (res) {
           this.hwstatus.DeleteHwStatus(row.id).subscribe(
@@ -146,18 +170,21 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         }
       });
     }
+    }
 
-//     onDelete(row:any){
-//       this.deleteService.openConfirmDialog();
-// }
+
 
 
 pageIn = 0;
 previousSizedef = 25;
 pagesizedef: number = 25;
 public pIn: number = 0;
-pageChanged(event: any) {
- // this.loader = true;
+pageChanged(event: any) {  
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+{
+  this.router.navigateByUrl('/login');
+}
+else{
   this.pIn = event.pageIndex;
   this.pageIn = event.pageIndex;
   this.pagesizedef = event.pageSize;
@@ -167,8 +194,13 @@ pageChanged(event: any) {
   this.previousSizedef = previousSize;
   this.getRequestdataNext(previousSize,  pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
 }
+}
 getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
       if (res.status == true) {
        
@@ -186,13 +218,18 @@ getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: s
      // this.loader = false;
 
     })
-  
+    }
 
 }
 lastcol: string = 'Id';
 lastdir: string = 'asc';
 
 sortData(sort: any) {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   if (this.pIn != 0)
     window.location.reload();
   if (this.lastcol == sort.active && this.lastdir == sort.direction) {
@@ -205,7 +242,13 @@ sortData(sort: any) {
   var c = this.pageIn;
   this.getRequestdata(1, 25, '', sort.active, this.lastdir);
 }
+}
 exportExcel() {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
     const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -218,25 +261,8 @@ exportExcel() {
     this.note.warn("! Fail")
 
   });
-
+  }
 }
 
-// exportExcel(){
-//   let searchData=this.searchKey.trim().toLowerCase();
-
-//   this.hwstatus.getAllHwStatusDataEXel(searchData).subscribe(res=>{
-    
-//     const blob = new Blob([res], { type : 'application/vnd.ms.excel' });
-//     const file = new File([blob],  'hwStatusData' + new Date().toLocaleString()+ '.xlsx', { type: 'application/vnd.ms.excel' });
-//     saveAs(file,'hwStatusData.txt');
-    
-//   },err=>{
-//     if(err.status==401)
-//     this.router.navigate(['/login'], { relativeTo: this.route });
-//     else 
-//     this.note.warn("!! Fail")
-   
-//   });
-// }
 
 }

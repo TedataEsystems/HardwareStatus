@@ -87,7 +87,13 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
 //////////
 
 ngOnInit(): void {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  }
 }
 
 ngAfterViewInit() {
@@ -99,8 +105,14 @@ onSearchClear() {
   this.applyFilter();
 }
 applyFilter() {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   let searchData = this.searchKey.trim().toLowerCase();
   this.getRequestdata(1, 25, searchData, this.sortColumnDef, "desc");
+  }
 }
 
 
@@ -120,6 +132,11 @@ applyFilter() {
   pagesizedef: number = 25;
   public pIn: number = 0;
   pageChanged(event: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.loader = true;
     this.pIn = event.pageIndex;
     this.pageIn = event.pageIndex;
@@ -130,8 +147,13 @@ applyFilter() {
     this.previousSizedef = previousSize;
     this.getRequestdataNext(previousSize,  pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
   }
+  }
   getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-  
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
       this.settingServices.getLogs(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
         if (res.status == true) {
          
@@ -149,8 +171,9 @@ applyFilter() {
         this.loader = false;
 
       })
-    
 
+    
+    }
   }
 ///////
 
@@ -158,6 +181,11 @@ lastcol: string = 'Id';
 lastdir: string = 'asc';
 
 sortData(sort: any) {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   if (this.pIn != 0)
     window.location.reload();
   if (this.lastcol == sort.active && this.lastdir == sort.direction) {
@@ -171,7 +199,7 @@ sortData(sort: any) {
   this.getRequestdata(1, 25, '', sort.active, this.lastdir);
 }
 
-
+}
 
 
 toggleTableRows() {

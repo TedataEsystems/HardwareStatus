@@ -139,7 +139,7 @@ if(this.data.dialogTitle=="اضافة جديد")
   console.log("HwStatus",HwStatus);
   //Add
   console.log("ADD");
-HwStatus.createdBy=sessionStorage.getItem('usernam') || '';
+HwStatus.createdBy=localStorage.getItem('usernam') || '';
     this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
       res=>{
         console.log("model",this.service.form.value)
