@@ -43,7 +43,7 @@ valdata="";valuid=0;
   editdisabled: boolean = false;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id', 'name','action'];
+  displayedColumns: string[] = ['id', 'name','creationDate','createdBy','updateDate','updateBy','action'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource = new MatTableDataSource(this.receiptList);
 settingtype=''
@@ -125,7 +125,7 @@ applyFilter() {
    this.isDisable=true;
    this.receipt.name=this.form.value.name;
    this.receipt.id=this.form.value.id;
-   this.receipt.createdBy =  sessionStorage.getItem('usernam') || '';
+   this.receipt.createdBy =  localStorage.getItem('usernam') || '';
       if (this.form.invalid||this.form.value.name==' ') {
         if (this.form.value.name==' ')
          this.setReactValue(Number(0),"");  
@@ -137,7 +137,6 @@ applyFilter() {
         if(this.form.value.id==0){
         this.isDisable=true;
       
-        this.receipt.createdBy= sessionStorage.getItem('usernam')||'';
         this.settingServices.AddReceiptStatus(this.receipt).subscribe(res=>
           {
               setTimeout(()=>{
@@ -202,7 +201,10 @@ applyFilter() {
     let ReceiptEdit:ReceiptStateList=
     {
       id: row.id,
-      name: row.name
+      name: row.name,
+      createdBy:row.createdBy,
+      creationDate:row.creationDate,
+      updatedBy: localStorage.getItem('usernam') || ''
     }
     console.log(ReceiptEdit);
     this.settingServices.UpdateReceiptStatus(ReceiptEdit).subscribe(res => {

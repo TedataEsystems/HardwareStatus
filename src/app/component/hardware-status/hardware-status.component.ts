@@ -41,7 +41,7 @@ export class HardwareStatusComponent implements OnInit {
   {
     this.titleService.setTitle("Hardware Status"); 
     //this.config.IsAuthentecated();
-    var teamval=  sessionStorage.getItem("userGroup");
+    var teamval=  localStorage.getItem("userGroup");
     
     if(teamval?.toLocaleLowerCase() != 'admin'){
       this.isNotAdmin=true;  }

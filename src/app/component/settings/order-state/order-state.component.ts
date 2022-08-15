@@ -43,7 +43,7 @@ valdata="";valuid=0;
  
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id', 'name','action'];
+  displayedColumns: string[] = ['id', 'name','creationDate','createdBy','updateDate','updateBy','action'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource = new MatTableDataSource(this.orderList);
 settingtype=''
@@ -117,6 +117,7 @@ applyFilter() {
    this.isDisable=true;
    this.order.name=this.form.value.name;
    this.order.id=this.form.value.id;
+   this.order.createdBy=localStorage.getItem('usernam') || '';
       if (this.form.invalid||this.form.value.name==' ') {
         if (this.form.value.name==' ')
          this.setReactValue(Number(0),"");  
@@ -127,7 +128,7 @@ applyFilter() {
       {
         if (this.form.value.id == 0) {
         this.isDisable=true;
-        this.order.createdBy= sessionStorage.getItem('usernam')||'';
+        this.order.createdBy= localStorage.getItem('usernam')||'';
         this.settingServices.AddOrderStatus(this.order).subscribe(res=>
           {
               setTimeout(()=>{
@@ -192,7 +193,10 @@ applyFilter() {
     let orderEdit: OrderStateList =
     {
       id: row.id,
-      name: row.name
+      name: row.name,
+      createdBy:row.createdBy,
+      creationDate:row.creationDate,
+      updatedBy: localStorage.getItem('usernam') || ''
     }
     this.settingServices.UpdateOrderStatus(orderEdit).subscribe(res => {
       if (res.status == true) {

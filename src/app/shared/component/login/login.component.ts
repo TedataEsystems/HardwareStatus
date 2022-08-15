@@ -56,19 +56,23 @@ this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     setInterval(()=>{     
       console.log("timer")                     
       this.config.Logout();
-    //  console.log( sessionStorage);
   }, 3600000);
     this.loginmodel.userName = this.form.value.username.trim();
     this.loginmodel.password = this.form.value.password;
     this.login.getLogin(this.loginmodel).subscribe(res => {
 
       if (res.status == true) {
-        sessionStorage.setItem("tokNum", res.token);
-        sessionStorage.setItem("usernam", res.userName);
-        sessionStorage.setItem("userGroup", res.userGroup);
+        localStorage.setItem("tokNum", res.token);
+        localStorage.setItem("usernam", res.userName);
+        localStorage.setItem("userGroup", res.userGroup);
  
       // window.location.href = "/"
       this.router.navigate([this.returnUrl]);
+      window.addEventListener("beforeunload", () =>
+      { localStorage.removeItem('usernam');
+      console.log("cleared");
+    });
+      
          //this.router.navigate(['/'], { relativeTo: this.route });
       }
       else {

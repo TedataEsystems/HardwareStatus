@@ -92,8 +92,13 @@ export class CompanyNameComponent implements OnInit {
   //////////
 
   ngOnInit(): void {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.editUsr = 0;
-    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);}
   }
 
   ngAfterViewInit() {
@@ -111,11 +116,11 @@ export class CompanyNameComponent implements OnInit {
   isDisable = false;
 
   onCreateUpdate() {
-
+   
     this.isDisable = true;
     this.company.name = this.form.value.name;
     this.company.id = this.form.value.id;
-    this.company.createdBy =  sessionStorage.getItem('usernam') || '';
+    this.company.createdBy =  localStorage.getItem('usernam') || '';
     if (this.form.invalid || this.form.value.name == ' ') {
       if (this.form.value.name == ' ')
         this.setReactValue(Number(0), "");
@@ -166,24 +171,37 @@ export class CompanyNameComponent implements OnInit {
           }
         )
       }//else
-    }
+  
+  }
     this.show = false;
   }//end of submit
 
   addNew() {
-    this.show = true;
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
+    this.show = true;}
   }
   editROw(r: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.editUsr = r.id;
-    this.editdisabled = true;
+    this.editdisabled = true;}
 
   }
   cancelEdit() {
+    
     this.editdisabled = false;
     this.isNameUpdatedRepeated = false;
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
   updateEdit(row: any) {
+  
     this.loader = true;
     let companyEdit: CompanyNameList =
     {
@@ -191,7 +209,7 @@ export class CompanyNameComponent implements OnInit {
       name: row.name,
       createdBy:row.createdBy,
       creationDate:row.creationDate,
-      updatedBy: sessionStorage.getItem('usernam') || ''
+      updatedBy: localStorage.getItem('usernam') || ''
     }
     this.settingServices.UpdateCompanyName(companyEdit).subscribe(res => {
       if (res.status == true) {
@@ -324,6 +342,11 @@ export class CompanyNameComponent implements OnInit {
 
 
   onDelete(r: any) {
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
     this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
       if (res) {
         this.settingServices.DeleteCompanyName(r.id).subscribe(
@@ -339,6 +362,7 @@ export class CompanyNameComponent implements OnInit {
        // this.notser.warn(':: An Error Occured')
       }
     });
+  }
   }
 
 
