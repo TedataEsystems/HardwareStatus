@@ -1169,3 +1169,9 @@ mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-
 .mat-paginator-range-label{
   direction: ltr;
 }
+.txt{
+  text-shadow: 2px 2px 4px #82919b;
+ }
+ .ico{
+  box-shadow: 2px 2px 4px #82919b;
+ }
