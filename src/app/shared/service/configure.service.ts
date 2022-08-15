@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 })
 export class ConfigureService {
 
+  // Apiurl:string = "http://172.29.29.9:2122/api/";
   Apiurl:string = "http://172.29.29.9:2122/api/";
 
 public pIn:number=0;
