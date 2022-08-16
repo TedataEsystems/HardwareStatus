@@ -30,6 +30,10 @@ export class EditFormService {
     receiptStatusId: new FormControl(0,[Validators.required]),
     orderStatusId: new FormControl(0,[Validators.required]),
     companyNameId: new FormControl(0,[Validators.required]),
+    creationDate :new FormControl(null),
+    updateDate :new FormControl(null),
+    createdBy:new FormControl(null),
+    updatedBy :new FormControl(null),
    
    
   });
@@ -49,6 +53,10 @@ export class EditFormService {
       receiptStatusId: 0,
       orderStatusId: 0,
       companyNameId:0,
+      creationDate:null,
+      createdBy:null,
+      updateDate:null,
+      updateBy:null,
 
     })
   }

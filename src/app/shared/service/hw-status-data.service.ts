@@ -50,7 +50,7 @@ export class HwStatusDataService {
     }
     return this.httpClient.get<any>(`${this.apiURL}/GetHardwareStatus`  , {observe:'response' , params}).pipe(
       map(response => {
-        console.log("fromservice",response)
+        // console.log("fromservice",response)
          return response.body ;
       })
     )
@@ -61,7 +61,6 @@ export class HwStatusDataService {
 
 
   UpdateHardwareStatus(model: HardwareStatus): Observable<any> {
-
     return this.httpClient.post<HardwareStatus>(`${this.apiURL}/UpdateHardwareStatus`, model
     );
   }
