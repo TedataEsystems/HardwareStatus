@@ -50,8 +50,7 @@ export class EditComponent implements OnInit {
  
   ngOnInit(){
     this.dialogTitle = this.data.dialogTitle;
-    console.log("rowOnInt",this.data);
-    //this.service.form=this.data.xx;
+    //console.log("rowOnInt",this.data);
    this.hwStatus.GettingLists().subscribe(res=>{
     if(res.status==true)
     {
@@ -60,7 +59,7 @@ export class EditComponent implements OnInit {
     this.receiptStateList=res.receiptStatus
     }
     else{this.notificationService.warn(':: error')}
-    console.log(res)
+   // console.log(res)
 
 
 
@@ -68,7 +67,7 @@ export class EditComponent implements OnInit {
 
    if(this.data)
    {
-    console.log("condition entered")
+    //console.log("condition entered")
     this.service.form.controls['id'].setValue(this.data.id);
     this.service.form.controls['central'].setValue(this.data.central);
     this.service.form.controls['clientName'].setValue(this.data.clientName);
@@ -84,6 +83,8 @@ export class EditComponent implements OnInit {
     this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
     this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
     this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
+    this.service.form.controls['createdBy'].setValue(this.data.createdBy);
+    this.service.form.controls['creationDate'].setValue(this.data.creationDate);
    
 
    }
@@ -127,23 +128,24 @@ let HwStatus=  {
   companyName :this.service.form.value.companyName,
   exitDate :this.service.form.value.exitDate,
   creationDate :this.service.form.value.creationDate,
-  updateDate :this.service.form.value.updateDate,
+  
   createdBy:this.service.form.value.createdBy,
-  updatedBy :this.service.form.value.updatedBy
+  
 };
-console.log("data checking",this.data);
+
 
 if(this.data.dialogTitle=="اضافة جديد")
 {
-  console.log("add",this.service.form.value);
-  console.log("HwStatus",HwStatus);
+  // console.log("add",this.service.form.value);
+  // console.log("HwStatus",HwStatus);
+    var changeHour= new Date(HwStatus.exitDate.getFullYear(), HwStatus.exitDate.getMonth(), HwStatus.exitDate.getDate(), 5, 0, 0);
+    HwStatus.exitDate=changeHour;
   //Add
-  console.log("ADD");
 HwStatus.createdBy=localStorage.getItem('usernam') || '';
     this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
       res=>{
-        console.log("model",this.service.form.value)
-        console.log("Status response",res)
+        // console.log("model",this.service.form.value)
+        // console.log("Status response",res)
         if(res.status=true)
         {
       this.notificationService.success(':: Submitted successfully');
@@ -161,11 +163,13 @@ HwStatus.createdBy=localStorage.getItem('usernam') || '';
   }else
   {
     //update
-    console.log("update",this.service.form.value);
+     this.service.form.controls['updatedBy'].setValue(localStorage.getItem('usernam') || '');
+    //console.log("update",this.service.form.value);
+
     this.hwStatus.UpdateHardwareStatus(this.service.form.value).subscribe(
       res=>{
-        console.log("model",this.service.form.value)
-        console.log("Status response",res)
+        // console.log("ResponseInUpdate",this.service.form.value)
+        // console.log("Status response",res)
         if(res.status=true)
         {
         this.notificationService.success(':: Updated successfully');

@@ -32,7 +32,7 @@ export class HardwareStatusComponent implements OnInit {
  
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updateBy','action'];
+  displayedColumns: string[] = ['id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updatedBy','action'];
   dataSource = new MatTableDataSource();
   columnsToDisplay: string[] = this.displayedColumns.slice();
   constructor( private dailogService:DeleteService,private titleService:Title, private note:NotificationService,private deleteService:DeleteService,private dialog: MatDialog, private route: ActivatedRoute,
@@ -59,7 +59,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
     this.hwList = response?.data;
     this.hwList.length = response?.pagination.totalCount;
-    console.log("fromreqquest",this.hwList)
+    //console.log("fromreqquest",this.hwList)
    
     this.dataSource = new MatTableDataSource<any>(this.hwList);
     this.dataSource._updateChangeSubscription();

@@ -110,9 +110,9 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ التعديل</mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="تاريخ العديل"> {{element.updateDate|date : 'yyyy-MM-dd'}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="updateBy">
+    <ng-container matColumnDef="updatedBy">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>  التعديل بواسطة</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label=" المستخدم"> {{element.updateBy}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label=" المستخدم"> {{element.updatedBy}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell mat-header-cell *matHeaderCellDef> الاجراء</mat-header-cell>

@@ -242,10 +242,10 @@ applyFilter() {
       creationDate:row.creationDate,
       updatedBy: localStorage.getItem('usernam') || ''
     }
-    console.log(ReceiptEdit);
+    //console.log(ReceiptEdit);
     this.settingServices.UpdateReceiptStatus(ReceiptEdit).subscribe(res => {
       if (res.status == true) {
-         console.log(ReceiptEdit);
+       //  console.log(ReceiptEdit);
         setTimeout(() => {
           this.loader = false;
         }, 1500)
@@ -358,8 +358,8 @@ onChecknameIsalreadysign()
   {
     this.receipt.name=this.form.value.name;
     this.receipt.id=this.form.value.id;
-    console.log(this.receipt.name,"yhyhyhhjkl");
-    console.log(this.receipt.id);
+    // console.log(this.receipt.name,"yhyhyhhjkl");
+    // console.log(this.receipt.id);
     this.settingServices.ReceiptStatusIsalreadysign(this.receipt.name , this.receipt.id).subscribe(
       res =>{
     if(res.status == true )
