@@ -138,6 +138,8 @@ if(this.data.dialogTitle=="اضافة جديد")
 {
   // console.log("add",this.service.form.value);
   // console.log("HwStatus",HwStatus);
+    var changeHour= new Date(HwStatus.exitDate.getFullYear(), HwStatus.exitDate.getMonth(), HwStatus.exitDate.getDate(), 5, 0, 0);
+    HwStatus.exitDate=changeHour;
   //Add
 HwStatus.createdBy=localStorage.getItem('usernam') || '';
     this.hwStatus.AddHardwareStatus(HwStatus).subscribe(
