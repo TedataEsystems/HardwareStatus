@@ -4,7 +4,7 @@
          الشركة
         </mat-card-title>
         <button mat-button (click)=toggleDisplay()>
-            <mat-icon class="add-new ico" (click)="addNew()">add</mat-icon>
+            <mat-icon class="add-new ico">add</mat-icon>
             <span class="txt mr-1">اضافة جديد</span> 
         </button>
     </mat-card-header>
@@ -21,7 +21,6 @@
               <input type="hidden" id="picid" formControlName="id"  [value]="valuid"  placeholder="">
               <span class="mat-error" *ngIf="isNameRepeated">الاسم مسجل مسبقاً</span>
             </mat-form-field><span style="margin-left: 10px;"> </span>
-            
             
            
             <button type="submit" mat-raised-button     class="search text-white"  [disabled]="!company.name.length || isDisabled">اضافة</button>

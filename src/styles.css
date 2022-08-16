@@ -705,10 +705,10 @@ a,span,input,h2,.mat-raised-button,.mat-menu-panel,.mat-list-item,.mat-menu-item
 }
 .mat-paginator {
   background: transparent;
-  color: #788677 !important;
+  color: var(--seconed-color) !important;
 }
 .mat-select-value,.mat-select-arrow {
-  color: #788677 !important;
+  color: #012535!important;
 }
 .mat-button.mat-primary.mat-button-disabled, .mat-button.mat-accent.mat-button-disabled, .mat-button.mat-warn.mat-button-disabled, .mat-button.mat-button-disabled.mat-button-disabled, .mat-icon-button.mat-primary.mat-button-disabled, .mat-icon-button.mat-accent.mat-button-disabled, .mat-icon-button.mat-warn.mat-button-disabled, .mat-icon-button.mat-button-disabled.mat-button-disabled, .mat-stroked-button.mat-primary.mat-button-disabled, .mat-stroked-button.mat-accent.mat-button-disabled, .mat-stroked-button.mat-warn.mat-button-disabled, .mat-stroked-button.mat-button-disabled.mat-button-disabled {
   color: rgb(163 171 162) !important;

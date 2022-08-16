@@ -59,7 +59,7 @@ settingtype=''
   }
   orderStatus: string = '';
   orderStatusId: number = 0;
-  show: boolean = false;
+ // show: boolean = false;
   loader:boolean=false;
   isDisabled = false;
   pageNumber = 1;
@@ -198,7 +198,7 @@ applyFilter() {
     }//else
   }
 
-  this.show=false;
+  this.isShowDiv=false;
   }//end of submit
 
   addNew(){
@@ -207,7 +207,7 @@ applyFilter() {
       this.router.navigateByUrl('/login');
     }
     else{
-    this.show=true;}
+    this.isShowDiv=true;}
   }
   editROw(r: any) {
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -413,7 +413,16 @@ onDelete(r: any) {
 
 
 toggleDisplay() {  
-  this.isShowDiv = !this.isShowDiv;  
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
+    this.isShowDiv = !this.isShowDiv;
+   
+
+  }
+
  
 } 
 }

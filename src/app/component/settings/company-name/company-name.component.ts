@@ -58,7 +58,7 @@ export class CompanyNameComponent implements OnInit {
   }
   companyName: string = '';
   companyNameId: number = 0;
-  show: boolean = false;
+ // show: boolean = false;
   loader: boolean = false;
   isDisabled = false;
   pageNumber = 1;
@@ -194,17 +194,17 @@ export class CompanyNameComponent implements OnInit {
       }//else
   
   }
-    this.show = false;
+    this.isShowDiv = false;
   }//end of submit
 
-  addNew() {
-    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-    {
-      this.router.navigateByUrl('/login');
-    }
-    else{
-    this.show = true;}
-  }
+  // addNew() {
+  //   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  //   {
+  //     this.router.navigateByUrl('/login');
+  //   }
+  //   else{
+  //   this.isShowDiv = true;}
+  // }
   editROw(r: any) {
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
     {
@@ -405,8 +405,16 @@ export class CompanyNameComponent implements OnInit {
 
 
   toggleDisplay() {
-    this.isShowDiv = !this.isShowDiv;
-    this.form['controls']['name'].setValue('');
-    this.form['controls']['id'].setValue(0);
+    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
+      this.isShowDiv = !this.isShowDiv;
+      // this.form['controls']['name'].setValue('');
+      // this.form['controls']['id'].setValue(0);
+
+    }
+   
   }
 }

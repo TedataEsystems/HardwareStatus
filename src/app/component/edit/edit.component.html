@@ -55,7 +55,7 @@
           </mat-form-field> -->
 
           <mat-form-field>
-            <input formControlName="exitDate"  [ngxMatDatetimePicker]="exitDate"  matInput placeholder="تاريخ الخروج *" readonly>
+            <input formControlName="exitDate" enableMeridian="true" [ngxMatDatetimePicker]="exitDate"  matInput placeholder="تاريخ الخروج *" readonly>
              
             <mat-datepicker-toggle matSuffix [for]="$any(exitDate)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #exitDate>
