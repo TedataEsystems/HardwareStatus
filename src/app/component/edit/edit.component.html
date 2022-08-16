@@ -47,12 +47,24 @@
             <input formControlName="notes" matInput placeholder="ملاحظات*">
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
-          <mat-form-field>
+          <!-- <mat-form-field>
             <input formControlName="exitDate" matInput [matDatepicker]="picker" placeholder="تاريخ الخروج *">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error>مطلوب</mat-error> 
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <mat-form-field>
+            <input formControlName="exitDate"  [ngxMatDatetimePicker]="exitDate"  matInput placeholder="تاريخ الخروج *" readonly>
+             
+            <mat-datepicker-toggle matSuffix [for]="$any(exitDate)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #exitDate>
+            </ngx-mat-datetime-picker>
+            <mat-error>مطلوب</mat-error>
+         </mat-form-field>
+
+
+
           <mat-form-field>
 
             <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *"  >
