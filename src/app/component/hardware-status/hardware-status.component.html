@@ -5,12 +5,13 @@
        تفاصيل حالة الاجهزة
         </mat-card-title>
         <button mat-button (click)="onCreate()">
-            <mat-icon class="add-new" >add</mat-icon>
-         اضافة جديد
+            <mat-icon class="add-new ico" >add</mat-icon>
+         <span class="txt mr-1">اضافة جديد</span> 
         </button>
         <button mat-button (click)="exportExcel()">
-            <mat-icon>file_download</mat-icon>
-          استخراج تقرير
+            <mat-icon class="txt">file_download</mat-icon>
+            <span class="txt">استخراج تقرير</span>
+           
         </button>
        
     </mat-card-header>
@@ -109,9 +110,9 @@
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> تاريخ التعديل</mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="تاريخ العديل"> {{element.updateDate|date : 'yyyy-MM-dd'}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="updateBy">
+    <ng-container matColumnDef="updatedBy">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>  التعديل بواسطة</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label=" المستخدم"> {{element.updateBy}} </mat-cell>
+        <mat-cell *matCellDef="let element" data-label=" المستخدم"> {{element.updatedBy}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action">
         <mat-header-cell mat-header-cell *matHeaderCellDef> الاجراء</mat-header-cell>

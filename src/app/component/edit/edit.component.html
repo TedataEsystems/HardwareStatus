@@ -7,6 +7,10 @@
       <mat-grid-tile>
         <div class="controles-container">
           <input type="hidden" formControlName="id">
+          <input type="hidden" formControlName="creationDate">
+          <input type="hidden" formControlName="createdBy">
+          <input type="hidden" formControlName="updateDate">
+          <input type="hidden" formControlName="updatedBy">
           <mat-form-field>
             <input formControlName="clientName" matInput placeholder="اسم العميل*">
             <mat-error>مطلوب</mat-error> 
@@ -53,6 +57,18 @@
             <mat-datepicker #picker></mat-datepicker>
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
+
+          <!-- <mat-form-field>
+            <input formControlName="exitDate"  [ngxMatDatetimePicker]="exitDate"  matInput placeholder="تاريخ الخروج *" readonly>
+             
+            <mat-datepicker-toggle matSuffix [for]="$any(exitDate)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #exitDate>
+            </ngx-mat-datetime-picker>
+            <mat-error>مطلوب</mat-error>
+         </mat-form-field> -->
+
+
+
           <mat-form-field>
 
             <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *"  >
@@ -83,14 +99,6 @@
                 {{companyName.name}}
               </mat-option>
             </mat-select>
-
-
-            <!-- <mat-select formControlName="companyNameId" placeholder="اسم الشركة*">
-              <mat-option>None</mat-option>
-              <ng-container *ngFor="let companyName of companyNameList">
-                <mat-option value={{companyName.id}}>{{companyName.name}}</mat-option>
-              </ng-container>
-            </mat-select> -->
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
        

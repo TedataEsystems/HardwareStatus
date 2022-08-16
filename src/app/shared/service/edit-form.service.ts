@@ -16,20 +16,24 @@ export class EditFormService {
 
   form: FormGroup = new FormGroup({
     id: new FormControl(0),
-    clientName: new FormControl('',[Validators.required]),
-    central: new FormControl('',[Validators.required]),
-    orderNumber: new FormControl(1,[Validators.required,Validators.min(1)]),
-    technicianName: new FormControl('',[Validators.required]),
+    clientName: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    central: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    orderNumber: new FormControl(0,[Validators.required,Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    technicianName: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
 
-    zoneNumber: new FormControl(1,[Validators.required,Validators.min(1)]),
-    number: new FormControl(1,[Validators.required ,Validators.min(1)]),
-    deviceType: new FormControl('',[Validators.required]),
-    serialNumber: new FormControl('',[Validators.required]),
-    notes: new FormControl('',[Validators.required]),
-    exitDate: new FormControl('',[Validators.required]),
+    zoneNumber: new FormControl(0,[Validators.required,Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    number: new FormControl(0,[Validators.required ,Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    deviceType: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    serialNumber: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    notes: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    exitDate: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
     receiptStatusId: new FormControl(0,[Validators.required]),
     orderStatusId: new FormControl(0,[Validators.required]),
     companyNameId: new FormControl(0,[Validators.required]),
+    creationDate :new FormControl(null),
+    updateDate :new FormControl(null),
+    createdBy:new FormControl(null),
+    updatedBy :new FormControl(null),
    
    
   });
@@ -49,6 +53,10 @@ export class EditFormService {
       receiptStatusId: 0,
       orderStatusId: 0,
       companyNameId:0,
+      creationDate:null,
+      createdBy:null,
+      updateDate:null,
+      updateBy:null,
 
     })
   }

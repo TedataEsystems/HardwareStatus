@@ -10,7 +10,7 @@ html, body { height: 100%;
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :root{
   --main-color:#0a5689;
-  --seconed-color:#71716f;
+  --seconed-color:#3a3e41 ;
   --third-color:#d7d7d7;
   --body-color:#f7f7f7;
   --forth-color:   #82919b ;/*#ffad00*/
@@ -705,10 +705,10 @@ a,span,input,h2,.mat-raised-button,.mat-menu-panel,.mat-list-item,.mat-menu-item
 }
 .mat-paginator {
   background: transparent;
-  color: #788677 !important;
+  color: var(--seconed-color) !important;
 }
 .mat-select-value,.mat-select-arrow {
-  color: #788677 !important;
+  color: #012535!important;
 }
 .mat-button.mat-primary.mat-button-disabled, .mat-button.mat-accent.mat-button-disabled, .mat-button.mat-warn.mat-button-disabled, .mat-button.mat-button-disabled.mat-button-disabled, .mat-icon-button.mat-primary.mat-button-disabled, .mat-icon-button.mat-accent.mat-button-disabled, .mat-icon-button.mat-warn.mat-button-disabled, .mat-icon-button.mat-button-disabled.mat-button-disabled, .mat-stroked-button.mat-primary.mat-button-disabled, .mat-stroked-button.mat-accent.mat-button-disabled, .mat-stroked-button.mat-warn.mat-button-disabled, .mat-stroked-button.mat-button-disabled.mat-button-disabled {
   color: rgb(163 171 162) !important;
@@ -1169,3 +1169,9 @@ mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-
 .mat-paginator-range-label{
   direction: ltr;
 }
+.txt{
+  text-shadow: 2px 2px 4px #82919b;
+ }
+ .ico{
+  box-shadow: 2px 2px 4px #82919b;
+ }

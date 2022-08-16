@@ -59,7 +59,7 @@ settingtype=''
   }
   rceceiptName: string = '';
   receiptNameId: number = 0;
-  show: boolean = false;
+  // show: boolean = false;
   loader:boolean=false;
   isDisabled = false;
   pageNumber = 1;
@@ -202,7 +202,7 @@ applyFilter() {
         )
       }//else
     }
-    this.show = false;
+    this.isShowDiv = false;
     
   }
   //end of submit
@@ -215,7 +215,7 @@ applyFilter() {
       this.router.navigateByUrl('/login');
     }
     else{
-    this.show=true;}
+    this.isShowDiv=true;}
   }
   editROw(r: any) {
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -242,10 +242,10 @@ applyFilter() {
       creationDate:row.creationDate,
       updatedBy: localStorage.getItem('usernam') || ''
     }
-    console.log(ReceiptEdit);
+    //console.log(ReceiptEdit);
     this.settingServices.UpdateReceiptStatus(ReceiptEdit).subscribe(res => {
       if (res.status == true) {
-         console.log(ReceiptEdit);
+       //  console.log(ReceiptEdit);
         setTimeout(() => {
           this.loader = false;
         }, 1500)
@@ -358,8 +358,8 @@ onChecknameIsalreadysign()
   {
     this.receipt.name=this.form.value.name;
     this.receipt.id=this.form.value.id;
-    console.log(this.receipt.name,"yhyhyhhjkl");
-    console.log(this.receipt.id);
+    // console.log(this.receipt.name,"yhyhyhhjkl");
+    // console.log(this.receipt.id);
     this.settingServices.ReceiptStatusIsalreadysign(this.receipt.name , this.receipt.id).subscribe(
       res =>{
     if(res.status == true )
@@ -420,7 +420,16 @@ onDelete(r: any) {
 
 
 toggleDisplay() {  
-  this.isShowDiv = !this.isShowDiv;  
+  
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
+    this.isShowDiv = !this.isShowDiv;
+   
+
+  } 
  
 } 
 }

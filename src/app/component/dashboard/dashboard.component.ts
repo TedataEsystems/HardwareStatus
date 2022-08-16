@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
     
   }
  
-  
 
   doughnutChartLabelsp: Label[] =[];
   doughnutChartDatap: MultiDataSet = [
@@ -40,69 +39,33 @@ export class DashboardComponent implements OnInit {
   doughnutChartData: MultiDataSet = [
     []
   ];
-
+ 
   doughnutChartType: ChartType = 'doughnut';
   colors: Color[] = [
     {
      
       backgroundColor: [
        
-        'red','orange','blue','yellow','purple','gray','green','lime','maroon'
-        ,'navy','teal','aqua','coral','#1a6699','peach',
+       '#0B6099','#0D77BD','#008C83','#136f8f','#00A69B','#00B3A7','#00BFB2','#00CCBE',
+       '#74dfdf','#00DBCD','#00E3D4','#00F0E0','#585858','#3a3e41 ','#82919b','#d7d7d7',
       ]
     }
   ];
 
+  doughnutChartPlugins = [{
+    afterLayout: function (chart:any) {
+      chart.legend.legendItems.forEach(
+        (label:any) => {
+          let value = chart.data.datasets[0].data[label.index];
 
-// getChartData():void{
-//   if(this.userRole=="esp")
-//   {
-//     this.hardwareService.chartDataForEsp().subscribe(res=>{
-//     this.chartData= res.data as IChart;
+          label.text += ' ' + value;
+          return label;
+        }
+      )
+    }
+  }];
 
-//     this.count=this.chartData.publishCount+this.chartData.vendorCount+this.chartData.espCount;
-
-//      this.doughnutChartLabelsp = ['HWpublish', 'HW Binding TO Vendor', 'HW Return TO ESP'];
-//      this.doughnutChartDatap = [
-//       [this.chartData.publishCount, this.chartData.vendorCount, this.chartData.espCount]
-//     ];
-  
-//    this.doughnutChartLabels = ['HWpublish', 'HW Binding TO Vendor', 'HW Return TO ESP'];
-//  this.doughnutChartData = [
-//   [this.chartData.publishCount, this.chartData.vendorCount, this.chartData.espCount]
-//   ];
-
-
-//     }
-//     ,err=>{this.notificationService.warn("An Error Occure ")}
-//     );
-
-//   }
-//   else if(this.userRole=="vendor")
-//   {
-//     this.hardwareService.chartDataForVendor().subscribe(res=>{
-//       this.chartData= res.data as IChart;
-//       this.count=this.chartData.underWorkCount+this.chartData.vendorCount+this.chartData.espCount;
-
-//       this.doughnutChartLabelsp = ['under Work', 'Not work on it', 'HW Return TO ESP'];
-//       this.doughnutChartDatap = [
-//        [this.chartData.underWorkCount, this.chartData.vendorCount, this.chartData.espCount]
-//      ];
-   
-     
-//     this.doughnutChartLabels = ['under Work', 'Not work on it', 'HW Return TO ESP'];
-//   this.doughnutChartData = [
-//    [this.chartData.underWorkCount, this.chartData.vendorCount, this.chartData.espCount]
-//    ];
- 
-
-//       }
-//       ,err=>{this.notificationService.warn("occure an error")}
-//       );
-
-//   }
-
-// }
+    
    ngOnInit(){
       console.log("side ");
 this.dashboard.getOrderStatusChart().subscribe(res=>

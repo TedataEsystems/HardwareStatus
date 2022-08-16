@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,7 +13,14 @@ import { SettingService } from 'src/app/shared/service/setting.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  styleUrls: ['./history.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class HistoryComponent implements OnInit {
   isShowDiv = false;  
@@ -25,6 +33,7 @@ valdata="";valuid=0;
   searchKey:string ='';
   listName:string ='';
   loading: boolean = true;
+  isTableExpanded = false;
  
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -193,7 +202,13 @@ sortData(sort: any) {
 }
 
 
+toggleTableRows() {
+  this.isTableExpanded = !this.isTableExpanded;
 
+  this.dataSource.data.forEach((row: any) => {
+    row.isExpanded = this.isTableExpanded;
+  })
+}
 
 
 

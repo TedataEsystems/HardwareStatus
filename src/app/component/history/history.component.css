@@ -1,7 +1,12 @@
 mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
     padding-right: 24px;
 }
-mat-cell, mat-header-cell,mat-header-cell{
+/* mat-cell > span.ellipsis {
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
+} */
+/* mat-cell, mat-header-cell,mat-header-cell{
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 7%  !important;
@@ -14,8 +19,8 @@ mat-cell, mat-header-cell,mat-header-cell{
   -webkit-hyphens: auto;
   hyphens: auto;
   
- }
- mat-cell:nth-child(1), mat-header-cell:nth-child(1),
+ } */
+ /* mat-cell:nth-child(1), mat-header-cell:nth-child(1),
  mat-cell:nth-child(2), mat-header-cell:nth-child(2){
   word-wrap: break-word !important;
   white-space: unset !important;
@@ -30,8 +35,8 @@ padding:0 5px;
   -webkit-hyphens: auto;
   hyphens: auto;
   
- }
- mat-cell:nth-child(4), mat-header-cell:nth-child(4){
+ } */
+ /* mat-cell:nth-child(4), mat-header-cell:nth-child(4){
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 10%  !important;
@@ -45,8 +50,8 @@ padding:0 5px;
   -webkit-hyphens: auto;
   hyphens: auto;
   
- }
-mat-cell:nth-child(3), mat-header-cell:nth-child(3){
+ } */
+/* mat-cell:nth-child(3), mat-header-cell:nth-child(3){
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 55%  !important;
@@ -59,5 +64,25 @@ padding:0 5px;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
   
- }
+ } */
+
+ 
+.student-element-detail{
+  width: 100%;
+}
+.student-detail-row {
+  min-height: 0;
+}
+.student-detail-row mat-cell
+{
+  background: var(--body-color);
+    box-shadow: inset 3px 0px 5px var(--third-color),inset -3px 0px 5px var(--third-color);
+
+}
+.text-success{
+  text-shadow: 2px 2px 5px #a4a9ac;
+}
