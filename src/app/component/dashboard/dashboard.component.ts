@@ -46,7 +46,8 @@ export class DashboardComponent implements OnInit {
      
       backgroundColor: [
        
-       '#0B6099','#0D77BD','#008C83','#00A69B','#00B3A7','#00BFB2','#00CCBE','#00DBCD','#00E3D4','#00F0E0','#585858','#3a3e41 ','#82919b','#d7d7d7',
+       '#0B6099','#0D77BD','#008C83','#00A69B','#00B3A7','#00BFB2','#00CCBE',
+       '#00DBCD','#00E3D4','#00F0E0','#585858','#3a3e41 ','#82919b','#d7d7d7',
       ]
     }
   ];

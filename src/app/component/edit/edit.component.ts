@@ -279,9 +279,10 @@ HwStatus.createdBy=localStorage.getItem('usernam') || '';
 
 
   }//submit
+
   onClose(){
     this.service.form.reset();
-    this.service.initializeFormGroup();
+   // this.service.initializeFormGroup();
     this.dialogRef.close();
 
   }
