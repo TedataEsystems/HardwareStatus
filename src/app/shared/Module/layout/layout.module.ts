@@ -19,6 +19,8 @@ import { OrderStateComponent } from 'src/app/component/settings/order-state/orde
 import { CompanyNameComponent } from 'src/app/component/settings/company-name/company-name.component';
 import { ReceiptStateComponent } from 'src/app/component/settings/receipt-state/receipt-state.component';
  import { ChartsModule } from 'ng2-charts';
+import { NgxMatMomentAdapter, NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 
 
@@ -48,7 +50,10 @@ import { ReceiptStateComponent } from 'src/app/component/settings/receipt-state/
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    NgxMatDatetimePickerModule,
+    NgxMatMomentModule,
+
 
  
     
