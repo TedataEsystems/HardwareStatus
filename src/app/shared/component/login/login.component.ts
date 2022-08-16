@@ -67,11 +67,14 @@ this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         localStorage.setItem("userGroup", res.userGroup);
  
       // window.location.href = "/"
+      //beforeunload
       this.router.navigate([this.returnUrl]);
       window.addEventListener("beforeunload", () =>
-      { localStorage.removeItem('usernam');
+      { 
+        localStorage.removeItem('usernam');
       localStorage.removeItem("userGroup");
     localStorage.removeItem("tokNum");
+   
      // console.log("cleared");
     });
          //this.router.navigate(['/'], { relativeTo: this.route });
