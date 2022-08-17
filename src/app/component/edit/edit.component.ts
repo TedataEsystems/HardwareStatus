@@ -162,10 +162,6 @@ HwStatus.createdBy=localStorage.getItem('usernam') || '';
   )
   }else
   {
-    
-    var changeHour= new Date(this.service.form.value.exitDate.getFullYear(), this.service.form.value.exitDate.getMonth(), this.service.form.value.exitDate.getDate(), 5, 0, 0);
-    this.service.form.controls['exitDate'].setValue(changeHour);
-
     //update
      this.service.form.controls['updatedBy'].setValue(localStorage.getItem('usernam') || '');
     //console.log("update",this.service.form.value);
