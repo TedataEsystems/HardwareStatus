@@ -9,8 +9,6 @@
     <div class="container-fluid py-4 px-4" >
       <div class="row g-4">
           <div class="col-sm-6 col-xl-6 text-center">
-           
-          
             <div class="chart-wrapper rounded mb-4">
                 <canvas baseChart 
                 [data]="doughnutChartDatap"
@@ -20,20 +18,24 @@
                 [chartType]="doughnutChartType">
               </canvas>
             </div>
-            <span>  {{TotalNumorderStat}}موقف الاوردر</span>
+            <span class="total" matBadgeColor="warn" matBadge="{{TotalNumorderStat}}" matBadgeOverlap="false"> TOTAL </span>
+           <span>موقف الاوردر</span>
           </div>
           <div class="col-sm-6 col-xl-6 text-center">
            
             <div class="chart-wrapper rounded mb-4">
               <canvas baseChart 
-              [data]="  doughnutChartData"
+              [data]="doughnutChartData"
               [labels]="doughnutChartLabels"
               [colors]="colors"
               [plugins]="doughnutChartPlugins"
               [chartType]="doughnutChartType">
             </canvas>
           </div>
-          <span>{{TotalNumReceiptStat}}موقف ايصال الاستلام</span>
+          <span class="total"  matBadgeColor="warn" matBadge="{{TotalNumReceiptStat}}" matBadgeOverlap="false">TOTAL</span>
+           <span>موقف ايصال الاستلام</span>
+         
+
           </div>
          
       </div>

@@ -13,7 +13,7 @@
      
        
       <mat-form-field class="search-form-field" floatLabel="never">
-        <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter()"> 
+        <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter($event)"> 
         <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
              <mat-icon>close</mat-icon>
          </button> 
@@ -84,7 +84,8 @@
         <ng-container matColumnDef="creationDate">
             <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> التاريخ 
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" data-label="تاريخ الانشاء"> {{element.creationDate|date : 'yyyy-MM-dd'}} </mat-cell>
+            <!-- {{element.creationDate|date : 'yyyy-MM-dd'}}  -->
+            <mat-cell *matCellDef="let element" data-label="تاريخ الانشاء"> {{element.creationDate}} </mat-cell>
         </ng-container>
 
         <!-- <ng-container matColumnDef="updateDate">

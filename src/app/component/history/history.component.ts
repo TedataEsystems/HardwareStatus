@@ -18,7 +18,7 @@ import { SettingService } from 'src/app/shared/service/setting.service';
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> collapsed', animate('2100ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ]
 })
@@ -57,7 +57,7 @@ settingtype=''
   loader:boolean=false;
   isDisabled = false;
   pageNumber = 1;
-  pageSize =25;
+  pageSize =100;
   sortColumnDef: string = "Id";
   SortDirDef: string = 'desc';
   public colname: string = 'Id';
@@ -92,7 +92,7 @@ ngOnInit(): void {
     this.router.navigateByUrl('/login');
   }
   else{
-  this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
   }
 }
 
@@ -102,21 +102,38 @@ ngAfterViewInit() {
 }
 onSearchClear() {
   this.searchKey = '';
-  this.applyFilter();
+  this.getRequestdata(1, 10, this.searchKey, this.sortColumnDef, "desc");
+  
 }
-applyFilter() {
+// applyFilter() {
+//   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+//   {
+//     this.router.navigateByUrl('/login');
+//   }
+//   else{
+//    let searchData = this.searchKey.trim().toLowerCase();
+ 
+  
+    
+
+//   this.getRequestdata(1, 100, searchData, this.sortColumnDef, "desc");
+//   }
+// }
+
+applyFilter(filterValue: Event) { 
   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-  {
-    this.router.navigateByUrl('/login');
-  }
-  else{
-  let searchData = this.searchKey.trim().toLowerCase();
-  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "desc");
+    {
+      this.router.navigateByUrl('/login');
+    }
+    else{
+  this.dataSource.filter =(<HTMLInputElement>filterValue.target).value.trim().toLowerCase();
+ 
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
   }
 }
-
-
-
+ 
+}
 
 
 
@@ -128,8 +145,8 @@ applyFilter() {
 
   //this section for pagination 
   pageIn = 0;
-  previousSizedef = 25;
-  pagesizedef: number = 25;
+  previousSizedef = 100;
+  pagesizedef: number = 100;
   public pIn: number = 0;
   pageChanged(event: any) {
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -196,7 +213,7 @@ sortData(sort: any) {
   }
   this.lastcol = sort.active; this.lastdir = sort.direction;
   var c = this.pageIn;
-  this.getRequestdata(1, 25, '', sort.active, this.lastdir);
+  this.getRequestdata(1, 100, '', sort.active, this.lastdir);
 }
 
 }

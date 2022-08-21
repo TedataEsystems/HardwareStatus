@@ -74,7 +74,7 @@
 
           <mat-form-field>
 
-            <mat-select formControlName="receiptStatusId" placeholder="موقف ايصال الاستلام *"  >
+            <mat-select formControlName="receiptStatusId" placeholder=" *موقف ايصال الاستلام (--اختار--) "  >
               <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let receiptStatus of receiptStateList"   [value]="receiptStatus.id">
                 {{receiptStatus.name}}
@@ -84,7 +84,7 @@
           </mat-form-field>
           <mat-form-field>
 
-            <mat-select formControlName="orderStatusId" placeholder="موقف الاوردر "  >
+            <mat-select formControlName="orderStatusId" placeholder="*موقف الاوردر (--اختار--)"  >
               <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
                 {{orderStatus.name}}
@@ -96,7 +96,7 @@
           <mat-form-field>
 
 
-            <mat-select formControlName="companyNameId" placeholder="اسم الشركة*"  >
+            <mat-select formControlName="companyNameId" placeholder=" *اسم الشركة (--اختار--) "  >
               <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let companyName of companyNameList"   [value]="companyName.id">
                 {{companyName.name}}

@@ -49,8 +49,16 @@ export class EditComponent implements OnInit {
 // }
  
   ngOnInit(){
-    this.dialogTitle = this.data.dialogTitle;
+    // this.dialogTitle = this.data.dialogTitle;
     //console.log("rowOnInt",this.data);
+    if(this.data.dialogTitle !=="اضافة جديد"){
+      this.dialogTitle= 'تعديل';
+    }
+    else{
+      this.dialogTitle = this.data.dialogTitle;
+    }
+
+    
    this.hwStatus.GettingLists().subscribe(res=>{
     if(res.status==true)
     {
@@ -162,6 +170,7 @@ HwStatus.createdBy=localStorage.getItem('usernam') || '';
   )
   }else
   {
+    
     //update
      this.service.form.controls['updatedBy'].setValue(localStorage.getItem('usernam') || '');
     //console.log("update",this.service.form.value);
