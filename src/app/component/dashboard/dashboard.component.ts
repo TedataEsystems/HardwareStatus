@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
  
   //chartData=<IChart>{};
+  TotalNumorderStat:number=0;
+  TotalNumReceiptStat:number=0;
   count:number=0;
   userRole= localStorage.getItem('userGroup');
   constructor(
@@ -70,20 +72,34 @@ export class DashboardComponent implements OnInit {
       console.log("side ");
 this.dashboard.getOrderStatusChart().subscribe(res=>
   {
-   console.log(res.key,"Firstkey");
-   console.log(res.val,"Firstval");
+  //  console.log(res.key,"Firstkey");
+  //  console.log(res.val,"Firstval");
 this.doughnutChartLabelsp=res.key;
 this. doughnutChartDatap=res.val;
+for(var val of res.val)
+{
+if(val>0){
+  this.TotalNumorderStat +=val;
+}
+}
+
   }
  
 )///
+
 this.dashboard.getReceiptStatusChart().subscribe(res=>
   {
-    //alert("recipt");
-    console.log(res.key,"key");
-     console.log(res.val,"val");
+  
+    // console.log(res.key,"key");
+    //  console.log(res.val,"val");
     this.doughnutChartLabels=res.key;
     this. doughnutChartData=res.val;
+    for(var val of res.val)
+ {
+    if(val>0){
+      this.TotalNumReceiptStat +=val;
+    }
+  }
   })
 
 
