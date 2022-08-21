@@ -16,6 +16,7 @@ import { LayoutModule } from './shared/Module/layout/layout.module';
 import { MaterialModule } from './shared/Module/material/material.module';
 import { LoginModule } from './shared/Module/login/login.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BasicAuthInterceptorService } from './basic-auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     LoginModule
   ],
-  providers: [],
+  providers: [BasicAuthInterceptorService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
