@@ -48,7 +48,7 @@ export class HardwareStatusComponent implements OnInit {
     
   }
   pageNumber = 1;
-  pageSize =25;
+  pageSize =100;
   sortColumnDef: string = "Id";
   SortDirDef: string = 'asc';
   public colname: string = 'Id';
@@ -83,7 +83,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       this.router.navigateByUrl('/login');
     }
     else{
-  this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+  this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
     }
   }
 
@@ -103,7 +103,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       }
       else{
      let searchData = this.searchKey.trim().toLowerCase();
-     this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+     this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
       }
     }
     onCreate(){
@@ -120,7 +120,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       dialogGonfig.width="50%";
       dialogGonfig.panelClass='modals-dialog';
       this.dialog.open(EditComponent,dialogGonfig).afterClosed().subscribe(result => {
-        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
       });
     }
     
@@ -140,7 +140,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       dialogGonfig.width="50%";
       dialogGonfig.panelClass='modals-dialog';
        this.dialog.open(EditComponent,{disableClose:true,autoFocus:true, width:"50%",data:row}).afterClosed().subscribe(result => {
-        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef)});
+        this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef)});
 
       
        }
@@ -158,8 +158,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
           this.hwstatus.DeleteHwStatus(row.id).subscribe(
             rs => {
               this.note.success(':: successfully Deleted');
-             this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
-             //  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+             this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+             //  this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
             },
             error => { this.note.warn(':: An Error Occured') }
           );
@@ -176,8 +176,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
 
 
 pageIn = 0;
-previousSizedef = 25;
-pagesizedef: number = 25;
+previousSizedef = 100;
+pagesizedef: number = 100;
 public pIn: number = 0;
 pageChanged(event: any) {  
   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -240,7 +240,7 @@ sortData(sort: any) {
   }
   this.lastcol = sort.active; this.lastdir = sort.direction;
   var c = this.pageIn;
-  this.getRequestdata(1, 25, '', sort.active, this.lastdir);
+  this.getRequestdata(1, 100, '', sort.active, this.lastdir);
 }
 }
 exportExcel() {

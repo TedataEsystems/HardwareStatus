@@ -1,6 +1,9 @@
 <mat-toolbar dir="rtl">
     <span class="fill-remaining-space">{{dialogTitle}}</span>
-    <button fxFlex fxLayout fxLayoutAlign="end" class="btn-dialog-close" mat-button  tabIndex="-1" (click)="onClose()"><mat-icon>clear</mat-icon></button>
+    <div class="w-100">
+      <button  class="btn-dialog-close" mat-button  tabIndex="-1" (click)="onClose()"><mat-icon>clear</mat-icon></button>
+    </div>
+   
   </mat-toolbar>
   <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()" dir="rtl">
     <mat-grid-list cols="2" rowHeight="450px">

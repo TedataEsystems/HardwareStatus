@@ -63,7 +63,7 @@ settingtype=''
   loader:boolean=false;
   isDisabled = false;
   pageNumber = 1;
-  pageSize =25;
+  pageSize =100;
   sortColumnDef: string = "Id";
   SortDirDef: string = 'asc';
   public colname: string = 'Id';
@@ -109,7 +109,7 @@ ngOnInit(): void {
   }
   else{
   this.editUsr=0;
-  this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);}
+  this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
 }
 
 ngAfterViewInit() {
@@ -132,7 +132,7 @@ applyFilter() {
   }
   else{
   let searchData = this.searchKey.trim().toLowerCase();
-  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");}
+  this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");}
 }
 
 
@@ -172,7 +172,7 @@ applyFilter() {
               this.form['controls']['name'].setValue('');
               this.form['controls']['id'].setValue(0);
              
-              this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+              this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
           } ,
           error => { 
             setTimeout(()=>{
@@ -191,7 +191,7 @@ applyFilter() {
           this.LoadReceoptStatus();
           this.form['controls']['name'].setValue('');
           this.form['controls']['id'].setValue(0);
-          this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+          this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
         },
           error => {
             setTimeout(() => {
@@ -230,7 +230,7 @@ applyFilter() {
   cancelEdit() {
     this.editdisabled = false;
     this.isNameUpdatedRepeated = false;
-    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+    this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
   }
   updateEdit(row: any) {
     this.loader = true;
@@ -254,7 +254,7 @@ applyFilter() {
         this.form['controls']['name'].setValue('');
         this.form['controls']['id'].setValue(0);
         this.cancelEdit();
-        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
       }//if
       else {
         setTimeout(() => {
@@ -282,8 +282,8 @@ applyFilter() {
     }
   //this section for pagination 
   pageIn = 0;
-  previousSizedef = 25;
-  pagesizedef: number = 25;
+  previousSizedef = 100;
+  pagesizedef: number = 100;
   public pIn: number = 0;
   pageChanged(event: any) {
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -350,7 +350,7 @@ sortData(sort: any) {
   }
   this.lastcol = sort.active; this.lastdir = sort.direction;
   var c = this.pageIn;
-  this.getRequestdata(1, 25, '', sort.active, this.lastdir);
+  this.getRequestdata(1, 100, '', sort.active, this.lastdir);
 }
 
 }
@@ -403,8 +403,8 @@ onDelete(r: any) {
       this.settingServices.DeleteReceiptStatus(r.id).subscribe(
         rs => {
           this.notser.success(':: successfully Deleted');
-         this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
-         //  this.getRequestdata(1, 25, searchData, this.sortColumnDef, "asc");
+         this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+         //  this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
         },
         error => { this.notser.warn(':: An Error Occured') }
       );
