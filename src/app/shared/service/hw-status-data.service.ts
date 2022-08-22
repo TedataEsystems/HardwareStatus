@@ -36,8 +36,9 @@ export class HwStatusDataService {
   DeleteHwStatus(id:any):Observable<any>
   {
     
-    return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`+id) ;
+    return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`+id );
   }
+
 
   getHwStatus(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
     let params = new HttpParams();

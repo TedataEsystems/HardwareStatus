@@ -10,9 +10,9 @@ export class SettingService {
   private apiUrl2:string;
   private apiUrl1:string;
   constructor(private httpClient:HttpClient) { 
-     this.apiUrl2="https://localhost:44329/api//Setting";
+    // this.apiUrl2="http://172.29.29.9:2122/api/Setting";
     // this.apiUrl1="http://172.29.29.9:2122/api/Logs";
-    //this.apiUrl2="http://172.29.29.9:2122/api/Setting";
+    this.apiUrl2="http://172.29.29.9:2122/api/Setting";
     this.apiUrl1="http://172.29.29.9:2122/api/Logs";
   }
 
@@ -97,6 +97,7 @@ AddOrderStatus(model:any):Observable<any>
    // console.log(id);
     return this.httpClient.delete(`${this.apiUrl2}/DeleteOrderStatus/`+id) ;
   }
+
   OrderStatusIsalreadysign(name:string,id:number ):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/OrderStatusIsAlreadySigned/`+name+`/`+id);  
@@ -131,6 +132,7 @@ DeleteReceiptStatus(id:any):Observable<any>
 {
   return this.httpClient.delete(`${this.apiUrl2}/DeleteReceiptStatus/`+id) ;
 }
+
 ReceiptStatusIsalreadysign(name:string,id:number ):Observable<any>
 {
  return this.httpClient.get<any>(`${this.apiUrl2}/ReceiptStatusIsAlreadySigned/`+name+`/`+id);  
