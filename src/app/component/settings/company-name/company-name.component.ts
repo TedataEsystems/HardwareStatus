@@ -385,8 +385,7 @@ export class CompanyNameComponent implements OnInit {
     else{
     this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
       if (res) {
-        r.updateBy=localStorage.getItem("usernam");
-        this.settingServices.DeleteCompanyName(r).subscribe(
+        this.settingServices.DeleteCompanyName(r.id).subscribe(
           rs => {
             this.notser.success(':: successfully Deleted');
             this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);

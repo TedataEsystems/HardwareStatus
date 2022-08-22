@@ -400,8 +400,7 @@ onDelete(r: any) {
   else{
   this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
     if (res) {
-      r.updateBy=localStorage.getItem("usernam");
-      this.settingServices.DeleteReceiptStatus(r).subscribe(
+      this.settingServices.DeleteReceiptStatus(r.id).subscribe(
         rs => {
           this.notser.success(':: successfully Deleted');
          this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);

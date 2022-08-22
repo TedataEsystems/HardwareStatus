@@ -41,15 +41,12 @@ export class SettingService {
     return this.httpClient.post<any>(`${this.apiUrl2}/AddCompanyName`,model);
   }
   
-  // DeleteCompanyName(id:any):Observable<any>
-  // {
-  //  // console.log(id);
-  //   return this.httpClient.delete(`${this.apiUrl2}/DeleteCompanyName/`+id) ;
-  // }
-  DeleteCompanyName(model:any):Observable<any>
+  DeleteCompanyName(id:any):Observable<any>
   {
-    return this.httpClient.post<any>(`${this.apiUrl2}/DeleteCompanyName/`,model) ;
+   // console.log(id);
+    return this.httpClient.delete(`${this.apiUrl2}/DeleteCompanyName/`+id) ;
   }
+
   CompanyNameIsalreadysign(name:string,id:number ):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/CompanyNameIsAlreadySigned/`+name+`/`+id);  
@@ -96,15 +93,12 @@ AddOrderStatus(model:any):Observable<any>
   {
     return this.httpClient.post<any>(`${this.apiUrl2}/AddOrderStatus`,model);
   }
-  // DeleteOrderStatus(id:any):Observable<any>
-  // {
-  //  // console.log(id);
-  //   return this.httpClient.delete(`${this.apiUrl2}/DeleteOrderStatus/`+id) ;
-  // }
-  DeleteOrderStatus(model:any):Observable<any>
+  DeleteOrderStatus(id:any):Observable<any>
   {
-    return this.httpClient.post<any>(`${this.apiUrl2}/DeleteOrderStatus/`,model) ;
+   // console.log(id);
+    return this.httpClient.delete(`${this.apiUrl2}/DeleteOrderStatus/`+id) ;
   }
+
   OrderStatusIsalreadysign(name:string,id:number ):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/OrderStatusIsAlreadySigned/`+name+`/`+id);  
@@ -135,14 +129,11 @@ getReceiptSttatus(PageNumber :number , PageSize :number , searchValue:string ,so
     })
   )
 }
-// DeleteReceiptStatus(id:any):Observable<any>
-// {
-//   return this.httpClient.delete(`${this.apiUrl2}/DeleteReceiptStatus/`+id) ;
-// }
-DeleteReceiptStatus(model:any):Observable<any>
+DeleteReceiptStatus(id:any):Observable<any>
 {
-  return this.httpClient.post<any>(`${this.apiUrl2}/DeleteReceiptStatus/`,model) ;
+  return this.httpClient.delete(`${this.apiUrl2}/DeleteReceiptStatus/`+id) ;
 }
+
 ReceiptStatusIsalreadysign(name:string,id:number ):Observable<any>
 {
  return this.httpClient.get<any>(`${this.apiUrl2}/ReceiptStatusIsAlreadySigned/`+name+`/`+id);  
