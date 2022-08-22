@@ -155,7 +155,9 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       else{
       this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
         if (res) {
-          this.hwstatus.DeleteHwStatus(row.id).subscribe(
+          //this.hwstatus.DeleteHwStatus(row.id).subscribe(
+            row.updatedBy=localStorage.getItem("usernam")
+            this.hwstatus.DeleteHwStatus(row).subscribe(
             rs => {
               this.note.success(':: successfully Deleted');
              this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);

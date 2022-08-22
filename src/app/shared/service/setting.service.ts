@@ -10,8 +10,11 @@ export class SettingService {
   private apiUrl2:string;
   private apiUrl1:string;
   constructor(private httpClient:HttpClient) { 
-    this.apiUrl2="http://172.29.29.9:2122/api/Setting";
-    this.apiUrl1="http://172.29.29.9:2122/api/Logs";
+     this.apiUrl2="http://172.29.29.9:2122/api/Setting";
+     this.apiUrl1="http://172.29.29.9:2122/api/Logs";
+  
+    //this.apiUrl2="https://localhost:44329/api/Setting" ;
+    //this.apiUrl1="https://localhost:44329/api/Logs" ;
   }
 
 
@@ -38,12 +41,15 @@ export class SettingService {
     return this.httpClient.post<any>(`${this.apiUrl2}/AddCompanyName`,model);
   }
   
-  DeleteCompanyName(id:any):Observable<any>
+  // DeleteCompanyName(id:any):Observable<any>
+  // {
+  //  // console.log(id);
+  //   return this.httpClient.delete(`${this.apiUrl2}/DeleteCompanyName/`+id) ;
+  // }
+  DeleteCompanyName(model:any):Observable<any>
   {
-   // console.log(id);
-    return this.httpClient.delete(`${this.apiUrl2}/DeleteCompanyName/`+id) ;
+    return this.httpClient.post<any>(`${this.apiUrl2}/DeleteCompanyName/`,model) ;
   }
-
   CompanyNameIsalreadysign(name:string,id:number ):Observable<any>
   {
    return this.httpClient.get<any>(`${this.apiUrl2}/CompanyNameIsAlreadySigned/`+name+`/`+id);  
@@ -90,10 +96,14 @@ AddOrderStatus(model:any):Observable<any>
   {
     return this.httpClient.post<any>(`${this.apiUrl2}/AddOrderStatus`,model);
   }
-  DeleteOrderStatus(id:any):Observable<any>
+  // DeleteOrderStatus(id:any):Observable<any>
+  // {
+  //  // console.log(id);
+  //   return this.httpClient.delete(`${this.apiUrl2}/DeleteOrderStatus/`+id) ;
+  // }
+  DeleteOrderStatus(model:any):Observable<any>
   {
-   // console.log(id);
-    return this.httpClient.delete(`${this.apiUrl2}/DeleteOrderStatus/`+id) ;
+    return this.httpClient.post<any>(`${this.apiUrl2}/DeleteOrderStatus/`,model) ;
   }
   OrderStatusIsalreadysign(name:string,id:number ):Observable<any>
   {
@@ -125,9 +135,13 @@ getReceiptSttatus(PageNumber :number , PageSize :number , searchValue:string ,so
     })
   )
 }
-DeleteReceiptStatus(id:any):Observable<any>
+// DeleteReceiptStatus(id:any):Observable<any>
+// {
+//   return this.httpClient.delete(`${this.apiUrl2}/DeleteReceiptStatus/`+id) ;
+// }
+DeleteReceiptStatus(model:any):Observable<any>
 {
-  return this.httpClient.delete(`${this.apiUrl2}/DeleteReceiptStatus/`+id) ;
+  return this.httpClient.post<any>(`${this.apiUrl2}/DeleteReceiptStatus/`,model) ;
 }
 ReceiptStatusIsalreadysign(name:string,id:number ):Observable<any>
 {

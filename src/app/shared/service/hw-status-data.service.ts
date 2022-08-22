@@ -33,10 +33,21 @@ export class HwStatusDataService {
     return this.httpClient.post<any>(`${this.apiURL}/AddHardwareStatus`, model);
   }
     
-  DeleteHwStatus(id:any):Observable<any>
-  {
+  // DeleteHwStatus(id:any):Observable<any>
+  // {
+  //   var user=localStorage.getItem("usernam");
+  //     x:{id =id,user=user} 
+  //   //return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`+id`/`+user ) 
+  //   return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`,x) ;
+  // }
+
+  DeleteHwStatus(model:any): Observable<any> {
+  
+  
+    return this.httpClient.post<HardwareStatus>(`${this.apiURL}/DeleteHardwareStatus`, model
+    );
     
-    return this.httpClient.delete(`${this.apiURL}/DeleteHardwareStatus/`+id) ;
+   
   }
 
   getHwStatus(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
