@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule ,Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { LoadingPageComponent } from './shared/component/loading-page/loading-pa
 import { ErrorPageComponent } from './shared/component/error-page/error-page.component';
 import { DeleteMsgComponent } from './shared/component/delete-msg/delete-msg.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './shared/Module/layout/layout.module';
 import { MaterialModule } from './shared/Module/material/material.module';
@@ -33,7 +33,10 @@ import { BasicAuthInterceptorService } from './basic-auth-interceptor.service';
     MaterialModule,
     LoginModule
   ],
-  providers: [BasicAuthInterceptorService ],
+  // providers: [BasicAuthInterceptorService ],
+  providers: [
+    Title, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

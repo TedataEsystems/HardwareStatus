@@ -14,7 +14,7 @@ export class BasicAuthInterceptorService implements HttpInterceptor {
     let authReq = request;
     const token = localStorage.getItem("tokNum");
 
-
+    
     if (token != null && token != undefined && token != '') {
       authReq = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
     }
