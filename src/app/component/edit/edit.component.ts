@@ -64,10 +64,55 @@ export class EditComponent implements OnInit {
     {
     this.companyNameList=res.companyName;
     this.orderStateList=res.orderStatus;
-    this.receiptStateList=res.receiptStatus
+    this.receiptStateList=res.receiptStatus;
+    if(this.data)
+    {
+      //set list in update
+      var companyCount=0;
+      var orderCount=0;
+      var receiptCount=0;
+      for(var companyName of this.companyNameList )
+      {
+        if(this.data.companyNameId==companyName.id)
+        { 
+          companyCount ++;
+          this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
+          break;
+        }
+      }
+      if(companyCount==0)
+      {
+        this.service.form.controls['companyNameId'].setValue(null);
+      }
+      for(var receipt of this.receiptStateList )
+      {
+        if(this.data.receiptStatusId==receipt.id)
+        { 
+          receiptCount ++;
+          this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
+          break;
+        }
+      }
+      if(receiptCount==0)
+      {
+        this.service.form.controls['receiptStatusId'].setValue(null);
+      }
+      for(var order of this.orderStateList )
+      {
+        if(this.data.orderStatusId==order.id)
+        { 
+          companyCount ++;
+          this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
+          break;
+        }
+      }
+      if(orderCount==0)
+      {
+        this.service.form.controls['orderStatusId'].setValue(null);
+      }
+    }
     }
     else{this.notificationService.warn(':: error')}
-   // console.log(res)
 
 
 
@@ -75,6 +120,7 @@ export class EditComponent implements OnInit {
 
    if(this.data)
    {
+    
     //console.log("condition entered")
     this.service.form.controls['id'].setValue(this.data.id);
     this.service.form.controls['central'].setValue(this.data.central);
@@ -88,15 +134,15 @@ export class EditComponent implements OnInit {
     this.service.form.controls['exitDate'].setValue(this.data.exitDate);
     this.service.form.controls['orderNumber'].setValue(this.data.orderNumber);
     this.service.form.controls['deviceType'].setValue(this.data.deviceType);
-    this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
-    this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
-    this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
+   //this.service.form.controls['companyNameId'].setValue(this.data.companyNameId);
+   // this.service.form.controls['receiptStatusId'].setValue(this.data.receiptStatusId);
+   // this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
     this.service.form.controls['createdBy'].setValue(this.data.createdBy);
     this.service.form.controls['creationDate'].setValue(this.data.creationDate);
    
 
    }
-
+   
 
 
 
@@ -118,7 +164,7 @@ export class EditComponent implements OnInit {
     }
 
 
-let HwStatus=  {
+  let HwStatus=  {
   central:this.service.form.value.central ,
   clientName:this.service.form.value.clientName,
   orderNumber:this.service.form.value.orderNumber,
