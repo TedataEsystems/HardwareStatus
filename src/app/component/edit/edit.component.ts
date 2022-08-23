@@ -65,6 +65,7 @@ export class EditComponent implements OnInit {
     this.companyNameList=res.companyName;
     this.orderStateList=res.orderStatus;
     this.receiptStateList=res.receiptStatus;
+    console.log(this.orderStateList)
     if(this.data)
     {
       //set list in update
@@ -99,9 +100,11 @@ export class EditComponent implements OnInit {
       }
       for(var order of this.orderStateList )
       {
+        debugger;
         if(this.data.orderStatusId==order.id)
         { 
-          companyCount ++;
+          orderCount ++;
+          console.log("orderStatusId",this.data.orderStatusId);
           this.service.form.controls['orderStatusId'].setValue(this.data.orderStatusId);
           break;
         }
