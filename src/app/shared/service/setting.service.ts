@@ -12,8 +12,10 @@ export class SettingService {
   constructor(private httpClient:HttpClient) { 
     // this.apiUrl2="http://172.29.29.9:2122/api/Setting";
     // this.apiUrl1="http://172.29.29.9:2122/api/Logs";
-    this.apiUrl2="http://172.29.29.9:2122/api/Setting";
-    this.apiUrl1="http://172.29.29.9:2122/api/Logs";
+    this.apiUrl2="https://localhost:44329/api/Setting";
+    //"http://172.29.29.9:2122/api/Setting";
+    this.apiUrl1="https://localhost:44329/api/Logs";
+        //"http://172.29.29.9:2122/api/Logs";
   }
 
 
