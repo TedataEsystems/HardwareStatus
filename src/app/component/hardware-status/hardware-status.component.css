@@ -77,7 +77,7 @@ span.input-group-btn {
   border: 0;
 }
 .mat-menu-item{
-    padding: 0 5px !important;
+    padding: 0 10px 0 30px !important;
 }
 li{
     border-bottom: 1px solid #eee;
@@ -100,14 +100,15 @@ li:last-of-type{
     
   }
   #upload{
-    background-color: transparent;
-    border: 1px dashed #252131;
+    background-color: var(--main-color);
+    /* border: 2px dashed #fff; */
     position: static;
-    margin: 20px auto 10px auto;
-    width: 140px;
-    color: #252131;
+    margin: 70px auto 10px auto;
+    width: 190px;
+    color: #fff;
     font-size: 20px;
     font-weight: 700;
+    box-shadow: 1px 4px 5px #b3b3b3;
   
   }
   .mat-button{
@@ -118,12 +119,12 @@ li:last-of-type{
   
 .btn-color{
     color: #fff;
-    background-color: #3a5a81;
+    background-color: var(--forth-color);
     width: 120px;
     text-align: center;
    }
    .field{
-     padding: 10px 15px;
+     /* padding: 10px 15px; */
   
    }
    .data{
@@ -251,6 +252,7 @@ mat-cell:nth-child(1), mat-header-cell:nth-child(1){
  }
  .txt{
   text-shadow: 2px 2px 4px #82919b;
+  color:var(--main-color)
  }
  .ico{
   box-shadow: 2px 2px 4px #82919b;
