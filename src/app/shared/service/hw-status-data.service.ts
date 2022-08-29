@@ -83,7 +83,10 @@ export class HwStatusDataService {
   return this.httpClient.post<any>(this.apiURL + '/importExcelFile' , file , {headers : this.headers});
 }
 
-
+ExportEmptyExcel():Observable<Blob>{
+  return this.httpClient.get(this.apiURL + '/ExportEmptyExcel',{responseType: 'blob',headers: this.headers});
+  
+}
 
 
 

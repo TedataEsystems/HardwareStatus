@@ -68,14 +68,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   setTimeout(()=> this.loader = false,2000) ;
 }
 
- 
-  
- 
-  // @ViewChild(MatSort) sort?:MatSort ;
-  // @ViewChild(MatPaginator) paginator?:MatPaginator ;
 
- 
- 
+
 
   ngOnInit(){
     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
@@ -311,10 +305,16 @@ closeMsg() {
   this._bottomSheet.dismiss();
 }
 openBottomSheet() {
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
   this._bottomSheet.open(this.template, {
     panelClass: 'botttom-dialog-container',
     disableClose: true
   });
+}
 }
 
 openBottomSheetMsg() {
@@ -351,5 +351,21 @@ upLoadF() {
 
 }
 
+ExportTOEmptyExcel()
+{
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+  {
+    this.router.navigateByUrl('/login');
+  }
+  else{
+  this.hwstatus.ExportEmptyExcel().subscribe(res => {
+    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+    const file = new File([blob], 'HardwareStatus' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
+    saveAs(file, 'HardwareStatus' + Date.now() + '.xlsx')
 
+  }, err => {
+    this.note.warn("! Fail")
+  });
+}
+}
 }

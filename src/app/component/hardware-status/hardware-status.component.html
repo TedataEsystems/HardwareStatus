@@ -13,8 +13,19 @@
             <span class="txt">استخراج تقرير</span>
            
         </button>
+
+        <button mat-button class="opt"  (click)="ExportTOEmptyExcel()">
+            <mat-icon class="txt">file_download</mat-icon>
+            <span class="txt">استخراج تقرير فارغ</span>
+           
+        </button>
+
+        <button mat-button class="opt"  (click)=" openBottomSheet()">
+            <!-- <mat-icon class="txt">file_download</mat-icon> -->
+            <span class="txt">اضافه تقرير</span>
+           
+        </button>
         
-        <span class="option" (click)=" openBottomSheet()">Import Excel</span>
     </mat-card-header>
     <mat-divider></mat-divider>
 <div class="search-div" fxLayout="row">
