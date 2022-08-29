@@ -13,7 +13,8 @@
             <span class="txt">استخراج تقرير</span>
            
         </button>
-       
+        
+        <span class="option" (click)=" openBottomSheet()">Import Excel</span>
     </mat-card-header>
     <mat-divider></mat-divider>
 <div class="search-div" fxLayout="row">
@@ -155,4 +156,53 @@
 <mat-paginator [pageSizeOptions]="[10,25, 50, 100]"   [pageSize]="10"   showFirstLastButtons></mat-paginator>
 
 </mat-card>
+
+
+<div class="search-div" fxLayout="row">
+
+    <ng-template #LIST>
+      <mat-toolbar>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="close()">
+          <mat-icon class="x">close</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-form-field class="sheet">
+        <div class="field">
+          <mat-toolbar>
+
+            <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+
+
+            <button mat-flat-button class="btn-color">
+              Browse file
+            </button>
+          </mat-toolbar>
+
+          <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvtF($event)" name="uploadFile"
+            multiple="multiple" />
+        </div>
+      </mat-form-field>
+
+      <button mat-flat-button (click)="upLoadF()" id="upload" class="d-block">
+        <mat-icon>cloud_upload</mat-icon> Upload
+      </button>
+    </ng-template>
+
+    <ng-template #Msg>
+      <mat-toolbar>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="closeMsg()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="sheet">
+        <div class="data" [innerHtml]="htmlToAdd">
+
+        </div>
+      </div>
+    </ng-template>
+
+   
+  </div>
+
+
 

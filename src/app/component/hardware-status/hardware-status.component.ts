@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -36,7 +36,7 @@ export class HardwareStatusComponent implements OnInit {
   dataSource = new MatTableDataSource();
   columnsToDisplay: string[] = this.displayedColumns.slice();
   constructor( private dailogService:DeleteService,private titleService:Title, private note:NotificationService,private deleteService:DeleteService,private dialog: MatDialog, private route: ActivatedRoute,
-    private router: Router, private hwstatus: HwStatusDataService, private config: ConfigureService, )
+    private router: Router, private hwstatus: HwStatusDataService, private config: ConfigureService, private _bottomSheet: MatBottomSheet )
   
   {
     this.titleService.setTitle("Hardware Status"); 
@@ -243,6 +243,19 @@ sortData(sort: any) {
   this.getRequestdata(1, 100, '', sort.active, this.lastdir);
 }
 }
+
+ //////////////import file
+ @Input() param = 'file';
+ @ViewChild('LIST') template!: TemplateRef<any>;
+ @ViewChild('LISTF') templateF!: TemplateRef<any>;
+ @ViewChild('fileInput') fileInput?: ElementRef;
+ @ViewChild('Msg') Msg!: TemplateRef<any>;
+ @ViewChild('data') data?: ElementRef;
+ fileAttr = 'Choose File';
+ fileAttrF = 'Choose File';
+ htmlToAdd: string = "";
+ fileuploaded: any;
+
 exportExcel() {
   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
   {
@@ -262,6 +275,80 @@ exportExcel() {
 
   });
   }
+}
+close() {
+  this.resetfile();
+  this._bottomSheet.dismiss();
+}
+resetfile() {
+  this.fileAttr = 'Choose File';
+}
+uploadFileEvtF(imgFile: any) {
+  console.log("img",imgFile.target.files[0])
+  this.fileuploaded = imgFile.target.files[0];
+  if (imgFile.target.files && imgFile.target.files[0]) {
+    this.fileAttr = '';
+    Array.prototype.forEach.call(imgFile.target.files, (file) => {
+      this.fileAttr += file.name + ' - ';
+    });
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      let image = new Image();
+      image.src = e.target.result;
+      image.onload = rs => {
+        let imgBase64Path = e.target.result;
+      };
+    };
+    reader.readAsDataURL(imgFile.target.files[0]);
+
+    // Reset if duplicate image uploaded again
+    (this.fileInput as ElementRef).nativeElement.value = "";
+  } else {
+    this.fileAttr = 'Choose File';
+  }
+}
+closeMsg() {
+  this._bottomSheet.dismiss();
+}
+openBottomSheet() {
+  this._bottomSheet.open(this.template, {
+    panelClass: 'botttom-dialog-container',
+    disableClose: true
+  });
+}
+
+openBottomSheetMsg() {
+  this._bottomSheet.open(this.Msg, {
+    panelClass: 'msg-dialog-container',
+    disableClose: true
+  });
+}
+upLoadF() {
+  console.log("uploadF","param:",this.param,"fileUploaded:", this.fileuploaded)
+  const fd = new FormData();
+  fd.append(this.param, this.fileuploaded);
+  console.log("data to api",fd)
+  this.hwstatus.importExcelFile(fd).subscribe(res => {
+    if (res.status == true) {
+      this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      this.fileAttr = 'Choose File';
+      this.resetfile();
+      this._bottomSheet.dismiss();
+      this.openBottomSheetMsg();
+      this.htmlToAdd = res.data
+    }
+    else {
+      this.openBottomSheetMsg();
+      this.htmlToAdd = res.error;
+    }
+  }
+    , error => {
+      this.note.warn("!! Fail")
+      this.resetfile();
+    }
+  );
+
+
 }
 
 

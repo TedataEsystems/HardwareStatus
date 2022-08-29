@@ -13,7 +13,9 @@ export class HwStatusDataService {
   private apiURL: string;
 
 
-  private headers = new HttpHeaders();
+  private headers = new HttpHeaders({  'Accept': 'application/json',
+  'zumo-api-version': '2.0.0',});
+
   constructor(private httpClient: HttpClient,
     private config: ConfigureService) {
     this.apiURL = this.config.ApiUrl() + "HardwareStatus";
@@ -23,10 +25,11 @@ export class HwStatusDataService {
 
 
 
-  public getAllHwStatusDataEXel(search: any, rId: any = 0, pool: any = 0): Observable<Blob> {
-    return this.httpClient.get(`${this.apiURL}/ExpotExcel?search=${search}&reqId=${rId}&poolId=${pool}`,
-      { responseType: 'blob', headers: this.headers });
-  }
+
+  // public getAllHwStatusDataEXel(search: any, rId: any = 0, pool: any = 0): Observable<Blob> {
+  //   return this.httpClient.get(`${this.apiURL}/ExpotExcel?search=${search}&reqId=${rId}&poolId=${pool}`,
+  //     { responseType: 'blob', headers: this.headers });
+  // }
 
 
   AddHardwareStatus(model: any): Observable<any> {
@@ -73,6 +76,12 @@ export class HwStatusDataService {
   DownloadAllDisplayDataOfExcel():Observable<Blob>{
     return this.httpClient.get(`${this.apiURL}/ExportExcel`,{responseType: 'blob',headers: this.headers}); 
   }
+
+  public importExcelFile(file : any)
+{
+  console.log("importservice",file)
+  return this.httpClient.post<any>(this.apiURL + '/importExcelFile' , file , {headers : this.headers});
+}
 
 
 
