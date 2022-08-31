@@ -339,6 +339,9 @@ upLoadF() {
     }
     else {
       this.openBottomSheetMsg();
+      this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      this.fileAttr = 'Choose File';
+      this.resetfile();
       this.htmlToAdd = res.error;
     }
   }
