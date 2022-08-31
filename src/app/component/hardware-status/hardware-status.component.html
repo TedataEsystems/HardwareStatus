@@ -11,26 +11,26 @@
         <!-- ----------------------------------------- -->
         <button mat-button class="opt " [matMenuTriggerFor]="menu" aria-label="">
             <mat-icon  class="txt" >insert_drive_file</mat-icon>
-            <span class="txt mr-1">حول التقارير</span>
+            <span class="txt mr-1">حول ملف الاكسل</span>
           </button>
           <mat-menu #menu="matMenu" >
             
             <button mat-menu-item class="text-right"  (click)="exportExcel()">
                
-                <span class=" mr-1">استخراج تقرير</span>
+                <span class=" mr-1">اصدار ملف اكسل </span>
                 <mat-icon class="txt">file_download</mat-icon>
                
             </button>
     
             <button mat-menu-item class="text-right"  (click)="ExportTOEmptyExcel()">
               
-                <span class=" mr-1">استخراج تقرير فارغ</span>
+                <span class=" mr-1">اصدار ملف اكسل فارغ</span>
                 <mat-icon class="txt">file_download</mat-icon>
                
             </button>
             <button mat-menu-item class="text-right"   (click)=" openBottomSheet()">
                
-                <span class=" mr-1">اضافه تقرير</span>
+                <span class=" mr-1">اضافه ملف اكسل</span>
                 <mat-icon class="txt" >add</mat-icon>
                
             </button>
