@@ -128,11 +128,15 @@ li:last-of-type{
   
    }
    .data{
-    border: 1px dashed #3a5a81;
-    padding: 10px 15px;
-    font-size: 13px;
-    margin: 0 20px;
+    margin: 0px 20px 20px 20px;
     font-family: 'ZCOOL XiaoWei', serif;
+    text-align: end;
+  
+    line-height: 1.7;
+    font-weight: 600;
+    border: 2px dashed #3a5a81;
+    padding: 10px 15px;
+    font-size: 15px;
    }
    .sheet{
      width: 100% !important;

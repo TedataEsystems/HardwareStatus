@@ -600,6 +600,19 @@ background: var(--forth-color);
   border-bottom: 6px solid var(--main-color);
   background-color: var(--body-color);
 }
+.mat-bottom-sheet-container {
+  padding: 8px 16px;
+  min-width: 100vw;
+  box-sizing: border-box;
+  display: block;
+  outline: 0;
+  max-height: 80vh;
+  overflow: auto;
+  top: 27%;
+  position: absolute;
+  left: 30%;
+  border-radius: 4px;
+}
 
 
 
