@@ -3,7 +3,7 @@
 }
 .hi{
   background-color: #9ead9a;
- 
+
 }
 .generate{
   position: absolute;
@@ -13,7 +13,7 @@
     text-shadow: 3px 3px 5px #40403e;
   } */
   .mat-icon.beig{
-    text-shadow: 0px 0px 0px transparent; 
+    text-shadow: 0px 0px 0px transparent;
   }
   .cdk-overlay-connected-position-bounding-box {
     position: absolute;
@@ -27,7 +27,7 @@
 .separator{
   color: #f4f3f3;
   font-size: 17px;
- 
+
 }
 .option{
   font-size: 12px;
@@ -36,7 +36,7 @@
 .option:hover{
   cursor: pointer;
   color: var(--seconed-color)
-  
+
 }
 .input-group{
   height: 35px;
@@ -91,13 +91,13 @@ li:last-of-type{
 #uploadFile {
     top: 0px;
     left: 0px;
-    width: 100%;    
+    width: 100%;
     z-index: 9;
     opacity: 0;
     height: 100%;
     cursor: pointer;
     position: absolute;
-    
+
   }
   #upload{
     background-color: var(--main-color);
@@ -109,29 +109,31 @@ li:last-of-type{
     font-size: 20px;
     font-weight: 700;
     box-shadow: 1px 4px 5px #b3b3b3;
-  
+
   }
   .mat-button{
     min-width: inherit !important;
 }
 
 
-  
+
 .btn-color{
     color: #fff;
     background-color: var(--forth-color);
     width: 120px;
     text-align: center;
    }
-   .field{
-     /* padding: 10px 15px; */
-  
+   .remIcon{
+    color: #fff;
+    background: red;
    }
+
+
    .data{
     margin: 0px 20px 20px 20px;
     font-family: 'ZCOOL XiaoWei', serif;
     text-align: end;
-  
+
     line-height: 1.7;
     font-weight: 600;
     border: 2px dashed #3a5a81;
@@ -141,7 +143,7 @@ li:last-of-type{
    .sheet{
      width: 100% !important;
    }
-  
+
   .mat-toolbar-row, .mat-toolbar-single-row {
     height: 40px !important;
 }
@@ -161,7 +163,7 @@ li:last-of-type{
     box-shadow: inset 3px 0px 5px var(--third-color),inset -3px 0px 5px var(--third-color);
 
 }
-/* 
+/*
 .student-element-row:not(.student-expanded-row):hover {
   background: whitesmoke;
 }
@@ -214,7 +216,7 @@ li:last-of-type{
   left: 10px; */
   color:#fff;
   /* width: 45px;*/
-  height: 30px; 
+  height: 30px;
   cursor: pointer;
   border: 0 !important;
   border-radius: 0;
@@ -236,7 +238,7 @@ mat-cell, mat-header-cell,mat-header-cell{
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-  
+
  }
 
 mat-cell:nth-child(1), mat-header-cell:nth-child(1){
@@ -252,7 +254,7 @@ mat-cell:nth-child(1), mat-header-cell:nth-child(1){
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-  
+
  }
  .txt{
   text-shadow: 2px 2px 4px #82919b;
