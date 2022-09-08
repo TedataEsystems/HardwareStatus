@@ -46,7 +46,7 @@
     </mat-card-header>
     <mat-divider></mat-divider>
 <div class="search-div" fxLayout="row">
-    
+ <button class="example-margin" (click)="deleteGroup()">حذف محموعه</button>
     <mat-form-field class="search-form-field" floatLabel="never">
         <input matInput [(ngModel)]="searchKey" placeholder="بحث" autocomplete="off" (keyup)="applyFilter()"> 
        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
@@ -64,12 +64,25 @@
 
 <mat-table [dataSource]="dataSource" multiTemplateDataRows   matSort (matSortChange)="sortData($event)" matSortActive="name"matSortDirection="asc" matSortDisableClear >
  
-    
+    <ng-container matColumnDef="all">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="onselectcheckall($event)">All</mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" data-label="All" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-checkbox [checked]="isall" (change)="onselectcheck($event,row)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
    
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> رقم</mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="رقم"> {{element.id}} </mat-cell>
     </ng-container>
+
+    
+
+
+
     <ng-container matColumnDef="clientName">
         <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> اسم العميل  </mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="اسم العميل"> {{element.clientName}} </mat-cell>

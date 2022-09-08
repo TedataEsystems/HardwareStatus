@@ -32,7 +32,7 @@ export class HardwareStatusComponent implements OnInit {
  
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updatedBy','action'];
+  displayedColumns: string[] = ['all','id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updatedBy','action'];
   dataSource = new MatTableDataSource();
   columnsToDisplay: string[] = this.displayedColumns.slice();
   constructor( private dailogService:DeleteService,private titleService:Title, private note:NotificationService,private deleteService:DeleteService,private dialog: MatDialog, private route: ActivatedRoute,
@@ -256,6 +256,21 @@ exportExcel() {
     this.router.navigateByUrl('/login');
   }
   else{
+    if(this.isall==true){
+      alert("all");
+      this.hwstatus.ExportSelectedDataOfExcel(this.hwList.map(({ id }) => id)).subscribe(res => {
+        console.log(this.hwList.map(({ id }) => id));
+        const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+        const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
+
+      },
+        err => {
+          this.note.warn("! Fail")
+        });
+    }
+    else if (this.isall==false && this.selectedRows==false){
+      alert("daiplayall");
   this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
     const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -268,6 +283,24 @@ exportExcel() {
     this.note.warn("! Fail")
 
   });
+
+}
+else if(this.selectedRows==true)
+{
+  alert("selectedrow"+this.selectedRows);
+  this.hwstatus.ExportSelectedDataOfExcel(this.Ids).subscribe(res => {
+    console.log(this.hwList.map(({ id }) => id));
+    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+    const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
+    saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
+
+  },
+    err => {
+      this.note.warn("! Fail")
+    });
+}
+
+
   }
 }
 close() {
@@ -330,6 +363,7 @@ upLoadF() {
   console.log("data to api",fd)
   this.hwstatus.importExcelFile(fd).subscribe(res => {
     if (res.status == true) {
+      console.log(res);
       this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
       this.fileAttr = 'Choose File';
       this.resetfile();
@@ -371,4 +405,58 @@ ExportTOEmptyExcel()
   });
 }
 }
+
+Ids: number[] = [];
+// select all
+isall: boolean = false;
+selectedRows: boolean = false;
+onselectcheckall(event: any) {
+  if (event.checked) {
+
+    this.isall = true;
+  }
+  else {
+    this.isall = false;
+
+  }
+}
+onselectcheck(event: any,row:any)
+{
+if(event.checked)
+{
+ this.selectedRows=true;
+  this.Ids.push(row.id);
+  console.log(this.Ids);
+}
+
+}
+deleteGroup()
+{
+  if(this.selectedRows==true)
+  {
+    this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(  res => {
+      if(res.status==true){
+      console.log("ge"+this.Ids);
+      this.note.success(' تم الحذف بنجاح');
+     this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
+     else
+     {
+     this.note.warn(':: An Error Occured') 
+     }
+    },
+    error => { this.note.warn(':: An Error Occured') }
+  );
+  }
+  else{
+    this.note.warn(" يجب ان تختار صفوف اولا");
+  }
+//
+}
+
+
+
+
+
+
+
 }

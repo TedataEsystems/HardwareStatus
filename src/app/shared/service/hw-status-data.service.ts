@@ -79,7 +79,6 @@ export class HwStatusDataService {
 
   public importExcelFile(file : any)
 {
-  console.log("importservice",file)
   return this.httpClient.post<any>(this.apiURL + '/importExcelFile' , file , {headers : this.headers});
 }
 
@@ -88,6 +87,14 @@ ExportEmptyExcel():Observable<Blob>{
   
 }
 
+ExportSelectedDataOfExcel(ids:number[]):Observable<Blob>{
+return this.httpClient.post(`${this.apiURL}/ExportSelectedDataOfExcel`,ids,{responseType: 'blob',headers: this.headers}); 
+}
+DeleteGroupHwStatus(ids:number[]):Observable<any>
+{
+  
+  return this.httpClient.post(`${this.apiURL}/DeleteGroupHardwareStatus`,ids );
+}
 
 
 }
