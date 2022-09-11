@@ -21,8 +21,8 @@ export class EditFormService {
     orderNumber: new FormControl(0,[Validators.required,Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
     technicianName: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
 
-    zoneNumber: new FormControl(0,[Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
-    number: new FormControl(0,[Validators.min(1),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    zoneNumber: new FormControl(0,[Validators.min(0),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
+    number: new FormControl(0,[Validators.min(0),Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
     deviceType: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
     serialNumber: new FormControl('',[Validators.required,Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
     notes: new FormControl('',[Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]),
