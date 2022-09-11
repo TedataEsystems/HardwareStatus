@@ -71,7 +71,7 @@
 
     <ng-container matColumnDef="all">
         <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="onselectcheckall($event)">All</mat-checkbox>
+          <mat-checkbox (change)="onselectcheckall($event)" [checked]="alll">All</mat-checkbox>
         </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="All" [ngClass]="{'highlight' : row.isToLate}">
           <mat-checkbox [checked]="isall" (change)="onselectcheck($event,row)"></mat-checkbox>
