@@ -89,7 +89,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     onSearchClear(){
       this.searchKey ='';
       this.changeSearckKey=true;
-    this.onselectcheckall(this.removeAll);
+      this.onselectcheckall(this.removeAll);
       this.applyFilter();
     }
     changeSearckKey:boolean=false;
@@ -418,10 +418,16 @@ onselectcheckall(event: any) {
     
     this.isall = true;
     this.alll=true;
+    this.selectedRows=true;
+    this.Ids=[];
+    var list=this.hwList.map(({ id }) =>this.Ids.push(id));
+    console.log("Ids",this.Ids);
+   
   }
 
   else {
-   // this.selectedRows=false;
+    this.Ids=[];
+    this.selectedRows=false;
     this.alll=false;
     this.isall = false;
   
@@ -430,7 +436,7 @@ onselectcheckall(event: any) {
 }
 onselectcheck(event: any,row:any)
 {
-  alert("kkk");
+ 
 if(event.checked)
 {
  this.selectedRows=true;
@@ -457,7 +463,9 @@ deleteGroup()
             this.note.success(' تم الحذف بنجاح');
            this.selectedRows=false;
            this.Ids=[];
-           this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
+           this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+           this.onSearchClear();
+          }
            else
            {
            this.note.warn(':: An Error Occured') 
