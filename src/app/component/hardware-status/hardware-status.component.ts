@@ -88,9 +88,11 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   removeAll:boolean=false;
     onSearchClear(){
       this.searchKey ='';
+      this.changeSearckKey=true;
     this.onselectcheckall(this.removeAll);
       this.applyFilter();
     }
+    changeSearckKey:boolean=false;
     applyFilter(){
       if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
       {
@@ -98,6 +100,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       }
       else{
      let searchData = this.searchKey.trim().toLowerCase();
+     this.changeSearckKey=true;
+     this.onselectcheckall(this.removeAll);
      this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
       }
     }
@@ -410,12 +414,14 @@ isall: boolean = false;
 selectedRows: boolean = false;
 alll:boolean=false;
 onselectcheckall(event: any) {
-  if (event.checked &&this.searchKey!='') {
+  if (event.checked &&this.changeSearckKey) {
+    
     this.isall = true;
     this.alll=true;
   }
 
   else {
+   // this.selectedRows=false;
     this.alll=false;
     this.isall = false;
   
@@ -424,6 +430,7 @@ onselectcheckall(event: any) {
 }
 onselectcheck(event: any,row:any)
 {
+  alert("kkk");
 if(event.checked)
 {
  this.selectedRows=true;
@@ -443,6 +450,7 @@ deleteGroup()
         {
           this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
             if (res) {
+
           this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(  res => {
             if(res.status==true){
               console.log(this.Ids);
