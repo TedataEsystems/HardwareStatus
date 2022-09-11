@@ -85,9 +85,10 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   
     this.dataSource.sort = this.sort as MatSort;
     this.dataSource.paginator = this.paginator as MatPaginator;}
-
+  removeAll:boolean=false;
     onSearchClear(){
       this.searchKey ='';
+    this.onselectcheckall(this.removeAll);
       this.applyFilter();
     }
     applyFilter(){
@@ -257,7 +258,6 @@ exportExcel() {
   }
   else{
     if(this.isall==true){
-      alert("all");
       this.hwstatus.ExportSelectedDataOfExcel(this.hwList.map(({ id }) => id)).subscribe(res => {
         console.log(this.hwList.map(({ id }) => id));
         const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -270,7 +270,6 @@ exportExcel() {
         });
     }
     else if (this.isall==false && this.selectedRows==false){
-      alert("daiplayall");
   this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
     const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -287,7 +286,6 @@ exportExcel() {
 }
 else if(this.selectedRows==true)
 {
-  alert("selectedrow"+this.selectedRows);
   this.hwstatus.ExportSelectedDataOfExcel(this.Ids).subscribe(res => {
     console.log(this.hwList.map(({ id }) => id));
     const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -410,13 +408,17 @@ Ids: number[] = [];
 // select all
 isall: boolean = false;
 selectedRows: boolean = false;
+alll:boolean=false;
 onselectcheckall(event: any) {
-  if (event.checked) {
-
+  if (event.checked &&this.searchKey!='') {
     this.isall = true;
+    this.alll=true;
   }
+
   else {
+    this.alll=false;
     this.isall = false;
+  
 
   }
 }
@@ -432,26 +434,43 @@ if(event.checked)
 }
 deleteGroup()
 {
-  if(this.selectedRows==true)
-  {
-    this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(  res => {
-      if(res.status==true){
-      console.log("ge"+this.Ids);
-      this.note.success(' تم الحذف بنجاح');
-     this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
-     else
-     {
-     this.note.warn(':: An Error Occured') 
-     }
-    },
-    error => { this.note.warn(':: An Error Occured') }
-  );
-  }
-  else{
-    this.note.warn(" يجب ان تختار صفوف اولا");
-  }
+  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
+      {
+        this.router.navigateByUrl('/login');
+      }
+      else{ 
+        if(this.selectedRows==true)
+        {
+          this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
+            if (res) {
+          this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(  res => {
+            if(res.status==true){
+              console.log(this.Ids);
+            this.note.success(' تم الحذف بنجاح');
+           this.selectedRows=false;
+           this.Ids=[];
+           this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
+           else
+           {
+           this.note.warn(':: An Error Occured') 
+           }
+         
+          // },
+          // error => { this.note.warn(':: An Error Occured') 
+        }
+        );
+          }
+          else
+          {
+
+          }});
+        }
+        else{
+          this.note.warn(" يجب ان تختار صفوف اولا");
+        }}
+ 
 //
-}
+}//deletegroup
 
 
 
