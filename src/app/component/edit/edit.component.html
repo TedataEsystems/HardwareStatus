@@ -84,7 +84,7 @@
           </mat-form-field>
           <mat-form-field>
 
-            <mat-select formControlName="orderStatusId" placeholder="*موقف الهاردوير(--اختار--)"  >
+            <mat-select formControlName="orderStatusId" placeholder="*حالة الهاردوير(--اختار--)"  >
               <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
                 {{orderStatus.name}}
