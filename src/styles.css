@@ -763,6 +763,10 @@ a,span,input,h2,.mat-raised-button,.mat-menu-panel,.mat-list-item,.mat-menu-item
     font-weight: 600;
 
 }
+.mat-checkbox-inner-container{
+  margin-left: 8px !important;
+  margin-right: initial !important;
+}
 
 .mat-form-field-appearance-fill .mat-form-field-label{
   /* color: rgb(196 196 162); */
