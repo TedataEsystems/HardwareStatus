@@ -758,8 +758,8 @@ a,span,input,h2,.mat-raised-button,.mat-menu-panel,.mat-list-item,.mat-menu-item
   color: var(--seconed-color) !important;
 }
 .mat-expansion-panel-header-title,.mat-expansion-indicator::after{
-  color: #012535 !important;
-    font-size: 14px;
+  color: var(--main-color) !important;
+    font-size: 18px;
     font-weight: 600;
 
 }

@@ -12,7 +12,7 @@ import { LayoutComponent } from './shared/component/layout/layout.component';
 import { LoginComponent } from './shared/component/login/login.component';
 
 const routes: Routes = [
- 
+
   {
     path:'login',component:LoginComponent,
  },
@@ -26,46 +26,46 @@ const routes: Routes = [
       {
       path:'',
       component: DashboardComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
     },
     {
       path:'hwStatus',
       component: HardwareStatusComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
 
     },
     {
       path:'company',
       component: CompanyNameComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
     },
     {
       path:'order',
       component: OrderStateComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
     },
     {
       path:'receipt',
       component: ReceiptStateComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
 
     },
-   
+
     {
       path:'history',
       component: HistoryComponent,
-      canActivate: [AuthGuard] 
+      canActivate: [AuthGuard]
 
     },
     {
       path:'**',
      pathMatch: 'full',
     component:ErrorPageComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
     },
-    
+
   ]
-  
+
 },
 
 ];

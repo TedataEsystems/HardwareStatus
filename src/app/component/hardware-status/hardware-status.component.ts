@@ -23,13 +23,14 @@ import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 
 export class HardwareStatusComponent implements OnInit {
   hwList:HardwareStatus[]=[];
+  panelOpenState = false;
   isNotAdmin= false ;
   loader: boolean = false;
   valdata="";valuid=0;
   searchKey:string ='';
   listName:string ='';
   loading: boolean = true;
- 
+
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['all','id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updatedBy','action'];
@@ -37,15 +38,15 @@ export class HardwareStatusComponent implements OnInit {
   columnsToDisplay: string[] = this.displayedColumns.slice();
   constructor( private dailogService:DeleteService,private titleService:Title, private note:NotificationService,private deleteService:DeleteService,private dialog: MatDialog, private route: ActivatedRoute,
     private router: Router, private hwstatus: HwStatusDataService, private config: ConfigureService, private _bottomSheet: MatBottomSheet )
-  
+
   {
-    this.titleService.setTitle("Hardware Status"); 
+    this.titleService.setTitle("Hardware Status");
     //this.config.IsAuthentecated();
     var teamval=  localStorage.getItem("userGroup");
-    
+
     if(teamval?.toLocaleLowerCase() != 'admin'){
       this.isNotAdmin=true;  }
-    
+
   }
   pageNumber = 1;
   pageSize =100;
@@ -60,7 +61,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     this.hwList = response?.data;
     this.hwList.length = response?.pagination.totalCount;
     //console.log("fromreqquest",this.hwList)
-   
+
     this.dataSource = new MatTableDataSource<any>(this.hwList);
     this.dataSource._updateChangeSubscription();
     this.dataSource.paginator = this.paginator as MatPaginator;
@@ -81,8 +82,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     }
   }
 
-  ngAfterViewInit() { 
-  
+  ngAfterViewInit() {
+
     this.dataSource.sort = this.sort as MatSort;
     this.dataSource.paginator = this.paginator as MatPaginator;}
 
@@ -117,7 +118,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
       });
     }
-    
+
     }
 
     onEdit(row:any){
@@ -136,7 +137,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
        this.dialog.open(EditComponent,{disableClose:true,autoFocus:true, width:"50%",data:row}).afterClosed().subscribe(result => {
         this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef)});
 
-      
+
        }
     }
 
@@ -173,7 +174,7 @@ pageIn = 0;
 previousSizedef = 100;
 pagesizedef: number = 100;
 public pIn: number = 0;
-pageChanged(event: any) {  
+pageChanged(event: any) {
   if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
 {
   this.router.navigateByUrl('/login');
@@ -197,7 +198,7 @@ getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: s
     else{
     this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
       if (res.status == true) {
-       
+
         this.hwList.length = cursize;
         this.hwList.push(...res?.data);
         this.hwList.length = res?.pagination.totalCount;
@@ -441,7 +442,7 @@ deleteGroup()
      this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
      else
      {
-     this.note.warn(':: An Error Occured') 
+     this.note.warn(':: An Error Occured')
      }
     },
     error => { this.note.warn(':: An Error Occured') }
