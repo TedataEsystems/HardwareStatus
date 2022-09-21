@@ -31,12 +31,12 @@
             <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="zoneNumber" type="number" min="0"  matInput placeholder=" رقم الدائرة*">
-            <mat-error>مطلوب</mat-error> 
+            <input formControlName="zoneNumber" type="number" min="0"  matInput placeholder=" رقم الدائرة">
+            <mat-error>يجب ان يكون 0 او اكبر</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="number" type="number" min="0" matInput placeholder="العدد*">
-            <mat-error>مطلوب</mat-error> 
+            <input formControlName="number" type="number" min="0" matInput placeholder="العدد">
+            <mat-error>يجب ان يكون 0 او اكبر</mat-error> 
           </mat-form-field>
           <mat-form-field>
             <input formControlName="deviceType" matInput placeholder="نوع الجهاز*">
@@ -51,8 +51,8 @@
             <mat-error>مطلوب</mat-error> 
           </mat-form-field>
           <mat-form-field>
-            <input formControlName="notes" matInput placeholder="ملاحظات*">
-            <mat-error>مطلوب</mat-error> 
+            <input formControlName="notes" matInput placeholder="ملاحظات">
+            <!-- <mat-error>مطلوب</mat-error>  -->
           </mat-form-field>
           <mat-form-field>
             <input formControlName="exitDate" matInput [matDatepicker]="picker" placeholder="تاريخ الخروج *">
@@ -84,7 +84,7 @@
           </mat-form-field>
           <mat-form-field>
 
-            <mat-select formControlName="orderStatusId" placeholder="*موقف الهاردوير(--اختار--)"  >
+            <mat-select formControlName="orderStatusId" placeholder="*حالة الهاردوير(--اختار--)"  >
               <mat-option>-- Please select --</mat-option>
               <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
                 {{orderStatus.name}}

@@ -161,7 +161,7 @@
 
     <ng-container matColumnDef="all">
         <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="onselectcheckall($event)">All</mat-checkbox>
+          <mat-checkbox (change)="onselectcheckall($event)" [checked]="alll">All</mat-checkbox>
         </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="All" [ngClass]="{'highlight' : row.isToLate}">
           <mat-checkbox [checked]="isall" (change)="onselectcheck($event,row)"></mat-checkbox>
@@ -226,8 +226,8 @@
         <mat-cell *matCellDef="let element" data-label="موقف ايصال الاستلام"> {{element._ReceiptStatusName}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="_OrderStatusName">
-        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> موقف الهاردوير </mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="موقف الهاردوير"> {{element._OrderStatusName}} </mat-cell>
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> حالة الهاردوير </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="حالة الهاردوير"> {{element._OrderStatusName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="_CompanyName">

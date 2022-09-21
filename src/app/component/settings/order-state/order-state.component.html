@@ -1,7 +1,7 @@
 <mat-card class="example-card">
   <mat-card-header>
       <mat-card-title>
-       موقف الهاردوير
+       حالة الهاردوير
       </mat-card-title>
       <button mat-button class="opt" (click)=toggleDisplay()>
         <mat-icon class="add-new ico">add</mat-icon>
@@ -16,7 +16,7 @@
     <form *ngIf="isShowDiv"  [formGroup]="form" (ngSubmit)="onCreateUpdate()" class="example-form"> 
         
           <mat-form-field class="example-full-width">
-            <mat-label>موقف الهاردوير</mat-label>
+            <mat-label>حالة الهاردوير</mat-label>
             <input type="text"  id="picvalid" matInput formControlName="name" [value]="valdata" (keyup)="onChecknameIsalreadysign()" >
             <input type="hidden" id="picid" formControlName="id"  [value]="valuid"  placeholder="">
             <span class="mat-error" *ngIf="isNameRepeated">الاسم مسجل مسبقاً</span>
@@ -55,8 +55,8 @@
 
  
   <ng-container matColumnDef="name">
-    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>موقف الهاردوير</mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="موقف الهاردوير">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>حالة الهاردوير</mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="حالة الهاردوير">
       <ng-container *ngIf="!editdisabled || element.id!=editUsr">
         {{element.name}} 
        </ng-container>

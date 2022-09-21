@@ -10,7 +10,7 @@ import { DeleteService } from 'src/app/shared/service/delete.service';
 import { HwStatusDataService } from 'src/app/shared/service/hw-status-data.service';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 import { EditComponent } from '../edit/edit.component';
-import{saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 import { ConfigureService } from 'src/app/shared/service/configure.service';
 import { HardwareStatus } from 'src/app/Model/hardware-status.model';
 
@@ -26,433 +26,487 @@ export class HardwareStatusComponent implements OnInit {
   panelOpenState = false;
   isNotAdmin= false ;
   loader: boolean = false;
-  valdata="";valuid=0;
-  searchKey:string ='';
-  listName:string ='';
+  valdata = ""; valuid = 0;
+  searchKey: string = '';
+  listName: string = '';
   loading: boolean = true;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
-  displayedColumns: string[] = ['all','id', 'clientName', 'central', 'orderNumber','technicianName','zoneNumber','deviceType','serialNumber','number','notes','exitDate','_ReceiptStatusName','_OrderStatusName','_CompanyName','creationDate','createdBy','updateDate','updatedBy','action'];
+  displayedColumns: string[] = ['all', 'id', 'clientName', 'central', 'orderNumber', 'technicianName', 'zoneNumber', 'deviceType', 'serialNumber', 'number', 'notes', 'exitDate', '_ReceiptStatusName', '_OrderStatusName', '_CompanyName', 'creationDate', 'createdBy', 'updateDate', 'updatedBy', 'action'];
   dataSource = new MatTableDataSource();
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  constructor( private dailogService:DeleteService,private titleService:Title, private note:NotificationService,private deleteService:DeleteService,private dialog: MatDialog, private route: ActivatedRoute,
-    private router: Router, private hwstatus: HwStatusDataService, private config: ConfigureService, private _bottomSheet: MatBottomSheet )
-
-  {
+  constructor(private dailogService: DeleteService, private titleService: Title, private note: NotificationService, private deleteService: DeleteService, private dialog: MatDialog, private route: ActivatedRoute,
+    private router: Router, private hwstatus: HwStatusDataService, private config: ConfigureService, private _bottomSheet: MatBottomSheet) {
     this.titleService.setTitle("Hardware Status");
     //this.config.IsAuthentecated();
-    var teamval=  localStorage.getItem("userGroup");
+    var teamval = localStorage.getItem("userGroup");
 
-    if(teamval?.toLocaleLowerCase() != 'admin'){
-      this.isNotAdmin=true;  }
+    if (teamval?.toLocaleLowerCase() != 'admin') {
+      this.isNotAdmin = true;
+    }
 
   }
   pageNumber = 1;
-  pageSize =100;
+  pageSize = 100;
   sortColumnDef: string = "Id";
   SortDirDef: string = 'asc';
   public colname: string = 'Id';
   public coldir: string = 'asc';
 
-getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-  this.loader = true;
-  this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
-    this.hwList = response?.data;
-    this.hwList.length = response?.pagination.totalCount;
-    //console.log("fromreqquest",this.hwList)
+  getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
+    this.loader = true;
+    this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
+      this.hwList = response?.data;
+      this.hwList.length = response?.pagination.totalCount;
+      //console.log("fromreqquest",this.hwList)
 
-    this.dataSource = new MatTableDataSource<any>(this.hwList);
-    this.dataSource._updateChangeSubscription();
-    this.dataSource.paginator = this.paginator as MatPaginator;
-  })
-  setTimeout(()=> this.loader = false,2000) ;
-}
-
-
+      this.dataSource = new MatTableDataSource<any>(this.hwList);
+      this.dataSource._updateChangeSubscription();
+      this.dataSource.paginator = this.paginator as MatPaginator;
+    })
+    setTimeout(() => this.loader = false, 2000);
+  }
 
 
-  ngOnInit(){
-    if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-    {
+
+
+  ngOnInit() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
       this.router.navigateByUrl('/login');
     }
-    else{
-  this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+    else {
+      this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
     }
   }
 
   ngAfterViewInit() {
 
     this.dataSource.sort = this.sort as MatSort;
-    this.dataSource.paginator = this.paginator as MatPaginator;}
-
-    onSearchClear(){
-      this.searchKey ='';
-      this.applyFilter();
+    this.dataSource.paginator = this.paginator as MatPaginator;
+  }
+  removeAll: boolean = false;
+  onSearchClear() {
+    this.searchKey = '';
+    this.changeSearckKey = true;
+    this.onselectcheckall(this.removeAll);
+    this.applyFilter();
+  }
+  changeSearckKey: boolean = false;
+  applyFilter() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
     }
-    applyFilter(){
-      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-      {
-        this.router.navigateByUrl('/login');
-      }
-      else{
-     let searchData = this.searchKey.trim().toLowerCase();
-     this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
-      }
+    else {
+      let searchData = this.searchKey.trim().toLowerCase();
+      this.changeSearckKey = true;
+      this.onselectcheckall(this.removeAll);
+      this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
     }
-    onCreate(){
-     // this.service.initializeFormGroup();
-     if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-     {
-       this.router.navigateByUrl('/login');
-     }
-     else{
+  }
+  onCreate() {
+    // this.service.initializeFormGroup();
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
       const dialogGonfig = new MatDialogConfig();
-      dialogGonfig.data= {dialogTitle: "اضافة جديد"};
-      dialogGonfig.disableClose=true;
-      dialogGonfig.autoFocus= true;
-      dialogGonfig.width="50%";
-      dialogGonfig.panelClass='modals-dialog';
-      this.dialog.open(EditComponent,dialogGonfig).afterClosed().subscribe(result => {
+      dialogGonfig.data = { dialogTitle: "اضافة جديد" };
+      dialogGonfig.disableClose = true;
+      dialogGonfig.autoFocus = true;
+      dialogGonfig.width = "50%";
+      dialogGonfig.panelClass = 'modals-dialog';
+      this.dialog.open(EditComponent, dialogGonfig).afterClosed().subscribe(result => {
         this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
       });
     }
 
+  }
+
+  onEdit(row: any) {
+    //this.service.initializeFormGroup();
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
     }
-
-    onEdit(row:any){
-      //this.service.initializeFormGroup();
-      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-      {
-        this.router.navigateByUrl('/login');
-      }
-      else{
-       const dialogGonfig = new MatDialogConfig();
-      dialogGonfig.data= {dialogTitle: " تعديل"};
-      dialogGonfig.disableClose=true;
-      dialogGonfig.autoFocus= true;
-      dialogGonfig.width="50%";
-      dialogGonfig.panelClass='modals-dialog';
-       this.dialog.open(EditComponent,{disableClose:true,autoFocus:true, width:"50%",data:row}).afterClosed().subscribe(result => {
-        this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef)});
+    else {
+      const dialogGonfig = new MatDialogConfig();
+      dialogGonfig.data = { dialogTitle: " تعديل" };
+      dialogGonfig.disableClose = true;
+      dialogGonfig.autoFocus = true;
+      dialogGonfig.width = "50%";
+      dialogGonfig.panelClass = 'modals-dialog';
+      this.dialog.open(EditComponent, { disableClose: true, autoFocus: true, width: "50%", data: row }).afterClosed().subscribe(result => {
+        this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef)
+      });
 
 
-       }
     }
+  }
 
 
-    onDelete(row: any) {
-      if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-      {
-        this.router.navigateByUrl('/login');
-      }
-      else{
+  onDelete(row: any) {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
       this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
         if (res) {
           this.hwstatus.DeleteHwStatus(row.id).subscribe(
             rs => {
               this.note.success(':: successfully Deleted');
-             this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
-             //  this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
+              this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+              //  this.getRequestdata(1, 100, searchData, this.sortColumnDef, "asc");
             },
             error => { this.note.warn(':: An Error Occured') }
           );
         }
-        else
-        {
+        else {
           // this.note.warn(':: test')
         }
       });
     }
-    }
+  }
 
 
 
 
-pageIn = 0;
-previousSizedef = 100;
-pagesizedef: number = 100;
-public pIn: number = 0;
-pageChanged(event: any) {
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-{
-  this.router.navigateByUrl('/login');
-}
-else{
-  this.pIn = event.pageIndex;
-  this.pageIn = event.pageIndex;
-  this.pagesizedef = event.pageSize;
-  let pageIndex = event.pageIndex;
-  let pageSize = event.pageSize;
-  let previousSize = pageSize * pageIndex;
-  this.previousSizedef = previousSize;
-  this.getRequestdataNext(previousSize,  pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
-}
-}
-getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-    {
+  pageIn = 0;
+  previousSizedef = 100;
+  pagesizedef: number = 100;
+  public pIn: number = 0;
+  pageChanged(event: any) {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
       this.router.navigateByUrl('/login');
     }
-    else{
-    this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
-      if (res.status == true) {
-
-        this.hwList.length = cursize;
-        this.hwList.push(...res?.data);
-        this.hwList.length = res?.pagination.totalCount;
-        this.dataSource = new MatTableDataSource<any>(this.hwList);
-        this.dataSource._updateChangeSubscription();
-        this.dataSource.paginator = this.paginator as MatPaginator;
-        //this.loader = false;
-      }
-      else  this.note.success(":: add successfully");
-    }, err => {
-      this.note.warn(":: failed");
-     // this.loader = false;
-
-    })
+    else {
+      this.pIn = event.pageIndex;
+      this.pageIn = event.pageIndex;
+      this.pagesizedef = event.pageSize;
+      let pageIndex = event.pageIndex;
+      let pageSize = event.pageSize;
+      let previousSize = pageSize * pageIndex;
+      this.previousSizedef = previousSize;
+      this.getRequestdataNext(previousSize, pageIndex + 1, pageSize, '', this.sortColumnDef, this.SortDirDef);
     }
-
-}
-lastcol: string = 'Id';
-lastdir: string = 'asc';
-
-sortData(sort: any) {
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-  {
-    this.router.navigateByUrl('/login');
   }
-  else{
-  if (this.pIn != 0)
-    window.location.reload();
-  if (this.lastcol == sort.active && this.lastdir == sort.direction) {
-    if (this.lastdir == 'asc')
-      sort.direction = 'desc';
-    else
-      sort.direction = 'asc';
-  }
-  this.lastcol = sort.active; this.lastdir = sort.direction;
-  var c = this.pageIn;
-  this.getRequestdata(1, 100, '', sort.active, this.lastdir);
-}
-}
-
- //////////////import file
- @Input() param = 'file';
- @ViewChild('LIST') template!: TemplateRef<any>;
- @ViewChild('LISTF') templateF!: TemplateRef<any>;
- @ViewChild('fileInput') fileInput?: ElementRef;
- @ViewChild('Msg') Msg!: TemplateRef<any>;
- @ViewChild('data') data?: ElementRef;
- fileAttr = 'Choose File';
- fileAttrF = 'Choose File';
- htmlToAdd: string = "";
- fileuploaded: any;
-
-exportExcel() {
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-  {
-    this.router.navigateByUrl('/login');
-  }
-  else{
-    if(this.isall==true){
-      alert("all");
-      this.hwstatus.ExportSelectedDataOfExcel(this.hwList.map(({ id }) => id)).subscribe(res => {
-        console.log(this.hwList.map(({ id }) => id));
-        const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
-        const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
-        saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
-
-      },
-        err => {
-          this.note.warn("! Fail")
-        });
-    }
-    else if (this.isall==false && this.selectedRows==false){
-      alert("daiplayall");
-  this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
-
-    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
-    const file = new File([blob], 'hwStatusData' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
-
-    saveAs(file, 'hwStatusData' + Date.now() + '.xlsx')
-
-  }, err => {
-
-    this.note.warn("! Fail")
-
-  });
-
-}
-else if(this.selectedRows==true)
-{
-  alert("selectedrow"+this.selectedRows);
-  this.hwstatus.ExportSelectedDataOfExcel(this.Ids).subscribe(res => {
-    console.log(this.hwList.map(({ id }) => id));
-    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
-    const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
-    saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
-
-  },
-    err => {
-      this.note.warn("! Fail")
-    });
-}
-
-
-  }
-}
-close() {
-  this.resetfile();
-  this._bottomSheet.dismiss();
-}
-resetfile() {
-  this.fileAttr = 'Choose File';
-}
-uploadFileEvtF(imgFile: any) {
-  console.log("img",imgFile.target.files[0])
-  this.fileuploaded = imgFile.target.files[0];
-  if (imgFile.target.files && imgFile.target.files[0]) {
-    this.fileAttr = '';
-    Array.prototype.forEach.call(imgFile.target.files, (file) => {
-      this.fileAttr += file.name + ' - ';
-    });
-    let reader = new FileReader();
-    reader.onload = (e: any) => {
-      let image = new Image();
-      image.src = e.target.result;
-      image.onload = rs => {
-        let imgBase64Path = e.target.result;
-      };
-    };
-    reader.readAsDataURL(imgFile.target.files[0]);
-
-    // Reset if duplicate image uploaded again
-    (this.fileInput as ElementRef).nativeElement.value = "";
-  } else {
-    this.fileAttr = 'Choose File';
-  }
-}
-closeMsg() {
-  this._bottomSheet.dismiss();
-}
-openBottomSheet() {
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-  {
-    this.router.navigateByUrl('/login');
-  }
-  else{
-  this._bottomSheet.open(this.template, {
-    panelClass: 'botttom-dialog-container',
-    disableClose: true
-  });
-}
-}
-
-openBottomSheetMsg() {
-  this._bottomSheet.open(this.Msg, {
-    panelClass: 'msg-dialog-container',
-    disableClose: true
-  });
-}
-upLoadF() {
-  console.log("uploadF","param:",this.param,"fileUploaded:", this.fileuploaded)
-  const fd = new FormData();
-  fd.append(this.param, this.fileuploaded);
-  console.log("data to api",fd)
-  this.hwstatus.importExcelFile(fd).subscribe(res => {
-    if (res.status == true) {
-      console.log(res);
-      this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
-      this.fileAttr = 'Choose File';
-      this.resetfile();
-      this._bottomSheet.dismiss();
-      this.openBottomSheetMsg();
-      this.htmlToAdd = res.data
+  getRequestdataNext(cursize: number, pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
     }
     else {
-      this.openBottomSheetMsg();
-      this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+      this.hwstatus.getHwStatus(pageNum, pageSize, search, sortColumn, sortDir).subscribe(res => {
+        if (res.status == true) {
+
+          this.hwList.length = cursize;
+          this.hwList.push(...res?.data);
+          this.hwList.length = res?.pagination.totalCount;
+          this.dataSource = new MatTableDataSource<any>(this.hwList);
+          this.dataSource._updateChangeSubscription();
+          this.dataSource.paginator = this.paginator as MatPaginator;
+          //this.loader = false;
+        }
+        else this.note.success(":: add successfully");
+      }, err => {
+        this.note.warn(":: failed");
+        // this.loader = false;
+
+      })
+    }
+
+  }
+  lastcol: string = 'Id';
+  lastdir: string = 'asc';
+
+  sortData(sort: any) {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
+      if (this.pIn != 0)
+        window.location.reload();
+      if (this.lastcol == sort.active && this.lastdir == sort.direction) {
+        if (this.lastdir == 'asc')
+          sort.direction = 'desc';
+        else
+          sort.direction = 'asc';
+      }
+      this.lastcol = sort.active; this.lastdir = sort.direction;
+      var c = this.pageIn;
+      this.getRequestdata(1, 100, '', sort.active, this.lastdir);
+    }
+  }
+
+  //////////////import file
+  @Input() param = 'file';
+  @ViewChild('LIST') template!: TemplateRef<any>;
+  @ViewChild('LISTF') templateF!: TemplateRef<any>;
+  @ViewChild('fileInput') fileInput?: ElementRef;
+  @ViewChild('Msg') Msg!: TemplateRef<any>;
+  @ViewChild('data') data?: ElementRef;
+  fileAttr = 'Choose File';
+  fileAttrF = 'Choose File';
+  htmlToAdd: string = "";
+  fileuploaded: any;
+
+  exportExcel() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
+      //this.isall == true||
+      if (this.searchKey != ''&& this.selectedRows == false ) {
+        this.hwstatus.ExportSelectedDataOfExcel(this.hwList.map(({ id }) => id)).subscribe(res => {
+          console.log(this.hwList.map(({ id }) => id));
+          const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+          const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
+          saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
+
+        },
+          err => {
+            this.note.warn("! Fail")
+          });
+      }
+      //this.isall == false &&
+      else if ((this.alll == true && this.selectedRows == true && this.searchKey == '') || (this.alll== false && this.selectedRows == false && this.searchKey == '')) {
+        console.log("first");
+
+        this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
+
+          const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+          const file = new File([blob], 'hwStatusData' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
+
+          saveAs(file, 'hwStatusData' + Date.now() + '.xlsx')
+
+        }, err => {
+
+          this.note.warn("! Fail")
+
+        });
+
+      }
+      else if (this.selectedRows == true) {
+        console.log("last");
+        this.hwstatus.ExportSelectedDataOfExcel(this.Ids).subscribe(res => {
+          console.log(this.hwList.map(({ id }) => id));
+          const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+          const file = new File([blob], 'Supportrequestedit' + '.xlsx', { type: 'application/vnd.ms.excel' });
+          saveAs(file, 'HardWareStatus' + Date.now() + '.xlsx')
+
+        },
+          err => {
+            this.note.warn("! Fail")
+          });
+      }
+
+
+    }
+  }
+  close() {
+    this.resetfile();
+    this._bottomSheet.dismiss();
+  }
+  resetfile() {
+    this.fileAttr = 'Choose File';
+  }
+  uploadFileEvtF(imgFile: any) {
+    console.log("img", imgFile.target.files[0])
+    this.fileuploaded = imgFile.target.files[0];
+    if (imgFile.target.files && imgFile.target.files[0]) {
+      this.fileAttr = '';
+      Array.prototype.forEach.call(imgFile.target.files, (file) => {
+        this.fileAttr += file.name + ' - ';
+      });
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        let image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          let imgBase64Path = e.target.result;
+        };
+      };
+      reader.readAsDataURL(imgFile.target.files[0]);
+
+      // Reset if duplicate image uploaded again
+      (this.fileInput as ElementRef).nativeElement.value = "";
+    } else {
       this.fileAttr = 'Choose File';
-      this.resetfile();
-      this.htmlToAdd = res.error;
     }
   }
-    , error => {
-      this.note.warn("!! Fail")
-      this.resetfile();
+  closeMsg() {
+    this._bottomSheet.dismiss();
+  }
+  openBottomSheet() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
     }
-  );
-
-
-}
-
-ExportTOEmptyExcel()
-{
-  if(localStorage.getItem("usernam")==""||localStorage.getItem("usernam")==undefined||localStorage.getItem("usernam")==null)
-  {
-    this.router.navigateByUrl('/login');
+    else {
+      this._bottomSheet.open(this.template, {
+        panelClass: 'botttom-dialog-container',
+        disableClose: true
+      });
+    }
   }
-  else{
-  this.hwstatus.ExportEmptyExcel().subscribe(res => {
-    const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
-    const file = new File([blob], 'HardwareStatus' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
-    saveAs(file, 'HardwareStatus' + Date.now() + '.xlsx')
 
-  }, err => {
-    this.note.warn("! Fail")
-  });
-}
-}
-
-Ids: number[] = [];
-// select all
-isall: boolean = false;
-selectedRows: boolean = false;
-onselectcheckall(event: any) {
-  if (event.checked) {
-
-    this.isall = true;
+  openBottomSheetMsg() {
+    this._bottomSheet.open(this.Msg, {
+      panelClass: 'msg-dialog-container',
+      disableClose: true
+    });
   }
-  else {
-    this.isall = false;
+  upLoadF() {
+    console.log("uploadF", "param:", this.param, "fileUploaded:", this.fileuploaded)
+    const fd = new FormData();
+    fd.append(this.param, this.fileuploaded);
+    console.log("data to api", fd)
+    this.hwstatus.importExcelFile(fd).subscribe(res => {
+      if (res.status == true) {
+        console.log(res);
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        this.fileAttr = 'Choose File';
+        this.resetfile();
+        this._bottomSheet.dismiss();
+        this.openBottomSheetMsg();
+        this.htmlToAdd = res.data
+      }
+      else {
+        this.openBottomSheetMsg();
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        this.fileAttr = 'Choose File';
+        this.resetfile();
+        this.htmlToAdd = res.error;
+      }
+    }
+      , error => {
+        this.note.warn("!! Fail")
+        this.resetfile();
+      }
+    );
+
 
   }
-}
-onselectcheck(event: any,row:any)
-{
-if(event.checked)
-{
- this.selectedRows=true;
-  this.Ids.push(row.id);
-  console.log(this.Ids);
-}
 
-}
-deleteGroup()
-{
-  if(this.selectedRows==true)
-  {
-    this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(  res => {
-      if(res.status==true){
-      console.log("ge"+this.Ids);
-      this.note.success(' تم الحذف بنجاح');
-     this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);}
-     else
-     {
-     this.note.warn(':: An Error Occured')
-     }
-    },
-    error => { this.note.warn(':: An Error Occured') }
-  );
+  ExportTOEmptyExcel() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
+      this.hwstatus.ExportEmptyExcel().subscribe(res => {
+        const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+        const file = new File([blob], 'HardwareStatus' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file, 'HardwareStatus' + Date.now() + '.xlsx')
+
+      }, err => {
+        this.note.warn("! Fail")
+      });
+    }
   }
-  else{
-    this.note.warn(" يجب ان تختار صفوف اولا");
+
+  Ids: number[] = [];
+  // select all
+  isall: boolean = false;
+  selectedRows: boolean = false;
+  alll: boolean = false;
+  onselectcheckall(event: any) {
+    if (event.checked || (this.changeSearckKey && event.checked)) {
+
+      this.isall = true;
+      this.alll = true;
+      this.selectedRows = true;
+      this.Ids = [];
+      this.hwList.map(({ id }) => this.Ids.push(id));
+
+    }
+
+    else {
+      console.log("isall", this.isall);
+      console.log("hhh", event);
+      this.Ids = [];
+      this.selectedRows = false;
+      this.alll = false;
+      this.isall = false;
+      console.log(this.Ids, "idsssss");
+      console.log("all", this.alll);
+      console.log("isall", this.isall);
+
+    }
   }
-//
-}
+  onselectcheck(event: any, row: any) {
+
+    if (event.checked) {
+      this.selectedRows = true;
+      this.Ids.push(row.id);
+      console.log(this.Ids);
+
+    }
+
+    else {
+   //   this.selectedRows = true;
+      for (let i = 0; i < this.Ids.length; i++) {
+        if (this.Ids[i] == row.id) {
+          this.Ids.splice(i, 1);
+       //   console.log("after splice",this.Ids);
+        }
+      }
+      if(this.Ids.length==0)
+      {
+        this.selectedRows = false;
+      }
+    }
+    if (this.Ids.length == this.hwList.length) {
+      this.alll = true;
+      this.isall = true;
+
+    }
+    else{
+
+      this.alll = false;
+      if(this.Ids.length!=0)
+      {
+        this.selectedRows = true;
+      }
+    }
+
+
+  }
+  deleteGroup() {
+    if (localStorage.getItem("usernam") == "" || localStorage.getItem("usernam") == undefined || localStorage.getItem("usernam") == null) {
+      this.router.navigateByUrl('/login');
+    }
+    else {
+      if (this.selectedRows == true) {
+        this.dailogService.openConfirmDialog().afterClosed().subscribe(res => {
+          if (res) {
+
+            this.hwstatus.DeleteGroupHwStatus(this.Ids).subscribe(res => {
+              if (res.status == true) {
+                console.log(this.Ids);
+                this.note.success(' تم الحذف بنجاح');
+                this.selectedRows = false;
+                this.Ids = [];
+                this.getRequestdata(1, 100, '', this.sortColumnDef, this.SortDirDef);
+                this.onSearchClear();
+              }
+              else {
+                this.note.warn(':: An Error Occured')
+              }
+
+              // },
+              // error => { this.note.warn(':: An Error Occured')
+            }
+            );
+          }
+          else {
+
+          }
+        });
+      }
+      else {
+        this.note.warn(" يجب ان تختار صفوف اولا");
+      }
+    }
+
+    //
+  }//deletegroup
 
 
 
