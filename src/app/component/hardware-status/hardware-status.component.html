@@ -60,18 +60,18 @@
           <input matInput formControlName="number" type="number">
         </mat-form-field>
         </div>
-        
+
 
         </mat-grid-tile>
         <mat-grid-tile>
 
           <div class="controles-container">
 
-           
 
-      
+
+
          <!------>
-       
+
         <mat-form-field>
           <input formControlName="createdDateFrom" matInput [matDatepicker]="createdDateFrom" placeholder=" من تاريخ اضافة">
           <mat-datepicker-toggle matSuffix [for]="createdDateFrom"></mat-datepicker-toggle>
@@ -82,9 +82,9 @@
           <mat-datepicker-toggle matSuffix [for]="createdDateTo"></mat-datepicker-toggle>
           <mat-datepicker #createdDateTo></mat-datepicker>
         </mat-form-field>
-        
 
-      
+
+
         <mat-form-field>
           <input formControlName="updatedDateFrom" matInput [matDatepicker]="updatedDateFrom" placeholder=" من تاريخ تعديل">
           <mat-datepicker-toggle matSuffix [for]="updatedDateFrom"></mat-datepicker-toggle>
@@ -111,7 +111,7 @@
 
 
 
-           
+
         <mat-form-field>
           <mat-select formControlName="companyNameId" placeholder=" *اسم الشركة (--اختار--) "  >
             <mat-option>-- Please select --</mat-option>
@@ -120,7 +120,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-     
+
         <mat-form-field>
           <mat-select formControlName="receiptStatusId" placeholder=" *موقف ايصال الاستلام (--اختار--) "  >
             <mat-option>-- Please select --</mat-option>
@@ -136,15 +136,15 @@
             <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
               {{orderStatus.name}}
             </mat-option>
-          </mat-select> 
+          </mat-select>
         </mat-form-field>
 
 
+<div class="w-100 d-flex  text-center">
+        <input mat-raised-button value="مسح " class="btn-danger  text-center mx-1 mt-3 serc w-50" (click)="clearAdvancedSearch()" >
 
-
-
-        <button mat-raised-button class="mt-3 serc" color="warn">بحث</button>
-     <input value="مسح " (click)="clearAdvancedSearch()" readonly>
+        <button mat-raised-button class="mt-3 w-50 serc" color="warn">بحث</button>
+      </div>
     </div>
     </mat-grid-tile>
     </mat-grid-list>
