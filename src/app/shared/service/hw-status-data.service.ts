@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HardwareStatus } from 'src/app/Model/hardware-status.model';
+import { IHardwareStatusSearch } from 'src/app/Model/HardwareStatusSearch';
 import { ConfigureService } from './configure.service';
 
 @Injectable({
@@ -94,6 +95,10 @@ DeleteGroupHwStatus(ids:number[]):Observable<any>
 {
   
   return this.httpClient.post(`${this.apiURL}/DeleteGroupHardwareStatus`,ids );
+}
+AdvancedSearch(data:any): Observable<any> {
+  console.log("ff",data);
+  return this.httpClient.post<any>(`${this.apiURL}/AdvancedSearch`, data);
 }
 
 

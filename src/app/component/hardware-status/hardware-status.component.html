@@ -1,8 +1,8 @@
 
   <div class="my-3" dir="rtl">
     <mat-accordion>
-      <mat-expansion-panel  (opened)="panelOpenState = false"
-      (closed)="panelOpenState = true">
+      <mat-expansion-panel  (opened)="openAdvancedSearch()"
+      (closed)="panelOpenState = true" >
         <mat-expansion-panel-header>
           <mat-panel-title>
          بحث متقدم
@@ -11,58 +11,171 @@
 
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
-        <mat-grid-list cols="2" rowHeight="360px">
+        <form [formGroup]="form" class="form-normal" (submit)="AdvancedSearch()">
+        <mat-grid-list cols="2" rowHeight="500px">
           <mat-grid-tile>
 
         <div class="controles-container">
         <mat-form-field >
           <mat-label>اسم العميل</mat-label>
-          <input matInput>
+          <input matInput  formControlName="clientName">
         </mat-form-field>
         <mat-form-field >
           <mat-label>السنترال</mat-label>
-          <input matInput>
+          <input matInput formControlName="central">
         </mat-form-field>
         <mat-form-field >
           <mat-label>رقم الاوردر</mat-label>
-          <input matInput>
+          <input matInput formControlName="orderNumber" type="number">
         </mat-form-field>
         <mat-form-field >
           <mat-label>اسم الفني</mat-label>
-          <input matInput>
+          <input matInput formControlName="technicianName">
         </mat-form-field>
-
+        <mat-form-field >
+          <mat-label>تم التعديل بواسطه</mat-label>
+          <input matInput formControlName="updatedBy">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>تم الاضافه بواسطه</mat-label>
+          <input matInput formControlName="createdBy">
+        </mat-form-field>
 
         <mat-form-field >
           <mat-label>رقم الدائرة </mat-label>
-          <input matInput>
+          <input matInput formControlName="zoneNumber" type="number">
         </mat-form-field>
 
         <mat-form-field >
           <mat-label>نوع الجهاز</mat-label>
-          <input matInput>
+          <input matInput formControlName="deviceType" >
         </mat-form-field>
         <mat-form-field >
           <mat-label>السيريال نامبر</mat-label>
-          <input matInput>
+          <input matInput formControlName="serialNumber">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>العدد</mat-label>
+          <input matInput formControlName="number" type="number">
         </mat-form-field>
         </div>
+        
+
         </mat-grid-tile>
         <mat-grid-tile>
 
           <div class="controles-container">
-            <mat-form-field >
-              <mat-label>العدد</mat-label>
-              <input matInput>
-            </mat-form-field>
-             <mat-form-field >
+           
+
+      
+         <!------>
+         <!-- <mat-form-field>
+          <input [ngxMatDatetimePicker]="createdDateFrom" formControlName="createdDateFrom" matInput
+            placeholder="تاريخ الاضافه من*" readonly>
+          <mat-datepicker-toggle matSuffix [for]="$any(createdDateFrom)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #createdDateFrom [enableMeridian]="true" >
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [ngxMatDatetimePicker]="createdDateTo" formControlName="createdDateTo" matInput
+            placeholder="تاريخ الاضافه الى*" readonly [min]="form.controls.createdDateFrom?.value">
+          <mat-datepicker-toggle matSuffix [for]="$any(createdDateTo)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #createdDateTo [enableMeridian]="true" >
+          </ngx-mat-datetime-picker>
+        </mat-form-field> -->
+        <mat-form-field>
+          <input formControlName="createdDateFrom" matInput [matDatepicker]="createdDateFrom" placeholder=" من تاريخ اضافة">
+          <mat-datepicker-toggle matSuffix [for]="createdDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #createdDateFrom></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="createdDateTo" matInput [matDatepicker]="createdDateTo" placeholder=" الى تاريخ اضافه" [min]="form.controls.createdDateFrom?.value">
+          <mat-datepicker-toggle matSuffix [for]="createdDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #createdDateTo></mat-datepicker>
+        </mat-form-field>
+        
+
+        <!--------->
+        <!-- <mat-form-field>
+          <input [ngxMatDatetimePicker]="updatedDateFrom" formControlName="updatedDateFrom" matInput
+            placeholder=" تاريخ التعديل من*" readonly>
+          <mat-datepicker-toggle matSuffix [for]="$any(updatedDateFrom)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #updatedDateFrom [enableMeridian]="true" >
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [ngxMatDatetimePicker]="updatedDateTo" formControlName="updatedDateTo" matInput
+            placeholder="تاريخ التعديل الى *" readonly [min]="form.controls.updatedDateFrom?.value">
+          <mat-datepicker-toggle matSuffix [for]="$any(updatedDateTo)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #updatedDateTo [enableMeridian]="true" >
+          </ngx-mat-datetime-picker>
+        </mat-form-field> -->
+        <mat-form-field>
+          <input formControlName="updatedDateFrom" matInput [matDatepicker]="updatedDateFrom" placeholder=" من تاريخ تعديل">
+          <mat-datepicker-toggle matSuffix [for]="updatedDateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #updatedDateFrom></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="updatedDateTo" matInput [matDatepicker]="updatedDateTo" placeholder="الى تاريخ تعديل" [min]="form.controls.updatedDateFrom?.value">
+          <mat-datepicker-toggle matSuffix [for]="updatedDateTo"></mat-datepicker-toggle>
+          <mat-datepicker #updatedDateTo></mat-datepicker>
+        </mat-form-field>
+<!-------->
+
+<mat-form-field>
+  <input formControlName="exitDateFrom" matInput [matDatepicker]="exitDateFrom" placeholder=" من تاريخ خروج">
+  <mat-datepicker-toggle matSuffix [for]="exitDateFrom"></mat-datepicker-toggle>
+  <mat-datepicker #exitDateFrom></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <input formControlName="exitDateTo" matInput [matDatepicker]="exitDateTo" placeholder=" الى تاريخ خروج" [min]="form.controls.exitDateFrom?.value">
+  <mat-datepicker-toggle matSuffix [for]="exitDateTo"></mat-datepicker-toggle>
+  <mat-datepicker #exitDateTo></mat-datepicker>
+</mat-form-field>
+
+
+
+
+             <!-- <mat-form-field >
           <mat-label>تاريخ الخروج</mat-label>
           <input matInput>
-        </mat-form-field>
-        <mat-form-field >
+        </mat-form-field> -->
+        <!-- <mat-form-field >
           <mat-label>موقف ايصال الاستلام</mat-label>
           <input matInput>
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select formControlName="companyNameId" placeholder=" *اسم الشركة (--اختار--) "  >
+            <mat-option>-- Please select --</mat-option>
+            <mat-option  *ngFor="let companyName of companyNameList"   [value]="companyName.id">
+              {{companyName.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+     
+        <mat-form-field>
+          <mat-select formControlName="receiptStatusId" placeholder=" *موقف ايصال الاستلام (--اختار--) "  >
+            <mat-option>-- Please select --</mat-option>
+            <mat-option  *ngFor="let receiptStatus of receiptStateList"   [value]="receiptStatus.id">
+              {{receiptStatus.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="orderStatusId" placeholder="*حالة الهاردوير(--اختار--)"  >
+            <mat-option>-- Please select --</mat-option>
+            <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
+              {{orderStatus.name}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+
+
+<!-- 
             <mat-form-field >
               <mat-label>موقف الهاردوير</mat-label>
               <input matInput>
@@ -74,13 +187,14 @@
         <mat-form-field >
           <mat-label>اسم المسخدم</mat-label>
           <input matInput>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <button mat-raised-button class="mt-3 serc" color="warn">بحث</button>
-
+     <input value="مسح " (click)="clearAdvancedSearch()" readonly>
     </div>
     </mat-grid-tile>
     </mat-grid-list>
+  </form>
       </mat-expansion-panel>
 
     </mat-accordion>
