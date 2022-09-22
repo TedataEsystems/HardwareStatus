@@ -6,10 +6,9 @@ span{
   text-shadow: 2px 2px 2px grey;
 }
 span.total{
-  position: absolute;
-    left: 44%;
-    top: 50%;
-    transform: translateY(-50%);
+  width: 90px;
+    margin: auto;
+    display: block;
     font-size: 20px;
     font-weight: bold;
     color: gray;

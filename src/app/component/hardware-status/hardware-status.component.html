@@ -16,19 +16,25 @@
           <mat-grid-tile>
 
         <div class="controles-container">
-        <mat-form-field >
+        <mat-form-field  appearance="fill">
           <mat-label>اسم العميل</mat-label>
+
           <input matInput  formControlName="clientName">
         </mat-form-field>
         <mat-form-field >
+
+          <input matInput>
+        </mat-form-field >
+        <mat-form-field appearance="fill" >
+
           <mat-label>السنترال</mat-label>
           <input matInput formControlName="central">
         </mat-form-field>
-        <mat-form-field >
+        <mat-form-field  appearance="fill">
           <mat-label>رقم الاوردر</mat-label>
           <input matInput formControlName="orderNumber" type="number">
         </mat-form-field>
-        <mat-form-field >
+        <mat-form-field appearance="fill" >
           <mat-label>اسم الفني</mat-label>
           <input matInput formControlName="technicianName">
         </mat-form-field>
@@ -41,16 +47,16 @@
           <input matInput formControlName="createdBy">
         </mat-form-field>
 
-        <mat-form-field >
+        <mat-form-field appearance="fill">
           <mat-label>رقم الدائرة </mat-label>
           <input matInput formControlName="zoneNumber" type="number">
         </mat-form-field>
 
-        <mat-form-field >
+        <mat-form-field appearance="fill">
           <mat-label>نوع الجهاز</mat-label>
           <input matInput formControlName="deviceType" >
         </mat-form-field>
-        <mat-form-field >
+        <mat-form-field appearance="fill" >
           <mat-label>السيريال نامبر</mat-label>
           <input matInput formControlName="serialNumber">
         </mat-form-field>
@@ -65,6 +71,7 @@
         <mat-grid-tile>
 
           <div class="controles-container">
+
            
 
       
@@ -143,6 +150,17 @@
           <input matInput>
         </mat-form-field> -->
         <!-- <mat-form-field >
+
+            <mat-form-field appearance="fill">
+              <mat-label>العدد</mat-label>
+              <input matInput>
+            </mat-form-field>
+             <mat-form-field appearance="fill">
+          <mat-label>تاريخ الخروج</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+
           <mat-label>موقف ايصال الاستلام</mat-label>
           <input matInput>
         </mat-form-field> -->
@@ -175,16 +193,20 @@
 
 
 
+
 <!-- 
             <mat-form-field >
+
+            <mat-form-field appearance="fill">
+
               <mat-label>موقف الهاردوير</mat-label>
               <input matInput>
             </mat-form-field>
-        <mat-form-field >
+        <mat-form-field appearance="fill">
           <mat-label>اسم الشركة</mat-label>
           <input matInput>
         </mat-form-field>
-        <mat-form-field >
+        <mat-form-field appearance="fill">
           <mat-label>اسم المسخدم</mat-label>
           <input matInput>
         </mat-form-field> -->

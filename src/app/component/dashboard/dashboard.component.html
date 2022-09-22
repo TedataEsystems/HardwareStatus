@@ -3,7 +3,7 @@
       <div class="row g-4">
           <div class="col-sm-5 col-xl-5  text-center">
             <div class="chart-wrapper rounded mb-4">
-                <canvas baseChart 
+                <canvas baseChart
                 [data]="doughnutChartDatap"
                 [labels]="doughnutChartLabelsp"
                 [colors]="colors"
@@ -13,12 +13,13 @@
             </div>
             <span class="total" matBadgeColor="warn" matBadge="{{TotalNumorderStat}}" matBadgeOverlap="false"> TOTAL </span>
           <span>حالة الهاردوير</span>
+
           </div>
           <div class="col-sm-2 col-xl-2  "></div>
           <div class="col-sm-5 col-xl-5  text-center">
-           
+
             <div class="chart-wrapper rounded mb-4">
-              <canvas baseChart 
+              <canvas baseChart
               [data]="doughnutChartData"
               [labels]="doughnutChartLabels"
               [colors]="colors"
@@ -28,10 +29,10 @@
           </div>
           <span class="total"  matBadgeColor="warn" matBadge="{{TotalNumReceiptStat}}" matBadgeOverlap="false">TOTAL</span>
            <span>موقف ايصال الاستلام</span>
-         
+
 
           </div>
-         
+
       </div>
   </div>
 
