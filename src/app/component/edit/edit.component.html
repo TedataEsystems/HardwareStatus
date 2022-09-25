@@ -3,10 +3,10 @@
     <div class="w-100">
       <button  class="btn-dialog-close" mat-button  tabIndex="-1" (click)="onClose()"><mat-icon>clear</mat-icon></button>
     </div>
-   
+
   </mat-toolbar>
   <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()" dir="rtl">
-    <mat-grid-list cols="2" rowHeight="450px">
+    <mat-grid-list cols="2" rowHeight="510px">
       <mat-grid-tile>
         <div class="controles-container">
           <input type="hidden" formControlName="id">
@@ -16,15 +16,15 @@
           <input type="hidden" formControlName="updatedBy">
           <mat-form-field>
             <input formControlName="clientName" matInput placeholder="اسم العميل*">
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="central" matInput placeholder="السنترال*">
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="orderNumber" type="number" min="0" matInput placeholder="رقم الاوردر*">
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="technicianName" matInput placeholder="اسم الفني *">
@@ -32,15 +32,15 @@
           </mat-form-field>
           <mat-form-field>
             <input formControlName="zoneNumber" type="number" min="0"  matInput placeholder=" رقم الدائرة">
-            <mat-error>يجب ان يكون 0 او اكبر</mat-error> 
+            <mat-error>يجب ان يكون 0 او اكبر</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="number" type="number" min="0" matInput placeholder="العدد">
-            <mat-error>يجب ان يكون 0 او اكبر</mat-error> 
+            <mat-error>يجب ان يكون 0 او اكبر</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="deviceType" matInput placeholder="نوع الجهاز*">
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
         </div>
       </mat-grid-tile>
@@ -48,7 +48,7 @@
         <div class="controles-container">
           <mat-form-field>
             <input formControlName="serialNumber"  matInput placeholder="السيريال نامبر *">
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input formControlName="notes" matInput placeholder="ملاحظات">
@@ -58,12 +58,12 @@
             <input formControlName="exitDate" matInput [matDatepicker]="picker" placeholder="تاريخ الخروج *">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
 
           <!-- <mat-form-field>
             <input formControlName="exitDate"  [ngxMatDatetimePicker]="exitDate"  matInput placeholder="تاريخ الخروج *" readonly>
-             
+
             <mat-datepicker-toggle matSuffix [for]="$any(exitDate)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #exitDate>
             </ngx-mat-datetime-picker>
@@ -89,9 +89,9 @@
               <mat-option  *ngFor="let orderStatus of orderStateList"   [value]="orderStatus.id">
                 {{orderStatus.name}}
               </mat-option>
-            
-            </mat-select> 
-            <mat-error>مطلوب</mat-error> 
+
+            </mat-select>
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
           <mat-form-field>
 
@@ -102,21 +102,21 @@
                 {{companyName.name}}
               </mat-option>
             </mat-select>
-            <mat-error>مطلوب</mat-error> 
+            <mat-error>مطلوب</mat-error>
           </mat-form-field>
-       
-       
-         
-         
+
+
+
+
         </div>
       </mat-grid-tile>
-        
+
     </mat-grid-list>
     <mat-grid-list cols="1" rowHeight="50px">
       <mat-grid-tile>
       <div class="button-row w-100 text-center">
         <button mat-raised-button class="btn-success w-50" type="submit" >ارسال</button>
-       
+
       </div>
       </mat-grid-tile>
       </mat-grid-list>
