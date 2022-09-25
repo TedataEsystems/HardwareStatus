@@ -28,16 +28,20 @@
       <mat-form-field appearance="fill" class="w-50 serch">
           <!-- <mat-label>تم التعديل بواسطه</mat-label>
           <input matInput formControlName="updatedBy"> -->
-          <mat-select formControlName="By" placeholder="--اختار تعديل او اضافة--"  >
-            <mat-option value="0" >اضافة بواسطة</mat-option>
-            <mat-option value="1">
+          <mat-select  placeholder="--اختار تعديل او اضافة--" (selectionChange)="selectedValue($event)" [(ngModel)]="faveCu" id="Initial"  [ngModelOptions]="{standalone: true}">
+            <mat-option value="createdBy" >اضافة بواسطة</mat-option>
+            <mat-option value="updatedBy">
             التعديل بواسطة
             </mat-option>
           </mat-select>
         </mat-form-field>
-      <mat-form-field appearance="fill" class="w-50 serch">
+      <mat-form-field appearance="fill" class="w-50 serch" *ngIf="by">
           <mat-label>تم  بواسطه</mat-label>
-          <input matInput formControlName="createdBy">
+          <input matInput formControlName="createdBy" >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-50 serch" *ngIf="!by">
+          <mat-label>تم  بواسطه</mat-label>
+          <input matInput formControlName="updatedBy" >
         </mat-form-field>
 
       </div>
@@ -167,7 +171,7 @@
         </mat-grid-tile>
     </mat-grid-list>
     <div class="w-100 d-flex justify-content-end mt-2">
-      <input mat-raised-button value="مسح " class="btn-danger btn-sm text-center mx-1 ser " (click)="clearAdvancedSearch()" >
+      <input mat-raised-button value="مسح " class="btn-danger btn-sm text-center mx-1 ser " (click)="clearAdvancedSearch()" readonly >
 
       <button mat-raised-button class="btn-sm ser " color="warn">بحث</button>
     </div>

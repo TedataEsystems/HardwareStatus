@@ -18,6 +18,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CompanyNameList } from 'src/app/Model/company-name-list.model';
 import { OrderStateList } from 'src/app/Model/order-state-list.model';
 import { ReceiptStateList } from 'src/app/Model/receipt-state-list.model';
+import { MatSelectChange } from '@angular/material/select';
 
 
 @Component({
@@ -604,11 +605,16 @@ this.hwstatus.AdvancedSearch(this.hardwareStatusSearch).subscribe(res=>
   }
 )//subsribe
   }//advanced
+  faveCu:string="";
   clearAdvancedSearch()
   {
    
     this.isFilterationData=false;
     this.form.reset();
+  //var  x= document.getElementById("Initial") as HTMLInputElement;
+  //console.log(x);
+  this.faveCu="--اختار تعديل او اضافة--";
+    //this.Initial="--اختار تعديل او اضافة--"
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
   //get lists
@@ -628,6 +634,23 @@ this.hwstatus.AdvancedSearch(this.hardwareStatusSearch).subscribe(res=>
       }})
   }
 
+  by:boolean=true;
+
+  selectedValue(event: MatSelectChange) {
+    
+   if(event.value=="createdBy")
+   {
+   // console.log(event.value,"cr"); 
+    this.by=true;
+   }
+   else if(event.value=="updatedBy")
+   {
+   // console.log(event.value,"up"); 
+    this.by=false;
+   }
+   //var  x= document.getElementById("Initial") ;
+  //console.log(x,"xx");
+  }
 
 
 }
