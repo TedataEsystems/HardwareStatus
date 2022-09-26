@@ -47,7 +47,7 @@
   padding-top: 16px;
 }
 .ser{
-  width: 170px;
+  width: 170px !important;
   outline: none;
   border: none !important;
   line-height: 36px;

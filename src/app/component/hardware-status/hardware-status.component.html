@@ -24,20 +24,27 @@
           <mat-label>رقم الدائرة </mat-label>
           <input matInput formControlName="zoneNumber" type="number">
         </mat-form-field>
-
-      <mat-form-field appearance="fill" class="serch">
+<div class="d-flex w-100 ">
+      <mat-form-field appearance="fill" class="serch w-50">
           <!-- <mat-label>تم التعديل بواسطه</mat-label>
           <input matInput formControlName="updatedBy"> -->
           <mat-select  placeholder="--اختار --" (selectionChange)="selectedValue($event)" [(ngModel)]="faveCu" id="Initial"  [ngModelOptions]="{standalone: true}">
             <mat-option value="createdBy" >اضافة </mat-option>
             <mat-option value="updatedBy">
-            التعديل
+            تعديل
             </mat-option>
-            <mat-option value="exitBy">
-                الخروج
-              </mat-option>
+
           </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="serch w-50" *ngIf="by" style="border-right:5px solid #fff">
+          <mat-label>تم  بواسطه</mat-label>
+          <input matInput formControlName="createdBy" >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="serch w-50" *ngIf="!by" style="border-right:5px solid #fff">
+          <mat-label>تم  بواسطه</mat-label>
+          <input matInput formControlName="updatedBy" >
+        </mat-form-field>
+        </div>
 
 
 
@@ -66,18 +73,21 @@
               <mat-label>نوع الجهاز</mat-label>
               <input matInput formControlName="deviceType" >
             </mat-form-field>
-            <mat-form-field appearance="fill" class="serch" *ngIf="by">
-              <mat-label>تم  بواسطه</mat-label>
-              <input matInput formControlName="createdBy" >
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="serch" *ngIf="!by">
-              <mat-label>تم  بواسطه</mat-label>
-              <input matInput formControlName="updatedBy" >
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="serch" *ngIf="!by">
-              <mat-label>تم  بواسطه</mat-label>
-              <input matInput formControlName="exitBy" >
-            </mat-form-field>
+            <mat-form-field appearance="fill" class="serch">
+              <!-- <mat-label>تم التعديل بواسطه</mat-label>
+              <input matInput formControlName="updatedBy"> -->
+              <mat-select  placeholder="--اختار --" (selectionChange)="selectedValue($event)" [(ngModel)]="faveCu" id="Initial"  [ngModelOptions]="{standalone: true}">
+                <mat-option value="createdBy" >تاريخ الاضافة</mat-option>
+                <mat-option value="updatedBy">
+                تاريخ التعديل
+                </mat-option>
+                <mat-option value="exitBy">
+                  تاريخ الخروج
+                  </mat-option>
+
+              </mat-select>
+</mat-form-field>
+
 
           <mat-form-field appearance="fill" class="serch">
               <mat-select formControlName="receiptStatusId" placeholder=" *موقف ايصال الاستلام (--اختار--) "  >
