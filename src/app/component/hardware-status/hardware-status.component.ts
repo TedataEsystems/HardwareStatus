@@ -637,6 +637,8 @@ export class HardwareStatusComponent implements OnInit {
       this.by = false;
     }
   }
+
+  /////
   dateType: number = 1;
   selectedValueOfDate(event: MatSelectChange) {
     if (event.value == "exitDate") {
