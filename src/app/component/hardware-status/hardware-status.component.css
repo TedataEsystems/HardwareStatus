@@ -41,6 +41,11 @@
 .input-group{
   height: 35px;
 }
+.btn-group{
+  margin-top: 45px;
+  height: 57px;
+  padding-top: 16px;
+}
 .ser{
   width: 170px;
   outline: none;

@@ -114,7 +114,7 @@
               <mat-datepicker #createdDateFrom></mat-datepicker>
             </mat-form-field>
 
-          <mat-form-field appearance="fill" class="w-50 mr-1 serch">
+          <mat-form-field appearance="fill" class="w-50  serch" style="border-right:5px solid #fff">
               <input formControlName="createdDateTo" matInput [matDatepicker]="createdDateTo" placeholder="الى" [min]="form.controls.createdDateFrom?.value">
               <mat-datepicker-toggle matSuffix [for]="createdDateTo"></mat-datepicker-toggle>
               <mat-datepicker #createdDateTo></mat-datepicker>
@@ -128,7 +128,7 @@
             <mat-datepicker-toggle matSuffix [for]="updatedDateFrom"></mat-datepicker-toggle>
             <mat-datepicker #updatedDateFrom></mat-datepicker>
           </mat-form-field>
-        <mat-form-field appearance="fill" class="w-50 mr-1 serch" >
+        <mat-form-field appearance="fill" class="w-50 serch"  style="border-right:5px solid #fff">
             <input formControlName="updatedDateTo" matInput [matDatepicker]="updatedDateTo" placeholder="الى" [min]="form.controls.updatedDateFrom?.value">
             <mat-datepicker-toggle matSuffix [for]="updatedDateTo"></mat-datepicker-toggle>
             <mat-datepicker #updatedDateTo></mat-datepicker>
@@ -141,7 +141,7 @@
               <mat-datepicker-toggle matSuffix [for]="exitDateFrom"></mat-datepicker-toggle>
               <mat-datepicker #exitDateFrom></mat-datepicker>
             </mat-form-field>
-          <mat-form-field appearance="fill" class="w-50 mr-1 serch">
+          <mat-form-field appearance="fill" class="w-50  serch" style="border-right:5px solid #fff">
               <input formControlName="exitDateTo" matInput [matDatepicker]="exitDateTo" placeholder="الى" [min]="form.controls.exitDateFrom?.value">
               <mat-datepicker-toggle matSuffix [for]="exitDateTo"></mat-datepicker-toggle>
               <mat-datepicker #exitDateTo></mat-datepicker>
@@ -175,7 +175,7 @@
           <input matInput formControlName="number" type="number">
         </mat-form-field>
 
-        <div class="w-100 d-flex justify-content-end mt-5">
+        <div class="w-100 d-flex justify-content-end btn-group">
           <input mat-raised-button value="مسح " class="btn-danger text-center mx-1 ser " (click)="clearAdvancedSearch()" readonly >
 
           <button mat-raised-button class="ser " color="warn">بحث</button>
