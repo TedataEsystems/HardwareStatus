@@ -630,7 +630,7 @@ this.appear=false
   by: boolean = true;
 
   selectedValue(event: MatSelectChange) {
-
+    this.form.reset();
     if (event.value == "createdBy") {
       this.by = true;
     }
@@ -642,6 +642,7 @@ this.appear=false
   /////
   dateType: number = 1;
   selectedValueOfDate(event: MatSelectChange) {
+    this.form.reset();
     this.appear=true
     if (event.value == "exitDate") {
       this.dateType = 1;
