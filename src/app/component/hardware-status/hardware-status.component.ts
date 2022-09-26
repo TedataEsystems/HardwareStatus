@@ -607,7 +607,7 @@ export class HardwareStatusComponent implements OnInit {
     this.isFilterationData = false;
     this.form.reset();
     this.IntialValCreateBy = "--اختار تعديل او اضافة--";
-    this.IntialValDate="";
+    this.IntialValDate="--اختار --";
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
   //get lists
