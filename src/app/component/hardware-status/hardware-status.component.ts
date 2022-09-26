@@ -608,7 +608,7 @@ this.appear=false
     this.isFilterationData = false;
     this.form.reset();
     this.IntialValCreateBy = "--اختار تعديل او اضافة--";
-    this.IntialValDate="--اختار --";
+    this.IntialValDate="--  اختار التاريخ--";
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
   //get lists
@@ -630,29 +630,49 @@ this.appear=false
   by: boolean = true;
 
   selectedValue(event: MatSelectChange) {
-    this.form.reset();
+    
     if (event.value == "createdBy") {
       this.by = true;
+      this.form['controls']['updatedBy'].setValue('');
+
     }
     else if (event.value == "updatedBy") {
       this.by = false;
+      
+      this.form['controls']['createdBy'].setValue('');
+
     }
   }
 
   /////
   dateType: number = 1;
   selectedValueOfDate(event: MatSelectChange) {
-    this.form.reset();
+    
     this.appear=true
     if (event.value == "exitDate") {
+      this.form['controls']['createdDateFrom'].setValue('');
+      this.form['controls']['createdDateTo'].setValue('');
+      this.form['controls']['updatedDateFrom'].setValue('');
+      this.form['controls']['updatedDateTo'].setValue('');
       this.dateType = 1;
+      
     }
     else if
       (event.value == "updatedDate") {
+        this.form['controls']['exitDateTo'].setValue('');
+        this.form['controls']['exitDateFrom'].setValue('');
+        this.form['controls']['createdDateFrom'].setValue('');
+        this.form['controls']['createdDateTo'].setValue('');
       this.dateType = 2;
+
     }
     else if (event.value == "createdDate") {
+      this.form['controls']['exitDateTo'].setValue('');
+        this.form['controls']['exitDateFrom'].setValue('');
+        this.form['controls']['updatedDateFrom'].setValue('');
+        this.form['controls']['updatedDateTo'].setValue('');
       this.dateType = 3;
+   
     }
   }
 
