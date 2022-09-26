@@ -38,6 +38,9 @@
   color: var(--seconed-color)
 
 }
+.apear{
+  display: hidden;
+}
 .input-group{
   height: 35px;
 }

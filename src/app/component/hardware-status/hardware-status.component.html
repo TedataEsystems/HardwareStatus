@@ -116,6 +116,11 @@
           <mat-label>السيريال نامبر</mat-label>
           <input matInput formControlName="serialNumber">
         </mat-form-field>
+        <mat-form-field class="serch hid" [hidden]="appear">
+          <mat-label></mat-label>
+          <input matInput formControlName="serialNumber">
+        </mat-form-field>
+        <div [hidden]="!appear" class="apear">
         <div class="w-100 d-flex" *ngIf="dateType==3">
 
           <mat-form-field appearance="fill" class="w-50 serch">
@@ -146,7 +151,7 @@
 
         </div>
 
-        
+
         <div class="w-100 d-flex" *ngIf="dateType==1">
           <mat-form-field appearance="fill" class="w-50 serch">
               <input formControlName="exitDateFrom" matInput [matDatepicker]="exitDateFrom" placeholder="من">
@@ -160,7 +165,7 @@
             </mat-form-field>
 
           </div>
-
+        </div>
 
       <mat-form-field appearance="fill" class="serch">
           <mat-select formControlName="orderStatusId" placeholder="*حالة الهاردوير(--اختار--)"  >

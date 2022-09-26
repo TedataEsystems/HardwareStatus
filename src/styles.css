@@ -916,7 +916,9 @@ app-sidebar{
     padding-left: 6px;
 
   }
-
+.hid.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}
 
 
   .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {

@@ -28,6 +28,7 @@ import { MatSelectChange } from '@angular/material/select';
 })
 
 export class HardwareStatusComponent implements OnInit {
+  appear=false;
   hwList: HardwareStatus[] = [];
   panelOpenState = false;
   isNotAdmin = false;
@@ -533,7 +534,7 @@ export class HardwareStatusComponent implements OnInit {
     //
   }//deletegroup
 
-  ///advanced search 
+  ///advanced search
   form: FormGroup = new FormGroup({
     createdDateFrom: new FormControl(''),
     createdDateTo: new FormControl(''),
@@ -603,7 +604,7 @@ export class HardwareStatusComponent implements OnInit {
   IntialValCreateBy: string = "";
   IntialValDate: string = "";
   clearAdvancedSearch() {
-
+this.appear=false
     this.isFilterationData = false;
     this.form.reset();
     this.IntialValCreateBy = "--اختار تعديل او اضافة--";
@@ -641,6 +642,7 @@ export class HardwareStatusComponent implements OnInit {
   /////
   dateType: number = 1;
   selectedValueOfDate(event: MatSelectChange) {
+    this.appear=true
     if (event.value == "exitDate") {
       this.dateType = 1;
     }
