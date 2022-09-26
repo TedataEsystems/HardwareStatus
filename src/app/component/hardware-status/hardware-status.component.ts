@@ -28,16 +28,16 @@ import { MatSelectChange } from '@angular/material/select';
 })
 
 export class HardwareStatusComponent implements OnInit {
-  hwList:HardwareStatus[]=[];
+  hwList: HardwareStatus[] = [];
   panelOpenState = false;
-  isNotAdmin= false ;
+  isNotAdmin = false;
   loader: boolean = false;
   valdata = ""; valuid = 0;
   searchKey: string = '';
   listName: string = '';
   loading: boolean = true;
   isFilterationData: Boolean = false;
-  hardwareStatusSearch:IHardwareStatusSearch=<IHardwareStatusSearch>{};
+  hardwareStatusSearch: IHardwareStatusSearch = <IHardwareStatusSearch>{};
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ['all', 'id', 'clientName', 'central', 'orderNumber', 'technicianName', 'zoneNumber', 'deviceType', 'serialNumber', 'number', 'notes', 'exitDate', '_ReceiptStatusName', '_OrderStatusName', '_CompanyName', 'creationDate', 'createdBy', 'updateDate', 'updatedBy', 'action'];
@@ -261,8 +261,8 @@ export class HardwareStatusComponent implements OnInit {
     }
     else {
       //this.isall == true||
-      if (this.searchKey != ''&& this.selectedRows == false ||(this.isFilterationData&&this.selectedRows==false)) {
-        console.log("first",this.alll);
+      if (this.searchKey != '' && this.selectedRows == false || (this.isFilterationData && this.selectedRows == false)) {
+        console.log("first", this.alll);
         this.hwstatus.ExportSelectedDataOfExcel(this.hwList.map(({ id }) => id)).subscribe(res => {
           console.log(this.hwList.map(({ id }) => id));
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -274,23 +274,22 @@ export class HardwareStatusComponent implements OnInit {
             this.note.warn("! Fail")
           });
       }
-      else if (this.alll== false && this.selectedRows == false && this.searchKey == '')
-      {
-         this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
+      else if (this.alll == false && this.selectedRows == false && this.searchKey == '') {
+        this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
           const file = new File([blob], 'hwStatusData' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
 
           saveAs(file, 'hwStatusData' + Date.now() + '.xlsx')
-      }, err => {
+        }, err => {
 
-        this.note.warn("! Fail")
+          this.note.warn("! Fail")
 
-      });
+        });
       }
       //this.isall == false &&
-      else if ((this.alll == true && this.selectedRows == true && this.searchKey == '') ) {
-        console.log("second",this.selectedRows );
+      else if ((this.alll == true && this.selectedRows == true && this.searchKey == '')) {
+        console.log("second", this.selectedRows);
 
         // this.hwstatus.DownloadAllDisplayDataOfExcel().subscribe(res => {
 
@@ -313,7 +312,7 @@ export class HardwareStatusComponent implements OnInit {
       }
       ///all ||selectrow
       else if (this.selectedRows == true) {
-        console.log("last",this.alll);
+        console.log("last", this.alll);
         this.hwstatus.ExportSelectedDataOfExcel(this.Ids).subscribe(res => {
           console.log(this.hwList.map(({ id }) => id));
           const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -385,10 +384,10 @@ export class HardwareStatusComponent implements OnInit {
     console.log("uploadF", "param:", this.param, "fileUploaded:", this.fileuploaded)
     const fd = new FormData();
     fd.append(this.param, this.fileuploaded);
- //   console.log("data to api", fd)
+    //   console.log("data to api", fd)
     this.hwstatus.importExcelFile(fd).subscribe(res => {
       if (res.status == true) {
-       // console.log(res);
+        // console.log(res);
         this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
         this.fileAttr = 'Choose File';
         this.resetfile();
@@ -468,15 +467,14 @@ export class HardwareStatusComponent implements OnInit {
     }
 
     else {
-   //   this.selectedRows = true;
+      //   this.selectedRows = true;
       for (let i = 0; i < this.Ids.length; i++) {
         if (this.Ids[i] == row.id) {
           this.Ids.splice(i, 1);
-       //   console.log("after splice",this.Ids);
+          //   console.log("after splice",this.Ids);
         }
       }
-      if(this.Ids.length==0)
-      {
+      if (this.Ids.length == 0) {
         this.selectedRows = false;
       }
     }
@@ -485,11 +483,10 @@ export class HardwareStatusComponent implements OnInit {
       this.isall = true;
 
     }
-    else{
+    else {
 
       this.alll = false;
-      if(this.Ids.length!=0)
-      {
+      if (this.Ids.length != 0) {
         this.selectedRows = true;
       }
     }
@@ -535,121 +532,123 @@ export class HardwareStatusComponent implements OnInit {
 
     //
   }//deletegroup
- 
-///advanced search 
-form: FormGroup = new FormGroup({
-   createdDateFrom: new FormControl(''),
-   createdDateTo: new FormControl(''),
-   updatedDateTo: new FormControl(''),
-   updatedDateFrom : new FormControl(''),
-   exitDateTo: new FormControl(''),
-   exitDateFrom: new FormControl(''),
-   createdBy: new FormControl(''),
-   updatedBy : new FormControl(''),
-   clientName: new FormControl(''),
-   central: new FormControl(''),
-   orderNumber: new FormControl(''),
-   technicianName : new FormControl(''),
-   zoneNumber: new FormControl(''),
-   number: new FormControl(''),
-   deviceType: new FormControl(''),
-   serialNumber: new FormControl(''),
-   notes : new FormControl(''),
-   orderStatusId : new FormControl(''),
-   receiptStatusId : new FormControl(''),
-   companyNameId: new FormControl(''),
-});
+
+  ///advanced search 
+  form: FormGroup = new FormGroup({
+    createdDateFrom: new FormControl(''),
+    createdDateTo: new FormControl(''),
+    updatedDateTo: new FormControl(''),
+    updatedDateFrom: new FormControl(''),
+    exitDateTo: new FormControl(''),
+    exitDateFrom: new FormControl(''),
+    createdBy: new FormControl(''),
+    updatedBy: new FormControl(''),
+    clientName: new FormControl(''),
+    central: new FormControl(''),
+    orderNumber: new FormControl(''),
+    technicianName: new FormControl(''),
+    zoneNumber: new FormControl(''),
+    number: new FormControl(''),
+    deviceType: new FormControl(''),
+    serialNumber: new FormControl(''),
+    notes: new FormControl(''),
+    orderStatusId: new FormControl(''),
+    receiptStatusId: new FormControl(''),
+    companyNameId: new FormControl(''),
+  });
 
 
 
 
-  AdvancedSearch()
-  {
-    this.isFilterationData=true;
-    this.panelOpenState=true;
-this.loader=true;
-this.hardwareStatusSearch.createdDateFrom=this.form.value.createdDateFrom==""? null:this.form.value.createdDateFrom;
-this.hardwareStatusSearch.createdDateTo=this.form.value.createdDateTo==""? null:this.form.value.createdDateTo;
-//
-this.hardwareStatusSearch.updatedDateFrom=this.form.value.updatedDateFrom==""? null:this.form.value.updatedDateFrom;
-this.hardwareStatusSearch.updatedDateTo=this.form.value.updatedDateTo==""? null:this.form.value.updatedDateTo;
-//
-this.hardwareStatusSearch.exitDateFrom=this.form.value.exitDateFrom==""? null:this.form.value.exitDateFrom;
-this.hardwareStatusSearch.exitDateTo=this.form.value.exitDateTo==""? null:this.form.value.exitDateTo;
-//
-this.hardwareStatusSearch.createdBy=this.form.value.createdBy;
-this.hardwareStatusSearch.updatedBy=this.form.value.updatedBy;
-this.hardwareStatusSearch.clientName=this.form.value.clientName;
-this.hardwareStatusSearch.central=this.form.value.central;
-this.hardwareStatusSearch.orderNumber=Number(this.form.value.orderNumber);
-this.hardwareStatusSearch.technicianName=this.form.value.technicianName;
-this.hardwareStatusSearch.zoneNumber=Number(this.form.value.zoneNumber);
-this.hardwareStatusSearch.number=Number(this.form.value.number);
-this.hardwareStatusSearch.deviceType=this.form.value.deviceType;
-this.hardwareStatusSearch.serialNumber=this.form.value.serialNumber;
-this.hardwareStatusSearch.notes=this.form.value.notes;
-this.hardwareStatusSearch.companyNameId=Number(this.form.value.companyNameId);
-this.hardwareStatusSearch.receiptStatusId=Number(this.form.value.receiptStatusId);
-this.hardwareStatusSearch.orderStatusId=Number(this.form.value.orderStatusId);
-console.log("ad" ,this.hardwareStatusSearch);
-this.hwstatus.AdvancedSearch(this.hardwareStatusSearch).subscribe(res=>
-  {
-    console.log("ff" ,res);
-    this.hwList = res as HardwareStatus[] ;
-   // this.dataSource = new MatTableDataSource(this.hwList);
-   this.dataSource = new MatTableDataSource<any>(this.hwList);
-    this.dataSource.paginator = this.paginator as MatPaginator;
-    this.dataSource.sort = this.sort as MatSort;
-    setTimeout(()=>this.loader=false ,3000 );
-   // this.form.reset();
-  }
-)//subsribe
+  AdvancedSearch() {
+    this.isFilterationData = true;
+    this.panelOpenState = true;
+    this.loader = true;
+    this.hardwareStatusSearch.createdDateFrom = this.form.value.createdDateFrom == "" ? null : this.form.value.createdDateFrom;
+    this.hardwareStatusSearch.createdDateTo = this.form.value.createdDateTo == "" ? null : this.form.value.createdDateTo;
+    //
+    this.hardwareStatusSearch.updatedDateFrom = this.form.value.updatedDateFrom == "" ? null : this.form.value.updatedDateFrom;
+    this.hardwareStatusSearch.updatedDateTo = this.form.value.updatedDateTo == "" ? null : this.form.value.updatedDateTo;
+    //
+    this.hardwareStatusSearch.exitDateFrom = this.form.value.exitDateFrom == "" ? null : this.form.value.exitDateFrom;
+    this.hardwareStatusSearch.exitDateTo = this.form.value.exitDateTo == "" ? null : this.form.value.exitDateTo;
+    //
+    this.hardwareStatusSearch.createdBy = this.form.value.createdBy;
+    this.hardwareStatusSearch.updatedBy = this.form.value.updatedBy;
+    this.hardwareStatusSearch.clientName = this.form.value.clientName;
+    this.hardwareStatusSearch.central = this.form.value.central;
+    this.hardwareStatusSearch.orderNumber = Number(this.form.value.orderNumber);
+    this.hardwareStatusSearch.technicianName = this.form.value.technicianName;
+    this.hardwareStatusSearch.zoneNumber = Number(this.form.value.zoneNumber);
+    this.hardwareStatusSearch.number = Number(this.form.value.number);
+    this.hardwareStatusSearch.deviceType = this.form.value.deviceType;
+    this.hardwareStatusSearch.serialNumber = this.form.value.serialNumber;
+    this.hardwareStatusSearch.notes = this.form.value.notes;
+    this.hardwareStatusSearch.companyNameId = Number(this.form.value.companyNameId);
+    this.hardwareStatusSearch.receiptStatusId = Number(this.form.value.receiptStatusId);
+    this.hardwareStatusSearch.orderStatusId = Number(this.form.value.orderStatusId);
+    console.log("ad", this.hardwareStatusSearch);
+    this.hwstatus.AdvancedSearch(this.hardwareStatusSearch).subscribe(res => {
+      console.log("ff", res);
+      this.hwList = res as HardwareStatus[];
+      // this.dataSource = new MatTableDataSource(this.hwList);
+      this.dataSource = new MatTableDataSource<any>(this.hwList);
+      this.dataSource.paginator = this.paginator as MatPaginator;
+      this.dataSource.sort = this.sort as MatSort;
+      setTimeout(() => this.loader = false, 3000);
+      // this.form.reset();
+    }
+    )//subsribe
   }//advanced
-  faveCu:string="";
-  clearAdvancedSearch()
-  {
-   
-    this.isFilterationData=false;
+  IntialValCreateBy: string = "";
+  IntialValDate: string = "";
+  clearAdvancedSearch() {
+
+    this.isFilterationData = false;
     this.form.reset();
-  //var  x= document.getElementById("Initial") as HTMLInputElement;
-  //console.log(x);
-  this.faveCu="--اختار تعديل او اضافة--";
-    //this.Initial="--اختار تعديل او اضافة--"
+    this.IntialValCreateBy = "--اختار تعديل او اضافة--";
+    this.IntialValDate="";
     this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
   }
   //get lists
-  public companyNameList :CompanyNameList[]=[];
-  public orderStateList :OrderStateList[]=[];
-  public receiptStateList :ReceiptStateList[]=[];
+  public companyNameList: CompanyNameList[] = [];
+  public orderStateList: OrderStateList[] = [];
+  public receiptStateList: ReceiptStateList[] = [];
 
-  openAdvancedSearch()
-  {
-  this.panelOpenState = false ;
-    this.hwstatus.GettingLists().subscribe(res=>{
-      if(res.status==true)
-      {
-      this.companyNameList=res.companyName;
-      this.orderStateList=res.orderStatus;
-      this.receiptStateList=res.receiptStatus;
-      }})
+  openAdvancedSearch() {
+    this.panelOpenState = false;
+    this.hwstatus.GettingLists().subscribe(res => {
+      if (res.status == true) {
+        this.companyNameList = res.companyName;
+        this.orderStateList = res.orderStatus;
+        this.receiptStateList = res.receiptStatus;
+      }
+    })
   }
 
-  by:boolean=true;
+  by: boolean = true;
 
   selectedValue(event: MatSelectChange) {
-    
-   if(event.value=="createdBy")
-   {
-   // console.log(event.value,"cr"); 
-    this.by=true;
-   }
-   else if(event.value=="updatedBy")
-   {
-   // console.log(event.value,"up"); 
-    this.by=false;
-   }
-   //var  x= document.getElementById("Initial") ;
-  //console.log(x,"xx");
+
+    if (event.value == "createdBy") {
+      this.by = true;
+    }
+    else if (event.value == "updatedBy") {
+      this.by = false;
+    }
+  }
+  dateType: number = 1;
+  selectedValueOfDate(event: MatSelectChange) {
+    if (event.value == "exitDate") {
+      this.dateType = 1;
+    }
+    else if
+      (event.value == "updatedDate") {
+      this.dateType = 2;
+    }
+    else if (event.value == "createdDate") {
+      this.dateType = 3;
+    }
   }
 
 
